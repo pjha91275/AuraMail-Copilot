@@ -1,122 +1,491 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import React, { useState, useEffect, useCallback } from 'react';
+import Navbar from './components/Navbar';
+import StatsStrip from './components/StatsStrip';
+import Sidebar from './components/Sidebar';
+import EmailList from './components/EmailList';
+import EmailDetail from './components/EmailDetail';
+import ClientPortal from './components/ClientPortal';
+import AiCopilotDrawer from './components/AiCopilotDrawer';
+import OnboardingModal from './components/OnboardingModal';
+import AccountsModal from './components/AccountsModal';
+import Toast from './components/Toast';
 
-function App() {
-  const [count, setCount] = useState(0)
+import {
+  fetchClients,
+  fetchAccounts,
+  fetchEmails,
+  updateClassification,
+  updateEmailStatus,
+  handleClientAction,
+  updateDraftReply,
+  simulateIncomingEmail,
+  syncAccount,
+  addAccount,
+  askCopilot,
+  generateAiDraft
+} from './services/api';
+
+export default function App() {
+  // Theme state
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem('auramail_theme') === 'dark' ||
+      window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+
+  // Core Data
+  const [clients, setClients] = useState([]);
+  const [activeClientId, setActiveClientId] = useState('client-1'); // Sarah Jenkins by default
+  const [accounts, setAccounts] = useState([]);
+  const [emails, setEmails] = useState([]);
+  const [stats, setStats] = useState(null);
+  const [selectedEmail, setSelectedEmail] = useState(null);
+
+  // Filters & Navigation
+  const [viewMode, setViewMode] = useState('assistant'); // 'assistant' | 'client'
+  const [activeCategory, setActiveCategory] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [urgencyFilter, setUrgencyFilter] = useState(null);
+  const [unreadOnly, setUnreadOnly] = useState(false);
+
+  // UI Modals & Drawers
+  const [isOnboardingOpen, setIsOnboardingOpen] = useState(false);
+  const [isAccountsModalOpen, setIsAccountsModalOpen] = useState(false);
+  const [isCopilotOpen, setIsCopilotOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [toasts, setToasts] = useState([]);
+
+  // Toast Helper
+  const pushToast = useCallback(({ title, message, type = 'info' }) => {
+    const id = Date.now() + Math.random().toString(36).substring(2, 6);
+    setToasts(prev => [...prev, { id, title, message, type }]);
+    setTimeout(() => {
+      setToasts(prev => prev.filter(t => t.id !== id));
+    }, 4500);
+  }, []);
+
+  const dismissToast = (id) => {
+    setToasts(prev => prev.filter(t => t.id !== id));
+  };
+
+  // Sync dark mode class on <html>
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('auramail_theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('auramail_theme', 'light');
+    }
+  }, [darkMode]);
+
+  // Initial Load: Clients and Accounts
+  useEffect(() => {
+    const loadInit = async () => {
+      try {
+        const clientList = await fetchClients();
+        setClients(clientList);
+        if (clientList.length > 0 && !activeClientId) {
+          setActiveClientId(clientList[0].id);
+        }
+
+        const accountList = await fetchAccounts(activeClientId);
+        setAccounts(accountList);
+      } catch (err) {
+        console.error('Failed to load initial metadata:', err);
+      }
+    };
+    loadInit();
+  }, []);
+
+  // Fetch Emails when filters change
+  const loadEmails = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const res = await fetchEmails({
+        clientId: activeClientId,
+        category: activeCategory,
+        search: searchQuery,
+        urgency: urgencyFilter,
+        unreadOnly
+      });
+
+      if (res.success) {
+        setEmails(res.data);
+        setStats(res.stats);
+
+        // Keep or select first email
+        if (res.data.length > 0) {
+          if (!selectedEmail || !res.data.some(e => e.id === selectedEmail.id)) {
+            setSelectedEmail(res.data[0]);
+          } else {
+            const fresh = res.data.find(e => e.id === selectedEmail.id);
+            if (fresh) setSelectedEmail(fresh);
+          }
+        } else {
+          setSelectedEmail(null);
+        }
+      }
+    } catch (err) {
+      console.error('Error loading emails:', err);
+      pushToast({
+        title: 'Connection Issue',
+        message: 'Could not fetch emails. Using cached data.',
+        type: 'warning'
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }, [activeClientId, activeCategory, searchQuery, urgencyFilter, unreadOnly, pushToast]);
+
+  useEffect(() => {
+    loadEmails();
+  }, [loadEmails]);
+
+  // Handle Client Switch
+  const handleSelectClient = (clientId) => {
+    setActiveClientId(clientId);
+    const client = clients.find(c => c.id === clientId);
+    pushToast({
+      title: 'Workspace Switched',
+      message: client ? `Switched active inbox to ${client.name} (${client.company})` : 'Viewing aggregated inbox across all clients',
+      type: 'info'
+    });
+  };
+
+  // Handle Classification Override (Assistant)
+  const handleUpdateClassification = async (emailId, newType) => {
+    try {
+      // Optimistic update
+      setEmails(prev => prev.map(e => {
+        if (e.id === emailId) {
+          return {
+            ...e,
+            classification: {
+              ...e.classification,
+              type: newType,
+              manualOverride: true,
+              reason: `Manually classified as ${newType} by Assistant`
+            }
+          };
+        }
+        return e;
+      }));
+
+      if (selectedEmail?.id === emailId) {
+        setSelectedEmail(prev => ({
+          ...prev,
+          classification: {
+            ...prev.classification,
+            type: newType,
+            manualOverride: true,
+            reason: `Manually classified as ${newType} by Assistant`
+          }
+        }));
+      }
+
+      await updateClassification(emailId, { type: newType });
+      pushToast({
+        title: 'Classification Updated',
+        message: `Email re-assigned to "${newType}". Synchronized across dashboards.`,
+        type: 'success'
+      });
+      loadEmails();
+    } catch (err) {
+      pushToast({ title: 'Error', message: 'Failed to update classification', type: 'error' });
+    }
+  };
+
+  // Toggle Star
+  const handleToggleStar = async (emailId, starred) => {
+    setEmails(prev => prev.map(e => e.id === emailId ? { ...e, starred } : e));
+    if (selectedEmail?.id === emailId) setSelectedEmail(prev => ({ ...prev, starred }));
+    await updateEmailStatus(emailId, { starred });
+  };
+
+  // Toggle Read
+  const handleToggleRead = async (emailId, unread) => {
+    setEmails(prev => prev.map(e => e.id === emailId ? { ...e, unread } : e));
+    if (selectedEmail?.id === emailId) setSelectedEmail(prev => ({ ...prev, unread }));
+    await updateEmailStatus(emailId, { unread });
+  };
+
+  // Archive
+  const handleArchive = async (emailId) => {
+    setEmails(prev => prev.filter(e => e.id !== emailId));
+    if (selectedEmail?.id === emailId) setSelectedEmail(null);
+    await updateEmailStatus(emailId, { archived: true });
+    pushToast({ title: 'Archived', message: 'Conversation moved to archive.', type: 'info' });
+  };
+
+  // Client Action (Mark handled or Delegate back to assistant)
+  const handleClientActionSubmit = async (emailId, { action, note }) => {
+    try {
+      const res = await handleClientAction(emailId, { action, note });
+      if (res.success) {
+        pushToast({
+          title: action === 'mark_handled' ? 'Marked Handled' : 'Delegated to Assistant',
+          message: action === 'mark_handled'
+            ? 'Matter resolved and marked complete.'
+            : `Instructions forwarded to Assistant Alex: "${note}"`,
+          type: 'success'
+        });
+        loadEmails();
+      }
+    } catch (err) {
+      pushToast({ title: 'Error', message: 'Could not process client action', type: 'error' });
+    }
+  };
+
+  // Send Reply
+  const handleSendReply = async (emailId, content, tone) => {
+    try {
+      const res = await updateDraftReply(emailId, { content, tone, status: 'sent' });
+      if (res.success) {
+        pushToast({
+          title: 'Reply Sent Successfully!',
+          message: 'Your reply has been delivered and thread marked resolved.',
+          type: 'success'
+        });
+        loadEmails();
+      }
+    } catch (err) {
+      pushToast({ title: 'Error', message: 'Failed to send reply', type: 'error' });
+    }
+  };
+
+  // Save Draft
+  const handleSaveDraft = async (emailId, content, tone) => {
+    try {
+      await updateDraftReply(emailId, { content, tone, status: 'draft' });
+      pushToast({
+        title: 'Draft Saved',
+        message: 'Reply draft saved for review.',
+        type: 'info'
+      });
+      loadEmails();
+    } catch (err) {
+      pushToast({ title: 'Error', message: 'Failed to save draft', type: 'error' });
+    }
+  };
+
+  // Simulate Incoming Email
+  const handleSimulateEmail = async (scenario) => {
+    try {
+      setIsSyncing(true);
+      const res = await simulateIncomingEmail({
+        clientId: activeClientId === 'all' ? 'client-1' : activeClientId,
+        scenario
+      });
+      if (res.success) {
+        pushToast({
+          title: '⚡ New Email Received & Classified',
+          message: `"${res.data.subject}" classified as [${res.data.classification.type}] (${Math.round(res.data.classification.confidence * 100)}% confidence)`,
+          type: 'success'
+        });
+        loadEmails();
+        setSelectedEmail(res.data);
+      }
+    } catch (err) {
+      pushToast({ title: 'Error', message: 'Simulation failed', type: 'error' });
+    } finally {
+      setTimeout(() => setIsSyncing(false), 600);
+    }
+  };
+
+  // Sync Account
+  const handleSyncAccount = async (accId) => {
+    setIsSyncing(true);
+    try {
+      await syncAccount(accId);
+      pushToast({
+        title: 'Sync Complete',
+        message: 'Mailbox accounts successfully refreshed with latest threads.',
+        type: 'success'
+      });
+      loadEmails();
+    } finally {
+      setIsSyncing(false);
+    }
+  };
+
+  // Add Account
+  const handleAddAccount = async (accountData) => {
+    try {
+      const res = await addAccount(accountData);
+      if (res.success) {
+        setAccounts(prev => [...prev, res.data]);
+        pushToast({
+          title: 'Account Connected',
+          message: `${accountData.emailAddress} is now actively syncing.`,
+          type: 'success'
+        });
+      }
+    } catch (err) {
+      pushToast({ title: 'Error', message: 'Failed to connect account', type: 'error' });
+    }
+  };
+
+  // Copilot Query
+  const handleAskCopilot = async (queryText) => {
+    try {
+      const res = await askCopilot({ query: queryText, clientId: activeClientId });
+      if (res.success) return res.data;
+    } catch (err) {
+      return { answer: 'I encountered an error querying the inbox. Please try again.', highlightedEmails: [] };
+    }
+  };
+
+  // Reset Data
+  const handleResetData = () => {
+    loadEmails();
+    pushToast({
+      title: 'Data Refreshed',
+      message: 'Demo email threads restored.',
+      type: 'info'
+    });
+  };
+
+  const activeClient = clients.find(c => c.id === activeClientId);
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="min-h-screen bg-surface-50 dark:bg-surface-950 text-surface-900 dark:text-surface-100 flex flex-col font-sans transition-colors duration-200">
+      
+      {/* Toast Notification Container */}
+      <Toast toasts={toasts} onDismiss={dismissToast} />
 
-      <div className="ticks"></div>
+      {/* Top Navbar */}
+      <Navbar
+        clients={clients}
+        activeClientId={activeClientId}
+        onSelectClient={handleSelectClient}
+        viewMode={viewMode}
+        onToggleViewMode={setViewMode}
+        darkMode={darkMode}
+        onToggleDarkMode={() => setDarkMode(!darkMode)}
+        onOpenCopilot={() => setIsCopilotOpen(true)}
+        onOpenAccountsModal={() => setIsAccountsModalOpen(true)}
+        onOpenOnboarding={() => setIsOnboardingOpen(true)}
+        onSimulateEmail={handleSimulateEmail}
+        isSyncing={isSyncing}
+        accountsCount={accounts.length}
+      />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      {/* Main App Workspace */}
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5">
+        
+        {viewMode === 'client' ? (
+          /* Client-Facing Minimalist VIP Experience */
+          <ClientPortal
+            client={activeClient}
+            emails={emails}
+            onClientAction={handleClientActionSubmit}
+            onSwitchToAssistantView={() => setViewMode('assistant')}
+          />
+        ) : (
+          /* Full Assistant Command Center */
+          <div className="space-y-4 animate-fade-in">
+            
+            {/* KPI Metrics Strip (Inbox Pulse) */}
+            <StatsStrip
+              stats={stats}
+              activeCategory={activeCategory}
+              onSelectCategory={setActiveCategory}
+            />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+            {/* Split 3-Column / 2-Column Responsive Layout */}
+            <div className="flex gap-4 items-start">
+              
+              {/* Left Column: Segment Sidebar */}
+              <div className="hidden lg:block">
+                <Sidebar
+                  activeCategory={activeCategory}
+                  onSelectCategory={setActiveCategory}
+                  stats={stats}
+                  unreadOnly={unreadOnly}
+                  onToggleUnreadOnly={() => setUnreadOnly(!unreadOnly)}
+                  onOpenAccountsModal={() => setIsAccountsModalOpen(true)}
+                  onOpenOnboarding={() => setIsOnboardingOpen(true)}
+                  onResetData={handleResetData}
+                />
+              </div>
+
+              {/* Middle Column: Email Feed / List */}
+              <div className="w-full lg:w-[420px] xl:w-[460px] shrink-0">
+                <EmailList
+                  emails={emails}
+                  selectedEmail={selectedEmail}
+                  onSelectEmail={setSelectedEmail}
+                  searchQuery={searchQuery}
+                  onSearchChange={setSearchQuery}
+                  activeCategory={activeCategory}
+                  onToggleStar={handleToggleStar}
+                  onToggleRead={handleToggleRead}
+                  onArchive={handleArchive}
+                  urgencyFilter={urgencyFilter}
+                  onSelectUrgency={setUrgencyFilter}
+                  isLoading={isLoading}
+                />
+              </div>
+
+              {/* Right Column: Detailed Conversation Thread & AI Studio */}
+              <div className="hidden md:flex flex-1 min-w-0">
+                <EmailDetail
+                  email={selectedEmail}
+                  onUpdateClassification={handleUpdateClassification}
+                  onToggleStar={handleToggleStar}
+                  onToggleRead={handleToggleRead}
+                  onArchive={handleArchive}
+                  onSendReply={handleSendReply}
+                  onSaveDraft={handleSaveDraft}
+                  onGenerateDraft={generateAiDraft}
+                  clientName={activeClient?.name || 'Sarah Jenkins'}
+                />
+              </div>
+
+            </div>
+
+          </div>
+        )}
+
+      </main>
+
+      {/* Slide-over AI Copilot Drawer */}
+      <AiCopilotDrawer
+        isOpen={isCopilotOpen}
+        onClose={() => setIsCopilotOpen(false)}
+        onAskCopilot={handleAskCopilot}
+        onSelectEmailById={(id) => {
+          const match = emails.find(e => e.id === id);
+          if (match) setSelectedEmail(match);
+        }}
+        activeClient={activeClient}
+      />
+
+      {/* Onboarding Setup Modal */}
+      <OnboardingModal
+        isOpen={isOnboardingOpen}
+        onClose={() => setIsOnboardingOpen(false)}
+        onFinishOnboarding={() => {
+          pushToast({
+            title: 'Welcome aboard!',
+            message: 'AuraMail AI setup is complete. Your mailbox is active.',
+            type: 'success'
+          });
+        }}
+        onConnectAccount={handleAddAccount}
+      />
+
+      {/* Accounts & OAuth Sync Modal */}
+      <AccountsModal
+        isOpen={isAccountsModalOpen}
+        onClose={() => setIsAccountsModalOpen(false)}
+        accounts={accounts}
+        onSyncAccount={handleSyncAccount}
+        onAddAccount={handleAddAccount}
+        activeClientId={activeClientId}
+      />
+
+    </div>
+  );
 }
-
-export default App
