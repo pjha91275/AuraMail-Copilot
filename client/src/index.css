@@ -8,7 +8,7 @@
   }
 }
 
-/* Ambient Crafted Background Styles */
+/* Ambient Crafted Cosmic Background */
 .ambient-bg {
   position: fixed;
   inset: 0;
@@ -20,77 +20,92 @@
 .ambient-orb {
   position: absolute;
   border-radius: 9999px;
-  filter: blur(100px);
-  opacity: 0.45;
-  will-change: transform;
+  filter: blur(110px);
+  will-change: transform, opacity;
 }
 
+/* Dark Mode Cosmic Lights */
 .dark .ambient-orb-1 {
-  width: 550px;
-  height: 550px;
-  left: -5%;
-  top: -10%;
-  background: radial-gradient(circle, rgba(79, 70, 229, 0.4) 0%, rgba(37, 99, 235, 0.15) 60%, transparent 80%);
+  width: 750px;
+  height: 750px;
+  left: -10%;
+  top: -15%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.5) 0%, rgba(59, 130, 246, 0.3) 40%, rgba(15, 23, 42, 0) 70%);
+  opacity: 0.85;
 }
 
 .dark .ambient-orb-2 {
-  width: 600px;
-  height: 600px;
-  right: -5%;
-  top: 20%;
-  background: radial-gradient(circle, rgba(14, 165, 233, 0.25) 0%, rgba(99, 102, 241, 0.1) 60%, transparent 80%);
+  width: 800px;
+  height: 800px;
+  right: -10%;
+  top: 15%;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.4) 0%, rgba(99, 102, 241, 0.2) 45%, rgba(15, 23, 42, 0) 70%);
+  opacity: 0.8;
 }
 
 .dark .ambient-orb-3 {
-  width: 500px;
-  height: 500px;
-  left: 30%;
+  width: 650px;
+  height: 650px;
+  left: 25%;
   bottom: -15%;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, rgba(59, 130, 246, 0.08) 60%, transparent 80%);
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, rgba(236, 72, 153, 0.15) 50%, rgba(15, 23, 42, 0) 70%);
+  opacity: 0.75;
 }
 
-/* Light mode ambient orbs */
+.dark .ambient-orb-4 {
+  width: 500px;
+  height: 500px;
+  right: 25%;
+  bottom: 10%;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, rgba(6, 182, 212, 0.1) 50%, transparent 70%);
+  opacity: 0.6;
+}
+
+/* Light Mode Soft Pastel Glows */
 .ambient-orb-1 {
-  width: 600px;
-  height: 600px;
-  left: -5%;
-  top: -10%;
-  background: radial-gradient(circle, rgba(199, 210, 254, 0.6) 0%, rgba(224, 231, 255, 0.2) 60%, transparent 80%);
+  width: 700px;
+  height: 700px;
+  left: -8%;
+  top: -12%;
+  background: radial-gradient(circle, rgba(199, 210, 254, 0.75) 0%, rgba(224, 231, 255, 0.35) 50%, transparent 70%);
+  opacity: 0.9;
 }
 
 .ambient-orb-2 {
-  width: 600px;
-  height: 600px;
-  right: -10%;
+  width: 750px;
+  height: 750px;
+  right: -8%;
   top: 15%;
-  background: radial-gradient(circle, rgba(186, 230, 253, 0.5) 0%, rgba(224, 242, 254, 0.2) 60%, transparent 80%);
+  background: radial-gradient(circle, rgba(186, 230, 253, 0.7) 0%, rgba(224, 242, 254, 0.35) 50%, transparent 70%);
+  opacity: 0.85;
 }
 
 .ambient-orb-3 {
-  width: 500px;
-  height: 500px;
-  left: 25%;
+  width: 650px;
+  height: 650px;
+  left: 30%;
   bottom: -10%;
-  background: radial-gradient(circle, rgba(233, 213, 255, 0.5) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(233, 213, 255, 0.65) 0%, transparent 65%);
+  opacity: 0.8;
 }
 
-/* Subtle dot-grid texture overlay */
+/* High-Tech Dot Matrix Pattern Overlay */
 .bg-grid-pattern {
-  background-size: 32px 32px;
+  background-size: 36px 36px;
   background-image: 
-    linear-gradient(to right, rgba(148, 163, 184, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
+    radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.15) 1px, transparent 0);
+  mask-image: radial-gradient(ellipse at 50% 50%, black 50%, transparent 95%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 50%, transparent 95%);
 }
 
 .dark .bg-grid-pattern {
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.12) 1px, transparent 0);
 }
 
 /* Ultra Glassmorphic Panels */
 .glass-panel {
-  @apply bg-white/70 dark:bg-surface-900/60 backdrop-blur-2xl border border-surface-200/80 dark:border-white/[0.08] shadow-card transition-all;
+  @apply bg-white/75 dark:bg-surface-900/70 backdrop-blur-2xl border border-surface-200/90 dark:border-white/[0.09] shadow-card transition-all;
 }
 
 .glass-card {
@@ -98,7 +113,7 @@
 }
 
 .glass-card:hover {
-  @apply bg-white/90 dark:bg-surface-800/70 border-surface-300 dark:border-white/[0.12] shadow-card-hover -translate-y-0.5;
+  @apply bg-white/90 dark:bg-surface-800/80 border-surface-300 dark:border-white/[0.15] shadow-card-hover -translate-y-0.5;
 }
 
 /* Custom modern scrollbars */
@@ -112,18 +127,18 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.25);
+  background: rgba(148, 163, 184, 0.3);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.45);
+  background: rgba(148, 163, 184, 0.5);
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.28);
 }
