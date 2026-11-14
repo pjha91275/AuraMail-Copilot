@@ -1,0 +1,14 @@
+{
+  "name": "personal-assistant-ai-dashboard",
+  "version": "1.0.0",
+  "description": "AI-Powered Email Management Dashboard for Personal Assistants & Clients",
+  "scripts": {
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "build:client": "cd client && npm run build",
+    "start": "cd server && npm start"
+  },
+  "keywords": ["ai", "email-management", "personal-assistant", "mern"],
+  "author": "Humanity Founders AI Intern Applicant",
+  "license": "MIT"
+}
