@@ -39,25 +39,25 @@ export default function Sidebar({
   ];
 
   return (
-    <aside className="w-64 shrink-0 flex flex-col justify-between p-4 bg-white dark:bg-surface-900/50 rounded-2xl border border-surface-200/80 dark:border-surface-800 shadow-subtle h-[calc(100vh-8.5rem)] sticky top-20">
+    <aside className="w-68 shrink-0 flex flex-col justify-between p-5 glass-panel rounded-3xl h-[calc(100vh-10rem)] sticky top-24">
       
       {/* Top Segment Nav */}
       <div className="space-y-6 overflow-y-auto pr-1">
         
         {/* Filter Toggle: Unread Only */}
-        <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-surface-50 dark:bg-surface-800/60 border border-surface-200/50 dark:border-surface-700/50">
-          <span className="text-xs font-semibold text-surface-600 dark:text-surface-300">
+        <div className="flex items-center justify-between px-4 py-2.5 rounded-2xl bg-surface-100/60 dark:bg-surface-800/60 border border-surface-200/50 dark:border-white/[0.05] shadow-subtle">
+          <span className="text-xs font-bold text-surface-700 dark:text-surface-200">
             Unread Only
           </span>
           <button
             onClick={onToggleUnreadOnly}
-            className={`w-9 h-5 flex items-center rounded-full p-0.5 transition-colors ${
+            className={`w-10 h-5 flex items-center rounded-full p-0.5 transition-colors ${
               unreadOnly ? 'bg-brand-600' : 'bg-surface-300 dark:bg-surface-700'
             }`}
           >
             <div
               className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${
-                unreadOnly ? 'translate-x-4' : 'translate-x-0'
+                unreadOnly ? 'translate-x-5' : 'translate-x-0'
               }`}
             />
           </button>
@@ -65,10 +65,10 @@ export default function Sidebar({
 
         {/* Main Segment List */}
         <div>
-          <div className="px-3 mb-2 text-[11px] font-bold text-surface-400 dark:text-surface-500 uppercase tracking-wider">
-            Email Segments
+          <div className="px-3 mb-3 text-[11px] font-black text-surface-400 dark:text-surface-500 uppercase tracking-widest">
+            Inbox Segments
           </div>
-          <nav className="space-y-1">
+          <nav className="space-y-1.5">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeCategory === item.id;
@@ -77,20 +77,20 @@ export default function Sidebar({
                 <button
                   key={item.label}
                   onClick={() => onSelectCategory(item.id)}
-                  className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all ${
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-semibold transition-all ${
                     isActive
-                      ? 'bg-brand-500 text-white shadow-sm shadow-brand-500/20 font-semibold'
-                      : 'text-surface-700 dark:text-surface-300 hover:bg-surface-100 dark:hover:bg-surface-800'
+                      ? 'bg-gradient-to-r from-brand-600 to-indigo-600 text-white shadow-glow-brand'
+                      : 'text-surface-700 dark:text-surface-300 hover:bg-surface-100/80 dark:hover:bg-surface-800/60'
                   }`}
                 >
-                  <div className="flex items-center space-x-2.5 truncate">
+                  <div className="flex items-center space-x-3 truncate">
                     <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-white' : 'text-surface-400'}`} />
                     <span className="truncate">{item.label}</span>
                   </div>
 
                   {item.count !== null && item.count !== undefined && item.count > 0 && (
                     <span
-                      className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                      className={`text-[10px] font-black px-2 py-0.5 rounded-full ${
                         isActive
                           ? 'bg-white/20 text-white'
                           : item.badgeColor || 'bg-surface-100 text-surface-600 dark:bg-surface-800 dark:text-surface-400'
@@ -107,10 +107,10 @@ export default function Sidebar({
       </div>
 
       {/* Bottom Actions & Configuration */}
-      <div className="pt-4 border-t border-surface-200/80 dark:border-surface-800 space-y-1">
+      <div className="pt-4 border-t border-surface-200/80 dark:border-white/[0.06] space-y-1.5">
         <button
           onClick={onOpenAccountsModal}
-          className="w-full flex items-center space-x-2 px-3 py-2 rounded-xl text-xs font-medium text-surface-600 dark:text-surface-400 hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors"
+          className="w-full flex items-center space-x-2.5 px-3.5 py-2.5 rounded-2xl text-xs font-semibold text-surface-700 dark:text-surface-300 hover:bg-surface-100/80 dark:hover:bg-surface-800/60 transition-colors"
         >
           <PlusCircle className="w-4 h-4 text-brand-500" />
           <span>Connect Email Account</span>
@@ -118,7 +118,7 @@ export default function Sidebar({
 
         <button
           onClick={onOpenOnboarding}
-          className="w-full flex items-center space-x-2 px-3 py-2 rounded-xl text-xs font-medium text-surface-600 dark:text-surface-400 hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors"
+          className="w-full flex items-center space-x-2.5 px-3.5 py-2.5 rounded-2xl text-xs font-semibold text-surface-700 dark:text-surface-300 hover:bg-surface-100/80 dark:hover:bg-surface-800/60 transition-colors"
         >
           <HelpCircle className="w-4 h-4 text-surface-400" />
           <span>Product Tour & Setup</span>
@@ -126,7 +126,7 @@ export default function Sidebar({
 
         <button
           onClick={onResetData}
-          className="w-full flex items-center space-x-2 px-3 py-2 rounded-xl text-xs font-medium text-surface-400 hover:text-surface-600 dark:hover:text-surface-300 hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors"
+          className="w-full flex items-center space-x-2.5 px-3.5 py-2.5 rounded-2xl text-xs font-semibold text-surface-400 hover:text-surface-600 dark:hover:text-surface-300 hover:bg-surface-100/80 dark:hover:bg-surface-800/60 transition-colors"
           title="Reset to default seed data"
         >
           <RotateCcw className="w-4 h-4" />

@@ -53,14 +53,14 @@ export default function EmailDetail({
 
   if (!email) {
     return (
-      <div className="flex-1 flex flex-col items-center justify-center bg-white dark:bg-surface-900/50 rounded-2xl border border-surface-200/80 dark:border-surface-800 shadow-subtle p-8 text-center text-surface-400 h-[calc(100vh-8.5rem)]">
-        <div className="w-16 h-16 rounded-2xl bg-surface-100 dark:bg-surface-800 flex items-center justify-center text-surface-400 mb-3">
-          <Mail className="w-8 h-8" />
+      <div className="flex-1 flex flex-col items-center justify-center glass-panel rounded-3xl p-10 text-center text-surface-400 h-[calc(100vh-10rem)]">
+        <div className="w-20 h-20 rounded-3xl bg-surface-100 dark:bg-surface-800/80 flex items-center justify-center text-surface-400 mb-4 shadow-subtle">
+          <Mail className="w-10 h-10" />
         </div>
-        <h3 className="text-base font-semibold text-surface-800 dark:text-surface-200">
+        <h3 className="text-lg font-bold text-surface-800 dark:text-surface-100">
           Select a conversation
         </h3>
-        <p className="text-xs text-surface-400 mt-1 max-w-sm">
+        <p className="text-xs text-surface-400 mt-2 max-w-sm leading-relaxed">
           Choose an email thread from the inbox list to inspect AI classification, review action items, or draft an AI-assisted reply.
         </p>
       </div>
@@ -96,8 +96,8 @@ export default function EmailDetail({
     try {
       await onSendReply(email.id, draftContent, selectedTone);
       confetti({
-        particleCount: 40,
-        spread: 60,
+        particleCount: 45,
+        spread: 65,
         origin: { y: 0.8 }
       });
     } finally {
@@ -113,18 +113,19 @@ export default function EmailDetail({
   };
 
   return (
-    <div className="flex-1 flex flex-col bg-white dark:bg-surface-900/50 rounded-2xl border border-surface-200/80 dark:border-surface-800 shadow-subtle overflow-hidden h-[calc(100vh-8.5rem)]">
+    <div className="flex-1 flex flex-col glass-panel rounded-3xl overflow-hidden h-[calc(100vh-10rem)] shadow-card">
       
       {/* Thread Header */}
-      <div className="p-4 border-b border-surface-200/80 dark:border-surface-800 bg-surface-50/50 dark:bg-surface-900/80">
-        <div className="flex items-start justify-between gap-3">
+      <div className="p-6 border-b border-surface-200/80 dark:border-white/[0.06] bg-white/40 dark:bg-surface-900/60 backdrop-blur-md">
+        <div className="flex items-start justify-between gap-4">
           <div className="flex-1 min-w-0">
-            <div className="flex items-center space-x-2 mb-1.5 flex-wrap gap-y-1">
+            <div className="flex items-center space-x-2.5 mb-2.5 flex-wrap gap-y-2">
+              
               {/* Mobile Back Button */}
               {onBackToList && (
                 <button
                   onClick={onBackToList}
-                  className="md:hidden flex items-center space-x-1 px-2.5 py-1 rounded-lg bg-surface-200 dark:bg-surface-800 text-surface-700 dark:text-surface-300 text-xs font-semibold hover:bg-surface-300"
+                  className="md:hidden flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-surface-200 dark:bg-surface-800 text-surface-700 dark:text-surface-300 text-xs font-bold hover:bg-surface-300 transition-colors mr-1"
                 >
                   <ArrowLeft className="w-3.5 h-3.5" />
                   <span>Inbox</span>
@@ -135,12 +136,12 @@ export default function EmailDetail({
               <div className="relative">
                 <button
                   onClick={() => setOverrideMenuOpen(!overrideMenuOpen)}
-                  className={`inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all shadow-sm ${
+                  className={`inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full text-xs font-black tracking-wide transition-all shadow-md ${
                     isAssistant
-                      ? 'bg-brand-500 text-white shadow-brand-500/20'
+                      ? 'bg-brand-600 text-white shadow-glow-brand'
                       : isClient
-                      ? 'bg-amber-500 text-white shadow-amber-500/20'
-                      : 'bg-emerald-600 text-white shadow-emerald-500/20'
+                      ? 'bg-amber-600 text-white shadow-glow-amber'
+                      : 'bg-emerald-600 text-white shadow-glow-emerald'
                   }`}
                   title="Click to manually change reply responsibility"
                 >
@@ -154,10 +155,10 @@ export default function EmailDetail({
                 {/* Override Dropdown */}
                 {overrideMenuOpen && (
                   <div
-                    className="absolute left-0 mt-2 w-56 bg-white dark:bg-surface-800 rounded-xl shadow-modal border border-surface-200 dark:border-surface-700 py-1.5 z-50 animate-slide-up"
+                    className="absolute left-0 mt-2 w-64 bg-white dark:bg-surface-800 rounded-2xl shadow-modal border border-surface-200 dark:border-surface-700 py-2 z-50 animate-slide-up"
                     onMouseLeave={() => setOverrideMenuOpen(false)}
                   >
-                    <div className="px-3 py-1 text-[10px] font-bold text-surface-400 uppercase tracking-wider">
+                    <div className="px-3.5 py-1 text-[10px] font-black text-surface-400 uppercase tracking-widest">
                       Override Classification
                     </div>
                     <button
@@ -165,53 +166,53 @@ export default function EmailDetail({
                         onUpdateClassification(email.id, 'Assistant to Reply');
                         setOverrideMenuOpen(false);
                       }}
-                      className="w-full flex items-center space-x-2 px-3 py-2 text-xs text-left hover:bg-surface-100 dark:hover:bg-surface-700"
+                      className="w-full flex items-center space-x-2.5 px-3.5 py-2.5 text-xs text-left hover:bg-surface-100 dark:hover:bg-surface-700 transition-colors"
                     >
-                      <Zap className="w-3.5 h-3.5 text-brand-500" />
-                      <span className="font-semibold text-brand-600 dark:text-brand-400">Assistant to Reply</span>
+                      <Zap className="w-4 h-4 text-brand-500" />
+                      <span className="font-bold text-brand-600 dark:text-brand-400">Assistant to Reply</span>
                     </button>
                     <button
                       onClick={() => {
                         onUpdateClassification(email.id, 'Client to Reply');
                         setOverrideMenuOpen(false);
                       }}
-                      className="w-full flex items-center space-x-2 px-3 py-2 text-xs text-left hover:bg-surface-100 dark:hover:bg-surface-700"
+                      className="w-full flex items-center space-x-2.5 px-3.5 py-2.5 text-xs text-left hover:bg-surface-100 dark:hover:bg-surface-700 transition-colors"
                     >
-                      <UserCheck className="w-3.5 h-3.5 text-amber-500" />
-                      <span className="font-semibold text-amber-600 dark:text-amber-400">Client to Reply</span>
+                      <UserCheck className="w-4 h-4 text-amber-500" />
+                      <span className="font-bold text-amber-600 dark:text-amber-400">Client to Reply</span>
                     </button>
                     <button
                       onClick={() => {
                         onUpdateClassification(email.id, 'No Reply Needed');
                         setOverrideMenuOpen(false);
                       }}
-                      className="w-full flex items-center space-x-2 px-3 py-2 text-xs text-left hover:bg-surface-100 dark:hover:bg-surface-700"
+                      className="w-full flex items-center space-x-2.5 px-3.5 py-2.5 text-xs text-left hover:bg-surface-100 dark:hover:bg-surface-700 transition-colors"
                     >
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                      <span className="font-semibold text-emerald-600 dark:text-emerald-400">No Reply Needed</span>
+                      <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                      <span className="font-bold text-emerald-600 dark:text-emerald-400">No Reply Needed</span>
                     </button>
                   </div>
                 )}
               </div>
 
               {/* Confidence Pill */}
-              <span className="text-[11px] font-semibold text-surface-500 dark:text-surface-400 bg-surface-100 dark:bg-surface-800 px-2 py-0.5 rounded-md border border-surface-200/60 dark:border-surface-700/60">
+              <span className="text-xs font-bold text-surface-600 dark:text-surface-300 bg-surface-100/80 dark:bg-surface-800/80 px-2.5 py-1 rounded-xl border border-surface-200/60 dark:border-white/[0.08]">
                 {Math.round((classification.confidence || 0.85) * 100)}% Confidence
               </span>
 
               {classification.manualOverride && (
-                <span className="text-[10px] font-semibold text-brand-600 dark:text-brand-300 bg-brand-50 dark:bg-brand-950/60 px-2 py-0.5 rounded-md border border-brand-200 dark:border-brand-800">
+                <span className="text-[11px] font-bold text-brand-600 dark:text-brand-300 bg-brand-500/10 px-2.5 py-1 rounded-xl border border-brand-500/30">
                   Assistant Override
                 </span>
               )}
 
               {/* Urgency Badge */}
               {classification.urgency && (
-                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider ${
+                <span className={`text-[10px] font-black px-2.5 py-1 rounded-xl uppercase tracking-wider ${
                   classification.urgency === 'urgent'
-                    ? 'bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300 border border-rose-200'
+                    ? 'bg-rose-500/15 text-rose-700 dark:text-rose-300 border border-rose-500/30'
                     : classification.urgency === 'high'
-                    ? 'bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200'
+                    ? 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30'
                     : 'bg-surface-100 text-surface-600 dark:bg-surface-800 dark:text-surface-400'
                 }`}>
                   {classification.urgency}
@@ -219,92 +220,94 @@ export default function EmailDetail({
               )}
             </div>
 
-            <h2 className="text-base font-bold text-surface-900 dark:text-surface-100 leading-snug">
+            <h2 className="text-lg font-black text-surface-900 dark:text-white leading-snug tracking-tight">
               {email.subject}
             </h2>
           </div>
 
           {/* Action icons */}
-          <div className="flex items-center space-x-1 shrink-0">
+          <div className="flex items-center space-x-1.5 shrink-0">
             <button
               onClick={() => onToggleStar(email.id, !email.starred)}
-              className="p-1.5 rounded-lg hover:bg-surface-100 dark:hover:bg-surface-800 text-surface-500 transition-colors"
+              className="p-2 rounded-xl hover:bg-surface-100 dark:hover:bg-surface-800 text-surface-500 transition-colors"
               title={email.starred ? 'Starred' : 'Star'}
             >
-              <Star className={`w-4 h-4 ${email.starred ? 'fill-amber-400 text-amber-500' : ''}`} />
+              <Star className={`w-4.5 h-4.5 ${email.starred ? 'fill-amber-400 text-amber-500' : ''}`} />
             </button>
             <button
               onClick={() => onToggleRead(email.id, !email.unread)}
-              className="p-1.5 rounded-lg hover:bg-surface-100 dark:hover:bg-surface-800 text-surface-500 transition-colors"
+              className="p-2 rounded-xl hover:bg-surface-100 dark:hover:bg-surface-800 text-surface-500 transition-colors"
               title={email.unread ? 'Mark as read' : 'Mark as unread'}
             >
-              {email.unread ? <MailOpen className="w-4 h-4" /> : <Mail className="w-4 h-4" />}
+              {email.unread ? <MailOpen className="w-4.5 h-4.5" /> : <Mail className="w-4.5 h-4.5" />}
             </button>
             <button
               onClick={() => onArchive(email.id)}
-              className="p-1.5 rounded-lg hover:bg-surface-100 dark:hover:bg-surface-800 text-surface-500 hover:text-rose-500 transition-colors"
+              className="p-2 rounded-xl hover:bg-surface-100 dark:hover:bg-surface-800 text-surface-500 hover:text-rose-500 transition-colors"
               title="Archive thread"
             >
-              <Archive className="w-4 h-4" />
+              <Archive className="w-4.5 h-4.5" />
             </button>
           </div>
         </div>
       </div>
 
-      {/* Main Body: Two scrollable sub-sections */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      {/* Main Body: Scrollable sub-sections with generous spacing */}
+      <div className="flex-1 overflow-y-auto p-6 space-y-6">
         
-        {/* AI Smart Triage Card */}
-        <div className="p-3.5 rounded-2xl bg-gradient-to-br from-brand-50/50 via-white to-surface-50 dark:from-brand-950/20 dark:via-surface-900 dark:to-surface-900 border border-brand-200/60 dark:border-brand-900/40 shadow-subtle space-y-3">
+        {/* AI Smart Triage Briefing Card */}
+        <div className="p-5 rounded-3xl bg-gradient-to-br from-brand-500/10 via-surface-900/40 to-surface-900/80 border border-brand-500/30 shadow-card space-y-4">
           
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2 text-brand-700 dark:text-brand-300">
-              <Sparkles className="w-4 h-4" />
-              <span className="text-xs font-bold uppercase tracking-wider">AI Intelligence Insights</span>
+            <div className="flex items-center space-x-2.5 text-brand-600 dark:text-brand-300">
+              <div className="w-7 h-7 rounded-xl bg-brand-500/20 flex items-center justify-center">
+                <Sparkles className="w-4 h-4 text-brand-500" />
+              </div>
+              <span className="text-xs font-black uppercase tracking-wider">AI Intelligence Insights</span>
             </div>
-            <span className="text-[11px] text-surface-400 font-medium">
+            <span className="text-[11px] text-surface-400 font-semibold bg-surface-100 dark:bg-surface-800/80 px-2.5 py-0.5 rounded-full">
               Auto-triage active
             </span>
           </div>
 
           {/* AI Reasoning Pill */}
-          <div className="text-xs text-surface-700 dark:text-surface-300 bg-white/80 dark:bg-surface-800/80 p-2.5 rounded-xl border border-surface-200/60 dark:border-surface-700/60">
-            <span className="font-semibold text-brand-600 dark:text-brand-400">Why this was assigned: </span>
+          <div className="text-xs text-surface-800 dark:text-surface-200 bg-white/70 dark:bg-surface-800/80 p-3.5 rounded-2xl border border-surface-200/80 dark:border-white/[0.08] shadow-subtle leading-relaxed">
+            <span className="font-bold text-brand-600 dark:text-brand-400">Why this was assigned: </span>
             {classification.reason}
           </div>
 
           {/* Executive Summary */}
           {email.summary && (
-            <div className="text-xs text-surface-600 dark:text-surface-300 bg-white/50 dark:bg-surface-800/50 p-2.5 rounded-xl border border-surface-200/40 dark:border-surface-700/40">
-              <span className="font-semibold text-surface-900 dark:text-surface-100 block mb-1">
-                Executive TL;DR:
+            <div className="text-xs text-surface-700 dark:text-surface-300 bg-white/50 dark:bg-surface-800/50 p-3.5 rounded-2xl border border-surface-200/50 dark:border-white/[0.05] leading-relaxed">
+              <span className="font-bold text-surface-900 dark:text-white block mb-1">
+                Executive Digest:
               </span>
-              <p className="leading-relaxed">{email.summary}</p>
+              <p>{email.summary}</p>
             </div>
           )}
 
           {/* Action Items Checklist */}
           {email.actionItems && email.actionItems.length > 0 && (
-            <div className="space-y-1.5 pt-1">
-              <div className="text-[11px] font-bold text-surface-500 uppercase tracking-wider flex items-center space-x-1.5">
+            <div className="space-y-2 pt-1">
+              <div className="text-[11px] font-black text-surface-500 uppercase tracking-widest flex items-center space-x-2">
                 <FileText className="w-3.5 h-3.5" />
                 <span>Extracted Action Items</span>
               </div>
-              <div className="space-y-1">
+              <div className="space-y-1.5">
                 {email.actionItems.map((item, idx) => (
                   <div
                     key={idx}
                     onClick={() => toggleAction(idx)}
-                    className="flex items-center space-x-2.5 p-1.5 rounded-lg hover:bg-white dark:hover:bg-surface-800 transition-colors cursor-pointer text-xs"
+                    className="flex items-center space-x-3 p-2.5 rounded-xl hover:bg-white/80 dark:hover:bg-surface-800/80 transition-colors cursor-pointer text-xs"
                   >
-                    <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${
+                    <div className={`w-4.5 h-4.5 rounded-lg border flex items-center justify-center transition-colors ${
                       completedActions[idx]
-                        ? 'bg-brand-600 border-brand-600 text-white'
+                        ? 'bg-brand-600 border-brand-600 text-white shadow-sm'
                         : 'border-surface-300 dark:border-surface-600'
                     }`}>
-                      {completedActions[idx] && <Check className="w-3 h-3" />}
+                      {completedActions[idx] && <Check className="w-3.5 h-3.5" />}
                     </div>
-                    <span className={`flex-1 ${completedActions[idx] ? 'line-through text-surface-400' : 'text-surface-700 dark:text-surface-200'}`}>
+                    <span className={`flex-1 font-medium ${completedActions[idx] ? 'line-through text-surface-400' : 'text-surface-800 dark:text-surface-200'}`}>
                       {item}
                     </span>
                   </div>
@@ -315,11 +318,13 @@ export default function EmailDetail({
 
           {/* Meeting / Calendar preview */}
           {email.meetingDetails?.isDetected && (
-            <div className="flex items-center justify-between p-2.5 rounded-xl bg-sky-50/80 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800 text-xs">
-              <div className="flex items-start space-x-2.5">
-                <Calendar className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0 mt-0.5" />
+            <div className="flex items-center justify-between p-3.5 rounded-2xl bg-sky-500/10 border border-sky-500/30 text-xs">
+              <div className="flex items-start space-x-3">
+                <div className="w-8 h-8 rounded-xl bg-sky-500/20 flex items-center justify-center text-sky-600 dark:text-sky-400 shrink-0">
+                  <Calendar className="w-4 h-4" />
+                </div>
                 <div>
-                  <div className="font-semibold text-sky-900 dark:text-sky-200">
+                  <div className="font-bold text-sky-900 dark:text-sky-200 text-xs">
                     {email.meetingDetails.title}
                   </div>
                   <div className="text-[11px] text-sky-700 dark:text-sky-300 mt-0.5">
@@ -328,8 +333,8 @@ export default function EmailDetail({
                 </div>
               </div>
               <button
-                onClick={() => alert(`Calendar invite prepared for ${email.meetingDetails.title}`)}
-                className="px-2.5 py-1 rounded-lg bg-sky-600 hover:bg-sky-700 text-white text-[11px] font-semibold shrink-0 transition-colors"
+                onClick={() => alert(`Calendar invite confirmed for ${email.meetingDetails.title}`)}
+                className="px-3 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold shrink-0 shadow-sm transition-colors"
               >
                 Add to Calendar
               </button>
@@ -339,8 +344,8 @@ export default function EmailDetail({
         </div>
 
         {/* Message Thread History */}
-        <div className="space-y-3">
-          <div className="text-xs font-bold text-surface-400 uppercase tracking-wider px-1">
+        <div className="space-y-4">
+          <div className="text-xs font-black text-surface-400 dark:text-surface-500 uppercase tracking-widest px-1">
             Conversation Thread ({email.messages?.length || 1} message{email.messages?.length > 1 ? 's' : ''})
           </div>
 
@@ -351,49 +356,49 @@ export default function EmailDetail({
             return (
               <div
                 key={msg.id || index}
-                className={`p-4 rounded-2xl border transition-all ${
+                className={`p-5 rounded-3xl border transition-all ${
                   isAssistantMsg
-                    ? 'bg-brand-50/60 dark:bg-brand-950/30 border-brand-200 dark:border-brand-800/60'
+                    ? 'bg-brand-50/70 dark:bg-brand-950/30 border-brand-200 dark:border-brand-800/60'
                     : isClientMsg
-                    ? 'bg-amber-50/60 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800/60'
-                    : 'bg-white dark:bg-surface-800/60 border-surface-200 dark:border-surface-700/80'
+                    ? 'bg-amber-50/70 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800/60'
+                    : 'bg-white/70 dark:bg-surface-850/60 border-surface-200 dark:border-white/[0.06] shadow-card'
                 }`}
               >
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center space-x-2.5">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center space-x-3">
                     <img
                       src={msg.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80'}
                       alt={msg.sender}
-                      className="w-7 h-7 rounded-full object-cover ring-1 ring-surface-200 dark:ring-surface-700"
+                      className="w-8 h-8 rounded-full object-cover ring-2 ring-surface-200 dark:ring-white/20 shadow-sm"
                     />
                     <div>
-                      <div className="flex items-center space-x-1.5">
-                        <span className="text-xs font-bold text-surface-900 dark:text-surface-100">
+                      <div className="flex items-center space-x-2">
+                        <span className="text-xs font-bold text-surface-900 dark:text-white">
                           {msg.sender}
                         </span>
                         {isAssistantMsg && (
-                          <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300">
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300">
                             Assistant
                           </span>
                         )}
                         {isClientMsg && (
-                          <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300">
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300">
                             Client
                           </span>
                         )}
                       </div>
-                      <div className="text-[10px] text-surface-400">
+                      <div className="text-[11px] text-surface-400">
                         {msg.senderEmail}
                       </div>
                     </div>
                   </div>
 
-                  <span className="text-[10px] text-surface-400 font-medium">
+                  <span className="text-xs text-surface-400 font-medium">
                     {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </span>
                 </div>
 
-                <div className="text-xs text-surface-700 dark:text-surface-300 leading-relaxed whitespace-pre-line pl-9">
+                <div className="text-xs text-surface-700 dark:text-surface-300 leading-relaxed whitespace-pre-line pl-11">
                   {msg.body}
                 </div>
               </div>
@@ -402,27 +407,27 @@ export default function EmailDetail({
         </div>
 
         {/* AI Reply Studio */}
-        <div className="p-4 rounded-2xl bg-white dark:bg-surface-800 border border-surface-200 dark:border-surface-700 shadow-card space-y-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <div className="w-6 h-6 rounded-lg bg-gradient-to-tr from-brand-600 to-indigo-500 flex items-center justify-center text-white">
-                <Sparkles className="w-3.5 h-3.5" />
+        <div className="p-6 rounded-3xl bg-white/80 dark:bg-surface-850/80 border border-surface-200 dark:border-white/[0.08] shadow-card space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center space-x-2.5">
+              <div className="w-7 h-7 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-500 flex items-center justify-center text-white shadow-glow-brand">
+                <Sparkles className="w-4 h-4" />
               </div>
-              <span className="text-xs font-bold text-surface-900 dark:text-surface-100">
+              <span className="text-xs font-black text-surface-900 dark:text-white uppercase tracking-wider">
                 AI Reply Studio
               </span>
             </div>
 
             {/* Tone Selector */}
-            <div className="flex items-center space-x-1 text-[11px]">
+            <div className="flex flex-wrap items-center gap-1.5 text-xs">
               {['Professional', 'Executive Brief', 'Scheduling Confirmation', 'Polite Decline'].map((tone) => (
                 <button
                   key={tone}
                   onClick={() => setSelectedTone(tone)}
-                  className={`px-2.5 py-1 rounded-lg font-medium transition-all ${
+                  className={`px-3 py-1 rounded-xl font-bold transition-all ${
                     selectedTone === tone
-                      ? 'bg-brand-600 text-white font-semibold shadow-sm'
-                      : 'bg-surface-100 dark:bg-surface-700 text-surface-600 dark:text-surface-300 hover:bg-surface-200 dark:hover:bg-surface-600'
+                      ? 'bg-brand-600 text-white shadow-sm'
+                      : 'bg-surface-100 dark:bg-surface-800 text-surface-600 dark:text-surface-300 hover:bg-surface-200 dark:hover:bg-surface-700'
                   }`}
                 >
                   {tone}
@@ -432,21 +437,21 @@ export default function EmailDetail({
           </div>
 
           {/* Custom Assistant Instruction Input */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-3">
             <input
               type="text"
               value={instructions}
               onChange={(e) => setInstructions(e.target.value)}
-              placeholder="Provide specific notes for AI reply (e.g. 'Confirm Friday at 10am, CC Jason')..."
-              className="flex-1 px-3 py-1.5 rounded-xl text-xs bg-surface-50 dark:bg-surface-700/60 border border-surface-200 dark:border-surface-600 text-surface-900 dark:text-surface-100 placeholder-surface-400 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
+              placeholder="Add specific notes for AI reply (e.g. 'Confirm Friday at 10am, CC Jason')..."
+              className="flex-1 px-4 py-2.5 rounded-2xl text-xs bg-surface-50 dark:bg-surface-800 border border-surface-200 dark:border-white/[0.08] text-surface-900 dark:text-surface-100 placeholder-surface-400 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
             />
             <button
               onClick={handleGenerateAiDraft}
               disabled={isGenerating}
-              className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-surface-100 hover:bg-surface-200 dark:bg-surface-700 dark:hover:bg-surface-600 text-xs font-semibold text-surface-700 dark:text-surface-200 transition-colors disabled:opacity-50"
+              className="flex items-center space-x-2 px-4 py-2.5 rounded-2xl bg-surface-100 hover:bg-surface-200 dark:bg-surface-800 dark:hover:bg-surface-700 text-xs font-bold text-surface-800 dark:text-surface-200 transition-colors disabled:opacity-50 shrink-0"
             >
               {isGenerating ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Sparkles className="w-3.5 h-3.5 text-brand-500" />}
-              <span>{isGenerating ? 'Generating...' : 'Regenerate Draft'}</span>
+              <span>{isGenerating ? 'Drafting...' : 'Regenerate Draft'}</span>
             </button>
           </div>
 
@@ -456,21 +461,21 @@ export default function EmailDetail({
               rows={5}
               value={draftContent}
               onChange={(e) => setDraftContent(e.target.value)}
-              placeholder="AI generated draft will appear here. You can freely edit and refine before sending..."
-              className="w-full p-3 rounded-xl text-xs leading-relaxed bg-surface-50 dark:bg-surface-900 border border-surface-200 dark:border-surface-700 text-surface-900 dark:text-surface-100 placeholder-surface-400 focus:outline-none focus:ring-2 focus:ring-brand-500/20 resize-none font-sans"
+              placeholder="AI generated draft will appear here. You can freely edit before sending..."
+              className="w-full p-4 rounded-2xl text-xs leading-relaxed bg-surface-50 dark:bg-surface-900/90 border border-surface-200 dark:border-white/[0.08] text-surface-900 dark:text-surface-100 placeholder-surface-400 focus:outline-none focus:ring-2 focus:ring-brand-500/20 resize-none font-sans"
             />
           </div>
 
           {/* Studio Action Footer */}
-          <div className="flex items-center justify-between pt-1">
-            <span className="text-[11px] text-surface-400">
+          <div className="flex items-center justify-between pt-2">
+            <span className="text-[11px] text-surface-400 font-medium">
               AI-generated responses must be reviewed before sending.
             </span>
 
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2.5">
               <button
                 onClick={() => onSaveDraft(email.id, draftContent, selectedTone)}
-                className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-surface-100 hover:bg-surface-200 dark:bg-surface-700 dark:hover:bg-surface-600 text-surface-700 dark:text-surface-300 transition-colors"
+                className="px-4 py-2 rounded-2xl text-xs font-bold bg-surface-100 hover:bg-surface-200 dark:bg-surface-800 dark:hover:bg-surface-700 text-surface-700 dark:text-surface-300 transition-colors"
               >
                 Save as Draft
               </button>
@@ -478,7 +483,7 @@ export default function EmailDetail({
               <button
                 onClick={handleSend}
                 disabled={isSending || !draftContent.trim()}
-                className="flex items-center space-x-1.5 px-4 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold shadow-sm shadow-brand-500/20 transition-all disabled:opacity-50"
+                className="flex items-center space-x-2 px-5 py-2 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold shadow-glow-brand transition-all disabled:opacity-50"
               >
                 {isSending ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Send className="w-3.5 h-3.5" />}
                 <span>Send Reply Now</span>

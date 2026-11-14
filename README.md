@@ -23,6 +23,25 @@
     <img src="https://img.shields.io/badge/License-MIT-gray?style=flat-square" alt="License" />
   </p>
 
+  <p align="center">
+    <a href="https://auramail-ai.vercel.app">
+      <img src="https://img.shields.io/badge/🚀%20Live%20Prototype-auramail--ai.vercel.app-blueviolet?style=for-the-badge&logo=vercel" alt="Live Deployed Link" />
+    </a>
+    &nbsp;
+    <a href="https://www.loom.com/share/your-loom-demo-id">
+      <img src="https://img.shields.io/badge/🎥%20Demo%20Video-Watch%20Walkthrough-ff4b4b?style=for-the-badge&logo=loom" alt="Loom Demo Video" />
+    </a>
+  </p>
+
+  <div align="center">
+    <table>
+      <tr>
+        <td align="center">🌐 <strong>Live Deployed Link:</strong> <a href="https://auramail-ai.vercel.app">https://auramail-ai.vercel.app</a></td>
+        <td align="center">🎬 <strong>Demo Walkthrough Video:</strong> <a href="https://www.loom.com/share/your-loom-demo-id">https://www.loom.com/share/your-loom-demo-id</a></td>
+      </tr>
+    </table>
+  </div>
+
 </div>
 
 ---
@@ -150,34 +169,6 @@ Open your browser to: **`http://localhost:5000`**
    ```
    *(Frontend runs on `http://localhost:3000`)*
 
----
-
-## 🌐 1-Click Deployment on Vercel
-
-AuraMail AI is pre-configured with a root serverless function adapter (`api/index.js`) and `vercel.json`:
-1. Push your code to GitHub.
-2. Sign in to [vercel.com](https://vercel.com) and click **"Add New Project"**.
-3. Select your repository: **`AuraMail-AI`**.
-4. Click **Deploy**. Vercel will build the React frontend and deploy the Express API to a live URL in under 2 minutes.
-
----
-
-## 🎬 Demo Video Walkthrough Script
-
-Use this structured script when recording your Loom walkthrough video:
-
-1. **Introduction (0:00 - 0:35)**:
-   > *"Hi everyone! I’m Prince Jha, presenting AuraMail AI, built for the Humanity Founders AI Full-Stack Intern evaluation. The core problem this solves is determining reply responsibility—helping assistants triage heavy email volume while giving clients a distraction-free view of only what needs their personal attention."*
-2. **Assistant Dashboard & The Numbers (0:35 - 1:15)**:
-   > *"Here in the Assistant Command Center, I can switch between multiple clients like Sarah Jenkins, David Chen, or an aggregated view. The metrics strip gives an instant pulse: how many emails need assistant replies, client decisions, or upcoming meetings."*
-3. **AI Classification & Manual Override (1:15 - 2:05)**:
-   > *"The Series B Term Sheet is automatically marked 'Client to Reply' (98% confidence) because it requires CEO wire authorization. The Board Meeting reschedule is classified as 'Assistant to Reply' with meeting details extracted. Assistants always maintain final control—I can click the badge to manually reclassify in 1 click."*
-4. **Client VIP Portal & Delegation (2:05 - 2:55)**:
-   > *"Switching to the Client Portal, Sarah only sees the emails needing her decision, with a clear 'Why your input is needed' banner. She can click 'Mark Handled' to resolve it immediately with celebration confetti, or 'Delegate to Assistant' with a quick note."*
-5. **AI Reply Studio & Copilot Chat (2:55 - 3:35)**:
-   > *"The AI Reply Studio lets me select a tone like 'Scheduling Confirmation', add notes, and generate a draft. The Inbox AI Copilot allows assistants to ask natural language questions like 'Show emails needing attention' and jump directly to the thread."*
-6. **Creative Polish & Inflow Simulator (3:35 - 4:15)**:
-   > *"We also built an interactive Notification Center, an Assistant Profile menu, and Superhuman keyboard shortcuts (press '?'). Finally, the Live Inflow Simulator tests real-time AI ingestion on the fly."*
 
 ---
 

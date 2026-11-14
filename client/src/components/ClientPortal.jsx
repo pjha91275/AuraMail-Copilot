@@ -63,7 +63,7 @@ export default function ClientPortal({
   const firstName = clientName.split(' ')[0];
 
   return (
-    <div className="max-w-4xl mx-auto py-4 px-4 sm:px-6 space-y-6 animate-fade-in">
+    <div className="max-w-5xl mx-auto py-6 px-4 sm:px-6 space-y-8 animate-fade-in">
       
       {/* Client VIP Header */}
       <div className="bg-gradient-to-r from-surface-900 via-surface-800 to-brand-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl border border-surface-700/50 relative overflow-hidden">

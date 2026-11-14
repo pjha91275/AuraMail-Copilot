@@ -48,8 +48,8 @@ export default function Navbar({
   const unreadNotificationsCount = notifications.filter(n => n.unread).length;
 
   return (
-    <header className="sticky top-0 z-30 bg-white/80 dark:bg-surface-900/80 backdrop-blur-md border-b border-surface-200 dark:border-surface-800 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+    <header className="sticky top-0 z-30 bg-white/70 dark:bg-surface-900/60 backdrop-blur-2xl border-b border-surface-200/80 dark:border-white/[0.08] transition-colors shadow-subtle">
+      <div className="max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-10 h-17 flex items-center justify-between gap-4">
         
         {/* Brand / Logo */}
         <div className="flex items-center space-x-3 shrink-0">

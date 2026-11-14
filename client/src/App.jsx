@@ -432,8 +432,15 @@ export default function App() {
   const activeClient = clients.find(c => c.id === activeClientId);
 
   return (
-    <div className="min-h-screen bg-surface-50 dark:bg-surface-950 text-surface-900 dark:text-surface-100 flex flex-col font-sans transition-colors duration-200">
+    <div className="min-h-screen bg-surface-50 dark:bg-surface-950 text-surface-900 dark:text-surface-100 flex flex-col font-sans transition-colors duration-300 relative overflow-x-hidden">
       
+      {/* Ambient Self-Crafted Dynamic Background with Floating Light Orbs */}
+      <div className="ambient-bg bg-grid-pattern">
+        <div className="ambient-orb ambient-orb-1 animate-float-slow" />
+        <div className="ambient-orb ambient-orb-2 animate-float-delayed" />
+        <div className="ambient-orb ambient-orb-3 animate-float-slow" />
+      </div>
+
       {/* Toast Notification Container */}
       <Toast toasts={toasts} onDismiss={dismissToast} />
 
@@ -465,7 +472,7 @@ export default function App() {
       />
 
       {/* Main App Workspace */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5">
+      <main className="flex-1 max-w-[1720px] w-full mx-auto px-4 sm:px-8 lg:px-10 py-7 relative z-10 space-y-7">
         
         {viewMode === 'client' ? (
           /* Client-Facing Minimalist VIP Experience */
@@ -477,7 +484,7 @@ export default function App() {
           />
         ) : (
           /* Full Assistant Command Center */
-          <div className="space-y-4 animate-fade-in">
+          <div className="space-y-6 animate-fade-in">
             
             {/* KPI Metrics Strip (Inbox Pulse) */}
             <StatsStrip
@@ -486,8 +493,8 @@ export default function App() {
               onSelectCategory={setActiveCategory}
             />
 
-            {/* Split 3-Column / 2-Column Responsive Layout */}
-            <div className="flex gap-4 items-start">
+            {/* Split 3-Column / 2-Column Responsive Layout with generous spacing */}
+            <div className="flex gap-6 items-start">
               
               {/* Left Column: Segment Sidebar */}
               <div className="hidden lg:block">
@@ -504,7 +511,7 @@ export default function App() {
               </div>
 
               {/* Middle Column: Email Feed / List */}
-              <div className={`w-full lg:w-[420px] xl:w-[460px] shrink-0 ${isMobileDetailOpen ? 'hidden md:block' : 'block'}`}>
+              <div className={`w-full lg:w-[460px] xl:w-[500px] shrink-0 ${isMobileDetailOpen ? 'hidden md:block' : 'block'}`}>
                 <EmailList
                   emails={emails}
                   selectedEmail={selectedEmail}
