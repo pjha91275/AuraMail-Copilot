@@ -52,20 +52,22 @@ export default function Navbar({
       <div className="max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-10 h-17 flex items-center justify-between gap-4">
         
         {/* Brand / Logo */}
-        <div className="flex items-center space-x-3 shrink-0">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-brand-500 to-indigo-400 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
-            <Sparkles className="w-5 h-5 animate-pulse" />
-          </div>
+        <div className="flex items-center space-x-3.5 shrink-0">
+          <img
+            src="/favicon.svg"
+            alt="AuraMail AI Logo"
+            className="w-10 h-10 object-contain rounded-2xl shadow-glow-brand ring-1 ring-white/10 hover:scale-105 transition-transform"
+          />
           <div>
             <div className="flex items-center space-x-2">
-              <span className="font-bold text-lg tracking-tight bg-gradient-to-r from-surface-900 via-brand-600 to-surface-700 dark:from-white dark:via-brand-400 dark:to-surface-300 bg-clip-text text-transparent">
+              <span className="font-black text-lg tracking-tight bg-gradient-to-r from-surface-900 via-brand-600 to-indigo-600 dark:from-white dark:via-brand-400 dark:to-cyan-400 bg-clip-text text-transparent">
                 AuraMail AI
               </span>
-              <span className="hidden sm:inline-flex text-[10px] font-semibold uppercase px-2 py-0.5 rounded-full bg-brand-50 text-brand-700 dark:bg-brand-950 dark:text-brand-300 border border-brand-200 dark:border-brand-800">
+              <span className="hidden sm:inline-flex text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-brand-50 text-brand-700 dark:bg-brand-950 dark:text-brand-300 border border-brand-200 dark:border-brand-800">
                 Assistant Co-Pilot
               </span>
             </div>
-            <p className="text-[11px] text-surface-500 dark:text-surface-400 hidden sm:block">
+            <p className="text-[11px] text-surface-500 dark:text-surface-400 hidden sm:block font-medium">
               Intelligent Email Triage & Client Delegation
             </p>
           </div>
