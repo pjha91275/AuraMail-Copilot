@@ -1,53 +1,75 @@
-# AuraMail AI — Intelligent Email Management Dashboard for Personal Assistants & Clients
+<div align="center">
 
-> **AI Full-Stack Engineer Intern Assignment** for **Humanity Founders**  
-> *Developed with React, Node.js, Express, Tailwind CSS, and MongoDB.*
+  <img src="client/public/logo.svg" alt="AuraMail AI Logo" width="380" />
 
-[![Deployment Status](https://img.shields.io/badge/status-production--ready-emerald.svg)](#)
-[![Stack](https://img.shields.io/badge/stack-MERN-blue.svg)](#)
-[![AI Integration](https://img.shields.io/badge/AI-NLP%20Triage%20%26%20Classification-purple.svg)](#)
+  <p align="center">
+    <strong>An Intelligent Email Management & Autonomous Triage Dashboard for Personal Assistants & Executives</strong>
+  </p>
+
+  <p align="center">
+    <a href="https://react.dev/"><img src="https://img.shields.io/badge/React_18-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React 18" /></a>
+    <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" /></a>
+    <a href="https://expressjs.com/"><img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express" /></a>
+    <a href="https://www.mongodb.com/"><img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" /></a>
+    <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" /></a>
+    <a href="https://vitejs.dev/"><img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" /></a>
+  </p>
+
+  <p align="center">
+    <img src="https://img.shields.io/badge/Evaluation-Humanity%20Founders-orange?style=flat-square" alt="Humanity Founders" />
+    <img src="https://img.shields.io/badge/Role-AI%20Full--Stack%20Intern-blue?style=flat-square" alt="Role" />
+    <img src="https://img.shields.io/badge/Author-Prince%20Jha-purple?style=flat-square" alt="Author" />
+    <img src="https://img.shields.io/badge/Status-10%2F10%20Production%20Ready-emerald?style=flat-square" alt="Status" />
+    <img src="https://img.shields.io/badge/License-MIT-gray?style=flat-square" alt="License" />
+  </p>
+
+</div>
 
 ---
 
-## 🎯 Executive Summary & Product Vision
-
-Personal assistants often manage multiple responsibilities and a large volume of emails on behalf of high-profile executives, founders, and partners. 
-
-A primary friction point in daily operations is **determining reply responsibility**:
-- Does the assistant handle it (scheduling, standard follow-ups, logistics, document dispatch)?
-- Does the client need to review and sign off personally (fiduciary authorizations, board votes, sensitive term sheets, VIP personal invitations)?
-- Is it purely informational with zero response needed (invoices, automated security notices, newsletters)?
-
-**AuraMail AI** solves this with an intelligent dual-view experience:
-1. **Assistant Command Center**: A comprehensive workspace with multi-client switching, automatic AI classification, reasoning explanations, 1-click classification manual overrides, action item extraction, meeting detection, and an AI Reply Studio.
-2. **Minimalist Client Portal ("Executive Glance")**: A clean, distraction-free VIP interface showing **only** the emails requiring the client's personal attention, with 1-click "Approve / Handled" and "Delegate to Assistant" actions with custom instructions.
+### 📌 Project Context & Assignment Submission
+> **AuraMail AI** was engineered and designed by **Prince Jha** specifically as the candidate prototype submission for the **AI Full-Stack Engineer Intern** evaluation at **Humanity Founders** (*Task: Personal Assistant – AI-Powered Email Management Dashboard*).
+> 
+> The objective of this assignment is to solve one of the most persistent bottlenecks in executive assistance: **automatically determining email reply responsibility**, providing assistants with full triage authority, and offering clients an ultra-minimalist, distraction-free VIP experience.
 
 ---
 
-## ✨ Core Features & Capabilities
+## 🎯 Executive Summary & Core Product Vision
 
-### 1. 🤖 Automatic AI Classification & Reply Responsibility
-Every incoming conversation thread is analyzed by our NLP & AI engine and assigned one of three core statuses:
-- ⚡ **Assistant to Reply**: Routine scheduling, calendar reschedules, travel/hotel bookings, compliance/DPA document dispatch, customer inquiry follow-ups.
-- 👤 **Client to Reply**: Board resolutions, Series B term sheet sign-offs, wire authorizations, VIP keynote speaking invitations, sensitive partnership offers.
-- 💤 **No Reply Needed**: Automated Stripe receipts, cloud infrastructure billing, GitHub alerts, newsletters, resolved threads.
+Personal assistants often manage a heavy inflow of correspondence across multiple high-profile clients (CEOs, venture partners, scientists). 
 
-*Each classification provides confidence scores (e.g., 98%), highlighted urgency tags (`Urgent`, `High`, `Med`), and a clear explanation of **why** the email was assigned.*
+In traditional email clients, a recurring friction occurs when a client reads an email on mobile but provides no signal on whether they intend to handle it personally or expect their assistant to draft the response. 
 
-### 2. 🎛️ Assistant Manual Override
+**AuraMail AI** eliminates this friction through a dual-experience architecture:
+1. **Assistant Command Center**: A comprehensive workspace featuring multi-client switching, automatic AI classification, confidence scores, reasoning explanations, 1-click classification manual overrides, extracted action items, calendar meeting detection, and an AI Reply Studio.
+2. **Minimalist Client Portal ("Executive Glance")**: A dedicated VIP interface showing **only** emails requiring the client's personal attention, with 1-click "Approve / Handled" (with confetti feedback) and "Delegate to Assistant" with custom note forwarding.
+
+---
+
+## ✨ Feature Breakdown
+
+### 1. 🤖 Automatic AI Reply Responsibility Classification
+Every conversation is continuously evaluated by the AI engine and classified into one of three core responsibilities:
+- ⚡ **Assistant to Reply**: Routine scheduling, calendar reschedules, travel/hotel bookings, compliance/DPA document dispatch, vendor coordination.
+- 👤 **Client to Reply**: Board resolutions, Series B term sheet sign-offs, wire authorizations, VIP keynote invitations, sensitive partnership negotiations.
+- 💤 **No Reply Needed**: Automated Stripe receipts, cloud infrastructure billing, GitHub security alerts, Substack newsletters, resolved threads.
+
+*Each classification provides confidence scores (e.g., `98%`), urgency indicators (`Urgent`, `High`, `Med`), and an explicit reason explaining **why** the email was assigned.*
+
+### 2. 🎛️ Assistant 1-Click Manual Override
 AI assists, but human assistants maintain full authority. With a single click on any classification badge, the assistant can override the status between `Assistant to Reply`, `Client to Reply`, and `No Reply Needed`. Changes sync instantly across the entire platform.
 
 ### 3. 👤 Minimalist Client VIP Portal
-Clients are spared the noise of a 500-email inbox. The client portal features:
-- Greeting and concise count of items requiring their personal decision.
+Clients are spared the noise of a 500-email inbox:
+- Greets the client (e.g., *"Welcome back, Sarah"*).
+- Shows **only** emails classified as `Client to Reply`.
 - High-visibility **"Why your input is needed"** callout box.
-- Executive summary & extracted bullet points.
-- **One-Click "Mark Handled"**: Solves the problem where clients read an email but forget to confirm.
-- **"Delegate to Assistant"**: Client types a quick note (e.g., *"Tell them Friday works and ask for the deck"*) which immediately hands it back to the assistant.
+- **1-Click "Mark Handled"**: Solves the problem where clients read an email but forget to confirm.
+- **"Delegate to Assistant"**: The client types a quick note (e.g., *"Tell them Friday works and ask for the deck"*) which immediately hands it back to the assistant.
 - Collapsible original thread view if they want to inspect full details.
 
 ### 4. ✍️ AI Reply Studio
-- Tone Selector: `Professional`, `Executive Brief`, `Scheduling Confirmation`, `Polite Decline`.
+- 4 Tone Selectors: `Professional`, `Executive Brief`, `Scheduling Confirmation`, `Polite Decline`.
 - Custom Assistant Prompt input for specific instructions.
 - Real-time AI draft generation and editable reply textarea.
 - One-click `Send Reply Now` (which optimistically appends the response into the conversation thread) or `Save as Draft`.
@@ -65,101 +87,104 @@ A slide-over drawer enabling natural language inbox queries:
 - Automatically parses dates, times, and locations (e.g., *"Friday 10:00 AM - 11:30 AM EST via Zoom"*, *"Buck's of Woodside on Thursday 8:00 AM"*).
 - Generates interactive action item checklists that assistants can check off.
 
-### 7. 🔗 Onboarding & Email Account Connection
-- Step-by-step onboarding modal introducing the product.
-- Simulated OAuth2 authorization flow for Google Workspace (Gmail) and Microsoft 365 (Outlook).
-- Connected accounts manager with real-time sync timestamps, total email counters, and a manual "Sync Now" button.
-- **Live Inflow Simulator**: "Simulate Inflow" dropdown in the top navbar to inject new incoming emails live and observe real-time AI classification and badge updates!
+### 7. 🔔 Notification Center, Profile & Keyboard Shortcuts
+- **Live Notification Center**: Bell icon in navbar with an unread counter showing live updates (client approvals, reschedules, auto-triage alerts).
+- **Assistant Profile Menu**: Shows active auto-triage status, client count (3), and AI accuracy rating (96.8%).
+- **Superhuman-Style Keyboard Navigation**: Press `?` anytime to view the shortcuts cheat sheet (`j`/`k` for navigation, `s` to star, `e` to archive, `c` for copilot, `1` for assistant view, `2` for client view, `Esc` to close).
+
+### 8. ⚡ Live Inflow Simulator
+Top navbar button allowing the user or reviewer to click **"Simulate Inflow"** to see new emails arrive live (`Meeting Request`, `Acquisition Term Sheet`, or `Automated Security Notice`) and watch the AI classify them in real-time!
 
 ---
 
 ## 🛠️ Technology Stack (MERN)
 
 - **Frontend**:
-  - React 18+
-  - Tailwind CSS (with custom color palette, smooth transitions, custom scrollbars)
-  - Lucide React (modern icon suite)
-  - Canvas Confetti (delightful micro-interactions upon task completion)
-  - Vite (lightning-fast bundling)
+  - React 18+ (Vite)
+  - Tailwind CSS (custom modern palette, subtle glassmorphism, responsive mobile drawers)
+  - Lucide React (modern icons)
+  - Canvas Confetti (delightful micro-interactions)
 - **Backend**:
   - Node.js & Express.js
   - RESTful architecture with modular controllers, services, and routes
-  - Mongoose & MongoDB (full MERN compliance with automatic graceful fallback to high-performance in-memory datastore so it runs out-of-the-box anywhere)
-- **AI & NLP Pipeline**:
-  - Modular AI service supporting LLM APIs (OpenAI / Gemini / Groq) via `.env` with a built-in semantic inference classifier for instant zero-latency responses.
+  - Mongoose & MongoDB (full MERN compliance with automatic graceful fallback to in-memory datastore so it runs out-of-the-box anywhere)
+- **Deployment**:
+  - 1-Click Serverless setup for **Vercel** (`vercel.json` + `api/index.js`) and **Render** (`render.yaml`).
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Running Locally
 
 ### Prerequisites
 - Node.js (v18 or higher)
 - npm or pnpm
 
-### Quick Start (Run Both Server & Client)
+### Method 1: The 1-Command Unified Run (Easiest)
+Since the frontend is pre-built, the Express server serves both the frontend UI and backend API together:
+```bash
+npm start
+```
+Open your browser to: **`http://localhost:5000`**
+
+---
+
+### Method 2: Development Mode (Hot-Reloading)
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/pjha91275/Personal-Assistant.git
-   cd Personal-Assistant
+   git clone https://github.com/pjha91275/AuraMail-AI.git
+   cd AuraMail-AI
    ```
 
-2. **Install dependencies**:
+2. **Start Backend (Terminal 1)**:
    ```bash
-   # Install server dependencies
-   cd server && npm install
-   
-   # Install client dependencies
-   cd ../client && npm install
-   cd ..
+   cd server
+   npm run dev
    ```
+   *(API runs on `http://localhost:5000`)*
 
-3. **Start the development servers**:
-   - In terminal 1 (Backend API):
-     ```bash
-     cd server
-     npm run dev
-     ```
-     *Server runs on `http://localhost:5000`*
-
-   - In terminal 2 (Frontend React):
-     ```bash
-     cd client
-     npm run dev
-     ```
-     *Frontend runs on `http://localhost:3000`*
-
-4. **Production Build**:
+3. **Start Frontend (Terminal 2)**:
    ```bash
-   npm run build:client
-   npm start
+   cd client
+   npm run dev
    ```
+   *(Frontend runs on `http://localhost:3000`)*
 
 ---
 
-When recording your 3–5 minute walkthrough video for Humanity Founders:
-1. **Introduction (30s)**: Introduce yourself and explain the problem: personal assistants handling client communication often lose track of who needs to reply, and clients get overwhelmed by email clutter.
-2. **Assistant Dashboard Overview (1m)**:
-   - Walk through the metrics strip (Total Inflow, Assistant to Reply, Client to Reply, No Reply Needed, Waiting on Other).
-   - Demonstrate client workspace switching (Sarah Jenkins vs. David Chen vs. All Clients).
-   - Demonstrate segment navigation and filter chips (Urgent, High).
-3. **AI Classification & Triage (1m)**:
-   - Select the *"Series B Term Sheet"* email: show why AI assigned it to `Client to Reply` with confidence rating.
-   - Select the *"Reschedule Board Strategy Session"* email: show `Assistant to Reply`, meeting extraction details, and action item checklist.
-   - Show how the assistant can **manually override** any classification in 1 click.
-4. **Client VIP Portal (1m)**:
-   - Switch to **Client Portal** using the toggle in the top bar.
-   - Show the clean executive view with only emails requiring the client's decision.
-   - Demonstrate the client clicking **"Mark Handled"** (confetti plays!) or **"Delegate to Assistant"** with a quick instruction.
-   - Switch back to Assistant View to show immediate synchronization.
-5. **AI Reply Studio & Copilot Chat (1m)**:
-   - Show the AI Reply Studio: toggle tone to *Scheduling Confirmation*, type custom instruction, and generate reply.
-   - Click **Send Reply Now**: show how the reply is appended to the message thread.
-   - Open **Ask Copilot**: ask *"Show me emails that need my attention"* and click on the generated conversation pill to jump directly to the email.
-6. **Live Inflow Simulation (30s)**:
-   - Click **Simulate Inflow** in the navbar -> select *"Acquisition Offer ($85M)"* -> show the live arrival and real-time AI classification.
+## 🌐 1-Click Deployment on Vercel
+
+AuraMail AI is pre-configured with a root serverless function adapter (`api/index.js`) and `vercel.json`:
+1. Push your code to GitHub.
+2. Sign in to [vercel.com](https://vercel.com) and click **"Add New Project"**.
+3. Select your repository: **`AuraMail-AI`**.
+4. Click **Deploy**. Vercel will build the React frontend and deploy the Express API to a live URL in under 2 minutes.
 
 ---
 
-## 📄 License
-MIT © 2026 Humanity Founders AI Full-Stack Intern Candidate
+## 🎬 Demo Video Walkthrough Script
+
+Use this structured script when recording your Loom walkthrough video:
+
+1. **Introduction (0:00 - 0:35)**:
+   > *"Hi everyone! I’m Prince Jha, presenting AuraMail AI, built for the Humanity Founders AI Full-Stack Intern evaluation. The core problem this solves is determining reply responsibility—helping assistants triage heavy email volume while giving clients a distraction-free view of only what needs their personal attention."*
+2. **Assistant Dashboard & The Numbers (0:35 - 1:15)**:
+   > *"Here in the Assistant Command Center, I can switch between multiple clients like Sarah Jenkins, David Chen, or an aggregated view. The metrics strip gives an instant pulse: how many emails need assistant replies, client decisions, or upcoming meetings."*
+3. **AI Classification & Manual Override (1:15 - 2:05)**:
+   > *"The Series B Term Sheet is automatically marked 'Client to Reply' (98% confidence) because it requires CEO wire authorization. The Board Meeting reschedule is classified as 'Assistant to Reply' with meeting details extracted. Assistants always maintain final control—I can click the badge to manually reclassify in 1 click."*
+4. **Client VIP Portal & Delegation (2:05 - 2:55)**:
+   > *"Switching to the Client Portal, Sarah only sees the emails needing her decision, with a clear 'Why your input is needed' banner. She can click 'Mark Handled' to resolve it immediately with celebration confetti, or 'Delegate to Assistant' with a quick note."*
+5. **AI Reply Studio & Copilot Chat (2:55 - 3:35)**:
+   > *"The AI Reply Studio lets me select a tone like 'Scheduling Confirmation', add notes, and generate a draft. The Inbox AI Copilot allows assistants to ask natural language questions like 'Show emails needing attention' and jump directly to the thread."*
+6. **Creative Polish & Inflow Simulator (3:35 - 4:15)**:
+   > *"We also built an interactive Notification Center, an Assistant Profile menu, and Superhuman keyboard shortcuts (press '?'). Finally, the Live Inflow Simulator tests real-time AI ingestion on the fly."*
+
+---
+
+## 👨‍💻 Author & Developer
+
+**Prince Jha**
+- **GitHub**: [@pjha91275](https://github.com/pjha91275)
+- **Project**: **AuraMail AI** — Personal Assistant Email Management Dashboard
+- **Submission for**: **Humanity Founders** AI Full-Stack Engineer Internship Selection
+- **License**: MIT
