@@ -8,6 +8,7 @@ import ClientPortal from './components/ClientPortal';
 import AiCopilotDrawer from './components/AiCopilotDrawer';
 import OnboardingModal from './components/OnboardingModal';
 import AccountsModal from './components/AccountsModal';
+import ShortcutsModal from './components/ShortcutsModal';
 import Toast from './components/Toast';
 
 import {
@@ -51,10 +52,42 @@ export default function App() {
   const [isOnboardingOpen, setIsOnboardingOpen] = useState(false);
   const [isAccountsModalOpen, setIsAccountsModalOpen] = useState(false);
   const [isCopilotOpen, setIsCopilotOpen] = useState(false);
+  const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
   const [isMobileDetailOpen, setIsMobileDetailOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isSyncing, setIsSyncing] = useState(false);
   const [toasts, setToasts] = useState([]);
+
+  // Live Notifications Activity Stream
+  const [notifications, setNotifications] = useState([
+    {
+      id: 'notif-1',
+      title: '🚨 Fiduciary Sign-Off Required',
+      description: 'Series B Term Sheet & Wire Authorization assigned to Sarah Jenkins.',
+      time: '12m ago',
+      type: 'client',
+      unread: true,
+      emailId: 'em-1'
+    },
+    {
+      id: 'notif-2',
+      title: '📅 Meeting Reschedule Request',
+      description: 'Lead director Richard Cole requested moving Board Strategy Session to Friday 10 AM.',
+      time: '45m ago',
+      type: 'calendar',
+      unread: true,
+      emailId: 'em-2'
+    },
+    {
+      id: 'notif-3',
+      title: '⚡ Autonomous Triage Run',
+      description: 'AI classified 8 new incoming emails across TechFlow and Horizon accounts.',
+      time: '1h ago',
+      type: 'triage',
+      unread: false,
+      emailId: null
+    }
+  ]);
 
   // Toast Helper
   const pushToast = useCallback(({ title, message, type = 'info' }) => {
@@ -359,7 +392,11 @@ export default function App() {
         setIsCopilotOpen(false);
         setIsAccountsModalOpen(false);
         setIsOnboardingOpen(false);
+        setIsShortcutsOpen(false);
         setIsMobileDetailOpen(false);
+      } else if (e.key === '?') {
+        e.preventDefault();
+        setIsShortcutsOpen(prev => !prev);
       } else if (e.key === 'c' || e.key === 'C') {
         e.preventDefault();
         setIsCopilotOpen(prev => !prev);
@@ -412,9 +449,19 @@ export default function App() {
         onOpenCopilot={() => setIsCopilotOpen(true)}
         onOpenAccountsModal={() => setIsAccountsModalOpen(true)}
         onOpenOnboarding={() => setIsOnboardingOpen(true)}
+        onOpenShortcuts={() => setIsShortcutsOpen(true)}
         onSimulateEmail={handleSimulateEmail}
         isSyncing={isSyncing}
         accountsCount={accounts.length}
+        notifications={notifications}
+        onMarkAllNotificationsRead={() => setNotifications(prev => prev.map(n => ({ ...n, unread: false })))}
+        onSelectNotification={(emailId) => {
+          const match = emails.find(e => e.id === emailId);
+          if (match) {
+            setSelectedEmail(match);
+            setIsMobileDetailOpen(true);
+          }
+        }}
       />
 
       {/* Main App Workspace */}
@@ -534,6 +581,12 @@ export default function App() {
         onSyncAccount={handleSyncAccount}
         onAddAccount={handleAddAccount}
         activeClientId={activeClientId}
+      />
+
+      {/* Keyboard Shortcuts Cheat Sheet Modal */}
+      <ShortcutsModal
+        isOpen={isShortcutsOpen}
+        onClose={() => setIsShortcutsOpen(false)}
       />
 
     </div>

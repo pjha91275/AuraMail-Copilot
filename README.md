@@ -137,8 +137,6 @@ A slide-over drawer enabling natural language inbox queries:
 
 ---
 
-## 🎬 Recommended Demo Walkthrough Video Script
-
 When recording your 3–5 minute walkthrough video for Humanity Founders:
 1. **Introduction (30s)**: Introduce yourself and explain the problem: personal assistants handling client communication often lose track of who needs to reply, and clients get overwhelmed by email clutter.
 2. **Assistant Dashboard Overview (1m)**:

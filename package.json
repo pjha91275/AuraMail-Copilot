@@ -1,12 +1,20 @@
 {
-  "name": "personal-assistant-ai-dashboard",
+  "name": "auramail-ai-personal-assistant",
   "version": "1.0.0",
   "description": "AI-Powered Email Management Dashboard for Personal Assistants & Clients",
   "scripts": {
+    "build": "cd client && npm install && npm run build",
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npm run dev",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "build:client": "cd client && npm run build",
     "start": "cd server && npm start"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.5"
   },
   "keywords": ["ai", "email-management", "personal-assistant", "mern"],
   "author": "Humanity Founders AI Intern Applicant",

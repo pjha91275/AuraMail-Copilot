@@ -44,17 +44,27 @@ app.get('*', (req, res) => {
   });
 });
 
-// Start Server
-const startServer = async () => {
-  try {
-    await connectDB();
-    await initStore();
-    app.listen(PORT, () => {
-      console.log(`🚀 AuraMail Server running smoothly on http://localhost:${PORT}`);
-    });
-  } catch (err) {
-    console.error('Failed to start server:', err);
+let isInitialized = false;
+const ensureInit = async () => {
+  if (!isInitialized) {
+    try {
+      await connectDB();
+      await initStore();
+      isInitialized = true;
+    } catch (err) {
+      console.error('Initialization error:', err);
+    }
   }
 };
 
-startServer();
+// Immediate init
+ensureInit();
+
+// Start standalone server if executed directly
+if (require.main === module || !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`🚀 AuraMail Server running smoothly on http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
