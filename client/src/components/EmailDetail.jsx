@@ -18,7 +18,8 @@ import {
   RefreshCw,
   Share2,
   Sliders,
-  FileText
+  FileText,
+  ArrowLeft
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -31,7 +32,8 @@ export default function EmailDetail({
   onSendReply,
   onSaveDraft,
   onGenerateDraft,
-  clientName = 'Sarah Jenkins'
+  clientName = 'Sarah Jenkins',
+  onBackToList
 }) {
   const [overrideMenuOpen, setOverrideMenuOpen] = useState(false);
   const [selectedTone, setSelectedTone] = useState('Professional');
@@ -118,6 +120,17 @@ export default function EmailDetail({
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
             <div className="flex items-center space-x-2 mb-1.5 flex-wrap gap-y-1">
+              {/* Mobile Back Button */}
+              {onBackToList && (
+                <button
+                  onClick={onBackToList}
+                  className="md:hidden flex items-center space-x-1 px-2.5 py-1 rounded-lg bg-surface-200 dark:bg-surface-800 text-surface-700 dark:text-surface-300 text-xs font-semibold hover:bg-surface-300"
+                >
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                  <span>Inbox</span>
+                </button>
+              )}
+
               {/* Classification Badge with manual override dropdown */}
               <div className="relative">
                 <button

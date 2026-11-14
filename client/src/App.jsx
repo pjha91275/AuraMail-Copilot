@@ -51,6 +51,7 @@ export default function App() {
   const [isOnboardingOpen, setIsOnboardingOpen] = useState(false);
   const [isAccountsModalOpen, setIsAccountsModalOpen] = useState(false);
   const [isCopilotOpen, setIsCopilotOpen] = useState(false);
+  const [isMobileDetailOpen, setIsMobileDetailOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isSyncing, setIsSyncing] = useState(false);
   const [toasts, setToasts] = useState([]);
@@ -346,6 +347,51 @@ export default function App() {
     });
   };
 
+  // Keyboard Shortcuts (j/k navigation, s to star, e to archive, c for copilot, esc to close)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Don't trigger if user is actively typing in an input or textarea
+      if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
+        return;
+      }
+
+      if (e.key === 'Escape') {
+        setIsCopilotOpen(false);
+        setIsAccountsModalOpen(false);
+        setIsOnboardingOpen(false);
+        setIsMobileDetailOpen(false);
+      } else if (e.key === 'c' || e.key === 'C') {
+        e.preventDefault();
+        setIsCopilotOpen(prev => !prev);
+      } else if (e.key === '1') {
+        setViewMode('assistant');
+      } else if (e.key === '2') {
+        setViewMode('client');
+      } else if (emails.length > 0) {
+        const currentIndex = emails.findIndex(item => item.id === selectedEmail?.id);
+
+        if (e.key === 'j' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          const nextIndex = (currentIndex + 1) % emails.length;
+          setSelectedEmail(emails[nextIndex]);
+        } else if (e.key === 'k' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          const prevIndex = (currentIndex - 1 + emails.length) % emails.length;
+          setSelectedEmail(emails[prevIndex]);
+        } else if ((e.key === 's' || e.key === 'S') && selectedEmail) {
+          e.preventDefault();
+          handleToggleStar(selectedEmail.id, !selectedEmail.starred);
+        } else if ((e.key === 'e' || e.key === 'E') && selectedEmail) {
+          e.preventDefault();
+          handleArchive(selectedEmail.id);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [emails, selectedEmail, handleToggleStar, handleArchive]);
+
   const activeClient = clients.find(c => c.id === activeClientId);
 
   return (
@@ -411,11 +457,14 @@ export default function App() {
               </div>
 
               {/* Middle Column: Email Feed / List */}
-              <div className="w-full lg:w-[420px] xl:w-[460px] shrink-0">
+              <div className={`w-full lg:w-[420px] xl:w-[460px] shrink-0 ${isMobileDetailOpen ? 'hidden md:block' : 'block'}`}>
                 <EmailList
                   emails={emails}
                   selectedEmail={selectedEmail}
-                  onSelectEmail={setSelectedEmail}
+                  onSelectEmail={(email) => {
+                    setSelectedEmail(email);
+                    setIsMobileDetailOpen(true);
+                  }}
                   searchQuery={searchQuery}
                   onSearchChange={setSearchQuery}
                   activeCategory={activeCategory}
@@ -429,7 +478,7 @@ export default function App() {
               </div>
 
               {/* Right Column: Detailed Conversation Thread & AI Studio */}
-              <div className="hidden md:flex flex-1 min-w-0">
+              <div className={`flex-1 min-w-0 ${isMobileDetailOpen ? 'flex' : 'hidden md:flex'}`}>
                 <EmailDetail
                   email={selectedEmail}
                   onUpdateClassification={handleUpdateClassification}
@@ -440,6 +489,7 @@ export default function App() {
                   onSaveDraft={handleSaveDraft}
                   onGenerateDraft={generateAiDraft}
                   clientName={activeClient?.name || 'Sarah Jenkins'}
+                  onBackToList={() => setIsMobileDetailOpen(false)}
                 />
               </div>
 
