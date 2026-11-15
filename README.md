@@ -12,7 +12,7 @@
   </p>
 
   <p align="center">
-    <a href="https://deepmind.google/technologies/gemini/"><img src="https://img.shields.io/badge/Built%20With-Google%20Antigravity%20IDE-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Built with Google Antigravity IDE" /></a>
+    <a href="https://antigravity.google/product/antigravity-ide/"><img src="https://img.shields.io/badge/Built%20With-Google%20Antigravity%20IDE-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Built with Google Antigravity IDE" /></a>
     <a href="https://ai.google.dev/"><img src="https://img.shields.io/badge/Google_Gemini_LLM-8E75B2?style=for-the-badge&logo=google&logoColor=white" alt="Google Gemini LLM" /></a>
     <a href="https://react.dev/"><img src="https://img.shields.io/badge/React_18-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React 18" /></a>
     <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" /></a>
@@ -247,7 +247,7 @@ PORT=5000
 NODE_ENV=development
 
 # 1. MongoDB Atlas Connection URI
-# Example: mongodb+srv://<username>:<password>@cluster0.kof6tuh.mongodb.net/auramail?retryWrites=true&w=majority
+# Example: mongodb+srv://<username>:<password>@cluster0.xxxxxx.mongodb.net/auramail?retryWrites=true&w=majority
 MONGODB_URI=your_mongodb_connection_string
 
 # 2. Google Gemini LLM API Key (from Google AI Studio: https://aistudio.google.com/app/apikey)

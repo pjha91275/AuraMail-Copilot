@@ -23,17 +23,19 @@
       <stop offset="100%" stop-color="#f59e0b" />
     </linearGradient>
 
-    <!-- Softened Refined Glow Filter (Reduced glare, elegant luminous stroke) -->
-    <filter id="emblemNeonGlow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="3" result="glow" />
+    <!-- Radiant Cyber Glow Filter (Elevated luminous glow) -->
+    <filter id="emblemNeonGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5.5" result="wideGlow" />
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="tightGlow" />
       <feMerge>
-        <feMergeNode in="glow" />
+        <feMergeNode in="wideGlow" />
+        <feMergeNode in="tightGlow" />
         <feMergeNode in="SourceGraphic" />
       </feMerge>
     </filter>
 
-    <filter id="starBurst" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="2" result="starBlur" />
+    <filter id="starBurst" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="starBlur" />
       <feMerge>
         <feMergeNode in="starBlur" />
         <feMergeNode in="SourceGraphic" />
