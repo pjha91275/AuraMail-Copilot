@@ -1,154 +1,256 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" fill="none">
   <defs>
-    <!-- Ultra-Deep Obsidian Dark Canvas Base -->
+    <!-- Ultra-Deep Obsidian Canvas Base -->
     <radialGradient id="baseGradDark" cx="50%" cy="30%" r="85%" fx="50%" fy="20%">
-      <stop offset="0%" stop-color="#060914"/>
-      <stop offset="50%" stop-color="#020408"/>
+      <stop offset="0%" stop-color="#080d1a"/>
+      <stop offset="45%" stop-color="#03050a"/>
       <stop offset="100%" stop-color="#010204"/>
     </radialGradient>
 
-    <!-- Top Left Indigo Nebula (Pure Deep Light, No Grey) -->
-    <radialGradient id="nebulaIndigo" cx="15%" cy="15%" r="40%">
-      <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.25"/>
-      <stop offset="60%" stop-color="#312e81" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#010204" stop-opacity="0"/>
-    </radialGradient>
+    <!-- Intense Multi-Layered Neon Shine & Glow Filter for Logos -->
+    <filter id="intenseNeonGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="24" result="blurWide"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blurMid"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blurTight"/>
+      <feMerge>
+        <feMergeNode in="blurWide"/>
+        <feMergeNode in="blurMid"/>
+        <feMergeNode in="blurTight"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
 
-    <!-- Top Right Cyan Glow -->
-    <radialGradient id="nebulaCyan" cx="85%" cy="20%" r="35%">
-      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.2"/>
-      <stop offset="50%" stop-color="#0284c7" stop-opacity="0.06"/>
-      <stop offset="100%" stop-color="#010204" stop-opacity="0"/>
-    </radialGradient>
+    <filter id="starShineBurst" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
 
-    <!-- Bottom Center Violet Aurora -->
-    <radialGradient id="nebulaViolet" cx="50%" cy="85%" r="45%">
-      <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.18"/>
-      <stop offset="60%" stop-color="#4c1d95" stop-opacity="0.05"/>
-      <stop offset="100%" stop-color="#010204" stop-opacity="0"/>
-    </radialGradient>
+    <filter id="nebulaSmudge" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="90"/>
+    </filter>
 
-    <!-- Subtle Cyber Matrix Grid (Ultra-clean, No Haze) -->
+    <!-- Subtle Cyber Matrix Grid Overlay -->
     <pattern id="cyberGrid" width="60" height="60" patternUnits="userSpaceOnUse">
-      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(255, 255, 255, 0.025)" stroke-width="1"/>
-      <circle cx="0" cy="0" r="1" fill="rgba(99, 102, 241, 0.12)"/>
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(255, 255, 255, 0.03)" stroke-width="1"/>
+      <circle cx="0" cy="0" r="1" fill="rgba(99, 102, 241, 0.18)"/>
     </pattern>
 
-    <!-- Official AuraMail Logo Mark Gradients -->
+    <!-- Luminous Gradients for Logos (Glowing & Shining) -->
     <linearGradient id="logoRibbonDark" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#2563eb"/>
-      <stop offset="35%" stop-color="#4f46e5"/>
-      <stop offset="70%" stop-color="#7c3aed"/>
-      <stop offset="100%" stop-color="#06b6d4"/>
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="30%" stop-color="#6366f1"/>
+      <stop offset="70%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#00f0ff"/>
     </linearGradient>
 
     <linearGradient id="logoFlapDark" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8"/>
-      <stop offset="100%" stop-color="#818cf8"/>
+      <stop offset="0%" stop-color="#67e8f9"/>
+      <stop offset="50%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#c084fc"/>
     </linearGradient>
 
     <linearGradient id="logoStarDark" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#fef08a"/>
       <stop offset="100%" stop-color="#f59e0b"/>
     </linearGradient>
 
-    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="70" result="blur"/>
-    </filter>
+    <!-- ============================================================ -->
+    <!-- RICH COLOR SMUDGE GRADIENTS (IN HOLLOW PORTIONS BETWEEN LOGOS) -->
+    <!-- ============================================================ -->
+    
+    <!-- 1. Upper-Center Hollow Smudge (Cyan / Azure Radiant Aurora) -->
+    <radialGradient id="smudgeUpperCenter" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.32"/>
+      <stop offset="40%" stop-color="#0284c7" stop-opacity="0.18"/>
+      <stop offset="70%" stop-color="#0369a1" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#010204" stop-opacity="0"/>
+    </radialGradient>
 
-    <filter id="vectorGlow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="6" result="blur"/>
-      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-    </filter>
+    <!-- 2. Mid-Center Hollow Smudge (Royal Violet & Magenta Pulse) -->
+    <radialGradient id="smudgeMidCenter" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.28"/>
+      <stop offset="35%" stop-color="#7c3aed" stop-opacity="0.16"/>
+      <stop offset="65%" stop-color="#4f46e5" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#010204" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- 3. Left-Center Hollow Smudge (Warm Golden Amber / Sunset Rose) -->
+    <radialGradient id="smudgeLeftCenter" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.25"/>
+      <stop offset="40%" stop-color="#ec4899" stop-opacity="0.14"/>
+      <stop offset="70%" stop-color="#be185d" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#010204" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- 4. Right-Center Hollow Smudge (Electric Emerald / Teal Flare) -->
+    <radialGradient id="smudgeRightCenter" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.26"/>
+      <stop offset="45%" stop-color="#06b6d4" stop-opacity="0.15"/>
+      <stop offset="75%" stop-color="#0284c7" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#010204" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- 5. Bottom-Center Hollow Smudge (Deep Cyber Indigo Aurora) -->
+    <radialGradient id="smudgeBottomCenter" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.3"/>
+      <stop offset="45%" stop-color="#4338ca" stop-opacity="0.15"/>
+      <stop offset="75%" stop-color="#312e81" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#010204" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Logo Halo Gradients for High Shine -->
+    <radialGradient id="logoHaloCyan" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.45"/>
+      <stop offset="50%" stop-color="#0284c7" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#010204" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="logoHaloIndigo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.45"/>
+      <stop offset="50%" stop-color="#4f46e5" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#010204" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="logoHaloPurple" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c084fc" stop-opacity="0.45"/>
+      <stop offset="50%" stop-color="#7c3aed" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#010204" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="logoHaloTeal" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.45"/>
+      <stop offset="50%" stop-color="#0d9488" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#010204" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Reusable Logo Symbol Template -->
+    <g id="auraMailLogoWatermark">
+      <!-- Envelope Outer Wings (Thick, glowing vector strokes) -->
+      <path d="M16 38 C16 30 22 24 30 24 L98 24 C106 24 112 30 112 38 L112 94 C112 102 106 108 98 108 L30 108 C22 108 16 102 16 94 Z" 
+            fill="none" 
+            stroke="url(#logoRibbonDark)" 
+            stroke-width="7.5" 
+            stroke-linecap="round" 
+            stroke-linejoin="round"/>
+
+      <!-- Intersecting Wing Fold (Aura Wings 'A' / 'M') with brilliant white/cyan highlight -->
+      <path d="M18 32 L64 74 L110 32" 
+            fill="none" 
+            stroke="url(#logoFlapDark)" 
+            stroke-width="7.5" 
+            stroke-linecap="round" 
+            stroke-linejoin="round"/>
+
+      <!-- Bottom Flap Wings -->
+      <path d="M18 100 L50 68" fill="none" stroke="url(#logoRibbonDark)" stroke-width="6.5" stroke-linecap="round" stroke-opacity="0.95"/>
+      <path d="M110 100 L78 68" fill="none" stroke="url(#logoRibbonDark)" stroke-width="6.5" stroke-linecap="round" stroke-opacity="0.95"/>
+
+      <!-- Central Neural AI Node with Bright Light Core -->
+      <circle cx="64" cy="74" r="8" fill="#00f0ff" opacity="0.6"/>
+      <circle cx="64" cy="74" r="5" fill="#38bdf8"/>
+      <circle cx="64" cy="74" r="2.5" fill="#ffffff"/>
+
+      <!-- Sparkling Radiant Star with Brilliant Lens Flare Rays -->
+      <g transform="translate(86, 6)" filter="url(#starShineBurst)">
+        <!-- Horizontal & Vertical Shine Rays -->
+        <line x1="16" y1="-12" x2="16" y2="42" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.95"/>
+        <line x1="-12" y1="15" x2="44" y2="15" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.95"/>
+        <line x1="-4" y1="-5" x2="36" y2="35" stroke="#fef08a" stroke-width="1.5" stroke-linecap="round" opacity="0.75"/>
+        <line x1="36" y1="-5" x2="-4" y2="35" stroke="#fef08a" stroke-width="1.5" stroke-linecap="round" opacity="0.75"/>
+
+        <!-- Star Diamond Geometry -->
+        <path d="M16 0 L20 11.5 L31 15 L20 18.5 L16 30 L12 18.5 L1 15 L12 11.5 Z" fill="url(#logoStarDark)"/>
+        <circle cx="16" cy="15" r="4" fill="#ffffff"/>
+      </g>
+    </g>
   </defs>
 
   <!-- Deep Obsidian Black Background Base -->
   <rect width="100%" height="100%" fill="url(#baseGradDark)"/>
 
-  <!-- Subtle Clean Cyber Grid Overlay -->
+  <!-- Subtle Cyber Matrix Grid Overlay -->
   <rect width="100%" height="100%" fill="url(#cyberGrid)"/>
 
-  <!-- Deep Ambient Glow Points (Soft & Non-intrusive) -->
-  <circle cx="300" cy="180" r="450" fill="url(#nebulaIndigo)" filter="url(#softGlow)"/>
-  <circle cx="1650" cy="220" r="400" fill="url(#nebulaCyan)" filter="url(#softGlow)"/>
-  <circle cx="960" cy="920" r="500" fill="url(#nebulaViolet)" filter="url(#softGlow)"/>
+  <!-- ========================================================================= -->
+  <!-- RICH COLOR SMUDGES IN HOLLOW PORTIONS WHERE NO LOGO IS USED              -->
+  <!-- ========================================================================= -->
+  
+  <!-- 1. Upper-Center Hollow Smudge (Between Top-Left and Top-Right Logos) -->
+  <circle cx="960" cy="160" r="460" fill="url(#smudgeUpperCenter)" filter="url(#nebulaSmudge)"/>
+
+  <!-- 2. Mid-Center Hollow Smudge (Center of Screen, Behind Central Lists) -->
+  <circle cx="960" cy="540" r="480" fill="url(#smudgeMidCenter)" filter="url(#nebulaSmudge)"/>
+
+  <!-- 3. Left-Center Hollow Smudge (Between Top-Left and Bottom-Left Logos) -->
+  <circle cx="80" cy="480" r="380" fill="url(#smudgeLeftCenter)" filter="url(#nebulaSmudge)"/>
+
+  <!-- 4. Right-Center Hollow Smudge (Between Top-Right and Bottom-Right Logos) -->
+  <circle cx="1840" cy="460" r="400" fill="url(#smudgeRightCenter)" filter="url(#nebulaSmudge)"/>
+
+  <!-- 5. Bottom-Center Hollow Smudge (Between Bottom-Left and Bottom-Right Logos) -->
+  <circle cx="960" cy="940" r="520" fill="url(#smudgeBottomCenter)" filter="url(#nebulaSmudge)"/>
+
 
   <!-- ========================================================================= -->
-  <!-- 1. OFFICIAL LOGO WATERMARK #1 (TOP-RIGHT: PURE VECTOR, ZERO GREY BUBBLE) -->
+  <!-- EXACTLY 4 HIGH-GLOW & SHINING LOGOS IN THE 4 MAIN QUADRANTS              -->
   <!-- ========================================================================= -->
-  <g transform="translate(1420, 80) scale(2.6)" opacity="0.22" filter="url(#vectorGlow)">
-    <!-- Base Envelope Shield Wings (No grey box, pure transparent glowing strokes) -->
-    <path d="M16 38 C16 30 22 24 30 24 L98 24 C106 24 112 30 112 38 L112 94 C112 102 106 108 98 108 L30 108 C22 108 16 102 16 94 Z" 
-          fill="none" 
-          stroke="url(#logoRibbonDark)" 
-          stroke-width="6.5" 
-          stroke-linecap="round" 
-          stroke-linejoin="round"/>
 
-    <!-- Intersecting Wing Fold (Aura Wings 'A' / 'M') -->
-    <path d="M18 32 L64 74 L110 32" 
-          fill="none" 
-          stroke="url(#logoFlapDark)" 
-          stroke-width="6.5" 
-          stroke-linecap="round" 
-          stroke-linejoin="round"/>
-
-    <!-- Bottom Wings -->
-    <path d="M18 100 L50 68" fill="none" stroke="url(#logoRibbonDark)" stroke-width="5.5" stroke-linecap="round" stroke-opacity="0.9"/>
-    <path d="M110 100 L78 68" fill="none" stroke="url(#logoRibbonDark)" stroke-width="5.5" stroke-linecap="round" stroke-opacity="0.9"/>
-
-    <!-- Central Neural AI Node -->
-    <circle cx="64" cy="74" r="5.5" fill="#38bdf8"/>
-    <circle cx="64" cy="74" r="2" fill="#ffffff"/>
-
-    <!-- Sparkle Star -->
-    <g transform="translate(86, 10)">
-      <path d="M16 0 L19.5 11.5 L31 15 L19.5 18.5 L16 30 L12.5 18.5 L1 15 L12.5 11.5 Z" fill="url(#logoStarDark)"/>
-      <circle cx="16" cy="15" r="3" fill="#ffffff"/>
-    </g>
+  <!-- ------------------------------------------------------------------------- -->
+  <!-- 1. LOGO WATERMARK #1: TOP-RIGHT QUADRANT                                  -->
+  <!-- ------------------------------------------------------------------------- -->
+  <!-- Radiant Light Halo Behind Logo 1 -->
+  <circle cx="1580" cy="190" r="260" fill="url(#logoHaloCyan)" filter="url(#nebulaSmudge)"/>
+  <!-- Glowing Logo 1 -->
+  <g transform="translate(1420, 60) scale(2.8)" opacity="0.45" filter="url(#intenseNeonGlow)">
+    <use href="#auraMailLogoWatermark"/>
   </g>
 
-  <!-- ========================================================================= -->
-  <!-- 2. OFFICIAL LOGO WATERMARK #2 (CENTER-LEFT: BEHIND INBOX THREADS)        -->
-  <!-- ========================================================================= -->
-  <g transform="translate(160, 320) scale(2.4)" opacity="0.18" filter="url(#vectorGlow)">
-    <path d="M16 38 C16 30 22 24 30 24 L98 24 C106 24 112 30 112 38 L112 94 C112 102 106 108 98 108 L30 108 C22 108 16 102 16 94 Z" 
-          fill="none" stroke="url(#logoRibbonDark)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M18 32 L64 74 L110 32" fill="none" stroke="url(#logoFlapDark)" stroke-width="6.5" stroke-linecap="round"/>
-    <path d="M18 100 L50 68" fill="none" stroke="url(#logoRibbonDark)" stroke-width="5.5" stroke-linecap="round" stroke-opacity="0.9"/>
-    <path d="M110 100 L78 68" fill="none" stroke="url(#logoRibbonDark)" stroke-width="5.5" stroke-linecap="round" stroke-opacity="0.9"/>
-    <circle cx="64" cy="74" r="5.5" fill="#38bdf8"/>
-    <g transform="translate(86, 10)">
-      <path d="M16 0 L19.5 11.5 L31 15 L19.5 18.5 L16 30 L12.5 18.5 L1 15 L12.5 11.5 Z" fill="url(#logoStarDark)"/>
-    </g>
+  <!-- ------------------------------------------------------------------------- -->
+  <!-- 2. LOGO WATERMARK #2: TOP-LEFT QUADRANT                                   -->
+  <!-- ------------------------------------------------------------------------- -->
+  <!-- Radiant Light Halo Behind Logo 2 -->
+  <circle cx="280" cy="220" r="260" fill="url(#logoHaloIndigo)" filter="url(#nebulaSmudge)"/>
+  <!-- Glowing Logo 2 -->
+  <g transform="translate(120, 90) scale(2.7)" opacity="0.42" filter="url(#intenseNeonGlow)">
+    <use href="#auraMailLogoWatermark"/>
   </g>
 
-  <!-- ========================================================================= -->
-  <!-- 3. OFFICIAL LOGO WATERMARK #3 (LOWER-RIGHT: QUADRANT BALANCE)            -->
-  <!-- ========================================================================= -->
-  <g transform="translate(1380, 680) scale(2.5)" opacity="0.18" filter="url(#vectorGlow)">
-    <path d="M16 38 C16 30 22 24 30 24 L98 24 C106 24 112 30 112 38 L112 94 C112 102 106 108 98 108 L30 108 C22 108 16 102 16 94 Z" 
-          fill="none" stroke="url(#logoRibbonDark)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M18 32 L64 74 L110 32" fill="none" stroke="url(#logoFlapDark)" stroke-width="6.5" stroke-linecap="round"/>
-    <path d="M18 100 L50 68" fill="none" stroke="url(#logoRibbonDark)" stroke-width="5.5" stroke-linecap="round"/>
-    <path d="M110 100 L78 68" fill="none" stroke="url(#logoRibbonDark)" stroke-width="5.5" stroke-linecap="round"/>
-    <circle cx="64" cy="74" r="5.5" fill="#38bdf8"/>
-    <g transform="translate(86, 10)">
-      <path d="M16 0 L19.5 11.5 L31 15 L19.5 18.5 L16 30 L12.5 18.5 L1 15 L12.5 11.5 Z" fill="url(#logoStarDark)"/>
-    </g>
+  <!-- ------------------------------------------------------------------------- -->
+  <!-- 3. LOGO WATERMARK #3: BOTTOM-LEFT QUADRANT                                -->
+  <!-- ------------------------------------------------------------------------- -->
+  <!-- Radiant Light Halo Behind Logo 3 -->
+  <circle cx="300" cy="780" r="270" fill="url(#logoHaloPurple)" filter="url(#nebulaSmudge)"/>
+  <!-- Glowing Logo 3 -->
+  <g transform="translate(140, 640) scale(2.7)" opacity="0.42" filter="url(#intenseNeonGlow)">
+    <use href="#auraMailLogoWatermark"/>
   </g>
 
-  <!-- Subtle Perspective Horizon Grid at the bottom -->
-  <g opacity="0.3">
-    <line x1="0" y1="880" x2="1920" y2="880" stroke="rgba(255, 255, 255, 0.03)" stroke-width="1"/>
-    <line x1="0" y1="940" x2="1920" y2="940" stroke="rgba(255, 255, 255, 0.04)" stroke-width="1"/>
-    <line x1="0" y1="1000" x2="1920" y2="1000" stroke="rgba(255, 255, 255, 0.05)" stroke-width="1"/>
+  <!-- ------------------------------------------------------------------------- -->
+  <!-- 4. LOGO WATERMARK #4: BOTTOM-RIGHT QUADRANT                               -->
+  <!-- ------------------------------------------------------------------------- -->
+  <!-- Radiant Light Halo Behind Logo 4 -->
+  <circle cx="1570" cy="770" r="280" fill="url(#logoHaloTeal)" filter="url(#nebulaSmudge)"/>
+  <!-- Glowing Logo 4 -->
+  <g transform="translate(1400, 630) scale(2.8)" opacity="0.45" filter="url(#intenseNeonGlow)">
+    <use href="#auraMailLogoWatermark"/>
   </g>
 
-  <!-- Ambient Vignette -->
-  <radialGradient id="vignetteDark" cx="50%" cy="45%" r="65%">
-    <stop offset="60%" stop-color="#000000" stop-opacity="0"/>
-    <stop offset="100%" stop-color="#000000" stop-opacity="0.85"/>
+
+  <!-- Subtle Perspective Horizon Grid Lines at Bottom -->
+  <g opacity="0.35">
+    <line x1="0" y1="880" x2="1920" y2="880" stroke="rgba(255, 255, 255, 0.04)" stroke-width="1"/>
+    <line x1="0" y1="940" x2="1920" y2="940" stroke="rgba(255, 255, 255, 0.05)" stroke-width="1"/>
+    <line x1="0" y1="1000" x2="1920" y2="1000" stroke="rgba(255, 255, 255, 0.06)" stroke-width="1"/>
+  </g>
+
+  <!-- Ultra-Subtle Vignette to Anchor Content -->
+  <radialGradient id="vignetteDark" cx="50%" cy="50%" r="70%">
+    <stop offset="65%" stop-color="#000000" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#000000" stop-opacity="0.6"/>
   </radialGradient>
   <rect width="100%" height="100%" fill="url(#vignetteDark)"/>
 </svg>

@@ -1,17 +1,23 @@
 <div align="center">
 
-  <img src="client/public/logo.svg" alt="AuraMail AI Logo" width="380" />
+  <img src="client/public/logo.svg" alt="AuraMail AI Logo" width="420" />
+
+  <h1 align="center">
+    <span style="color: #38bdf8; font-weight: 900;">AuraMail</span>
+    <span style="color: #818cf8; font-weight: 900;"> AI</span>
+  </h1>
 
   <p align="center">
     <strong>An Intelligent Email Management & Autonomous Triage Dashboard for Personal Assistants & Executives</strong>
   </p>
 
   <p align="center">
+    <a href="https://deepmind.google/technologies/gemini/"><img src="https://img.shields.io/badge/Built%20With-Google%20Antigravity%20IDE-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Built with Google Antigravity IDE" /></a>
+    <a href="https://ai.google.dev/"><img src="https://img.shields.io/badge/Google_Gemini_LLM-8E75B2?style=for-the-badge&logo=google&logoColor=white" alt="Google Gemini LLM" /></a>
     <a href="https://react.dev/"><img src="https://img.shields.io/badge/React_18-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React 18" /></a>
     <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" /></a>
     <a href="https://expressjs.com/"><img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express" /></a>
     <a href="https://www.mongodb.com/"><img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" /></a>
-    <a href="https://ai.google.dev/"><img src="https://img.shields.io/badge/Google_Gemini_LLM-8E75B2?style=for-the-badge&logo=google&logoColor=white" alt="Google Gemini LLM" /></a>
     <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" /></a>
     <a href="https://vitejs.dev/"><img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" /></a>
   </p>
@@ -21,12 +27,13 @@
     <img src="https://img.shields.io/badge/Role-AI%20Full--Stack%20Intern-blue?style=flat-square" alt="Role" />
     <img src="https://img.shields.io/badge/Author-Prince%20Jha-purple?style=flat-square" alt="Author" />
     <img src="https://img.shields.io/badge/Status-10%2F10%20Production%20Ready-emerald?style=flat-square" alt="Status" />
+    <img src="https://img.shields.io/badge/IDE-Google%20Antigravity-4285F4?style=flat-square" alt="Google Antigravity" />
     <img src="https://img.shields.io/badge/License-MIT-gray?style=flat-square" alt="License" />
   </p>
 
   <p align="center">
-    <a href="https://auramail-ai.vercel.app">
-      <img src="https://img.shields.io/badge/🚀%20Live%20Prototype-auramail--ai.vercel.app-blueviolet?style=for-the-badge&logo=vercel" alt="Live Deployed Link" />
+    <a href="https://auramail-copilot.vercel.app">
+      <img src="https://img.shields.io/badge/🚀%20Live%20Prototype-auramail--copilot.vercel.app-blueviolet?style=for-the-badge&logo=vercel" alt="Live Deployed Link" />
     </a>
     &nbsp;
     <a href="https://www.loom.com/share/your-loom-demo-id">
@@ -37,8 +44,13 @@
   <div align="center">
     <table>
       <tr>
-        <td align="center">🌐 <strong>Live Deployed Link:</strong> <a href="https://auramail-ai.vercel.app">https://auramail-ai.vercel.app</a></td>
+        <td align="center">🌐 <strong>Primary Live Prototype:</strong> <a href="https://auramail-copilot.vercel.app">https://auramail-copilot.vercel.app</a></td>
         <td align="center">🎬 <strong>Demo Walkthrough Video:</strong> <a href="https://www.loom.com/share/your-loom-demo-id">https://www.loom.com/share/your-loom-demo-id</a></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+          <em>Alternative Vercel Domain Options: <code>auramail-copilot.vercel.app</code> | <code>auramail-hq.vercel.app</code> | <code>auramail-assistant.vercel.app</code> | <code>auramail-app.vercel.app</code></em>
+        </td>
       </tr>
     </table>
   </div>
@@ -48,9 +60,18 @@
 ---
 
 ### 📌 Project Context & Assignment Submission
-> **AuraMail AI** was engineered and designed by **Prince Jha** specifically as the candidate prototype submission for the **AI Full-Stack Engineer Intern** evaluation at **Humanity Founders** (*Task: Personal Assistant – AI-Powered Email Management Dashboard*).
+> **AuraMail AI** was engineered, designed, and built by **Prince Jha** specifically as the candidate prototype submission for the **AI Full-Stack Engineer Intern** evaluation at **Humanity Founders** (*Task: Personal Assistant – AI-Powered Email Management Dashboard*).
 > 
 > The objective of this assignment is to solve one of the most persistent bottlenecks in executive assistance: **automatically determining email reply responsibility**, providing assistants with full triage authority, and offering clients an ultra-minimalist, distraction-free VIP experience.
+
+---
+
+### ⚡ Built with Google Antigravity IDE
+This entire platform was developed and architected using **Google Antigravity IDE**, Google DeepMind's next-generation autonomous engineering environment. Google Antigravity enabled:
+- High-velocity full-stack MERN scaffolding with Vite and Tailwind CSS.
+- Precision heuristic and Gemini LLM prompt orchestration for autonomous email responsibility classification.
+- Dynamic atmospheric background visual design with multi-quadrant vector shining watermarks and color-smudge nebula rendering.
+- Continuous zero-downtime dual-mode fallback architecture (MERN + in-memory store + offline heuristic engine).
 
 ---
 
@@ -61,14 +82,31 @@ Personal assistants often manage a heavy inflow of correspondence across multipl
 In traditional email clients, a recurring friction occurs when a client reads an email on mobile but provides no signal on whether they intend to handle it personally or expect their assistant to draft the response. 
 
 **AuraMail AI** eliminates this friction through a dual-experience architecture:
-1. **Assistant Command Center**: A comprehensive workspace featuring multi-client switching, automatic AI classification, confidence scores, reasoning explanations, 1-click classification manual overrides, extracted action items, calendar meeting detection, and an AI Reply Studio.
-2. **Minimalist Client Portal ("Executive Glance")**: A dedicated VIP interface showing **only** emails requiring the client's personal attention, with 1-click "Approve / Handled" (with confetti feedback) and "Delegate to Assistant" with custom note forwarding.
+1. **Split-Screen Authentication Hub**: A dedicated sign-in portal featuring 1-click quick demo access profiles (`Assistant: Alex Vance` and `Client / CEO: Sarah Jenkins`) alongside credential sign-in and workspace sign-out flow.
+2. **Assistant Command Center**: A comprehensive workspace featuring multi-client switching, automatic AI classification, confidence scores, reasoning explanations, 1-click classification manual overrides, extracted action items, calendar meeting detection, and an AI Reply Studio.
+3. **Minimalist Client Portal ("Executive Glance")**: A dedicated VIP interface showing **only** emails requiring the client's personal attention, with 1-click "Approve / Handled" (with confetti feedback) and "Delegate to Assistant" with custom note forwarding.
 
 ---
 
 ## ✨ Feature Breakdown
 
-### 1. 🤖 Automatic AI Reply Responsibility Classification
+### 1. 🔐 Split-Screen Atmospheric Authentication & 1-Click Demo Profiles
+- **Brand Hero & Value Pitch**: Highlighting autonomous triage, client portal, and AI reply studio.
+- **Floating Glassmorphism Sign-In Card**: Styled with ambient glass borders, focus glow, and a password visibility toggle.
+- **Instant 1-Click Demo Profiles**:
+  - ⚡ **Assistant Profile (Alex Vance)**: Launches directly into the full assistant command center with complete triage controls.
+  - 👑 **Client / CEO Profile (Sarah Jenkins)**: Launches directly into the minimalist VIP portal.
+- **Workspace Sign-Out Flow**: Integrated in both desktop profile dropdown and mobile navigation drawer, returning the user instantly to the sign-in screen.
+- **Session Persistence**: Stored via `localStorage` so refreshing preserves active workspace credentials.
+
+### 2. 🌌 Self-Crafted Cyber-Atmospheric Background & Visuals
+- **4 Radiant Glowing Vector Logos**: Positioned in all 4 key quadrants of the viewport (Top-Left, Top-Right, Bottom-Left, Bottom-Right) with multi-layered neon glow filters and shining lens flare rays on sparkle stars.
+- **5 Radiant Color Smudges**: Positioned in the hollow areas between logos (Upper-Center Cyan Nebula, Mid-Center Violet Aurora, Left-Center Golden Amber, Right-Center Emerald Teal, Bottom-Center Deep Indigo).
+- **Dual Dynamic Themes**: Seamless Dark Mode (deep obsidian `#020408`) and Bright Mode (crisp pearlescent `#f8fafc`).
+- **Floating Ambient Plasma Orbs**: Smooth floating animation with blurred neon lighting.
+- **Micro-Interactions**: Confetti bursts upon client email approval and smooth drawer slide-overs.
+
+### 3. 🤖 Automatic AI Reply Responsibility Classification
 Every conversation is continuously evaluated by the AI engine and classified into one of three core responsibilities:
 - ⚡ **Assistant to Reply**: Routine scheduling, calendar reschedules, travel/hotel bookings, compliance/DPA document dispatch, vendor coordination.
 - 👤 **Client to Reply**: Board resolutions, Series B term sheet sign-offs, wire authorizations, VIP keynote invitations, sensitive partnership negotiations.
@@ -76,10 +114,10 @@ Every conversation is continuously evaluated by the AI engine and classified int
 
 *Each classification provides confidence scores (e.g., `98%`), urgency indicators (`Urgent`, `High`, `Med`), and an explicit reason explaining **why** the email was assigned.*
 
-### 2. 🎛️ Assistant 1-Click Manual Override
+### 4. 🎛️ Assistant 1-Click Manual Override
 AI assists, but human assistants maintain full authority. With a single click on any classification badge, the assistant can override the status between `Assistant to Reply`, `Client to Reply`, and `No Reply Needed`. Changes sync instantly across the entire platform.
 
-### 3. 👤 Minimalist Client VIP Portal
+### 5. 👤 Minimalist Client VIP Portal
 Clients are spared the noise of a 500-email inbox:
 - Greets the client (e.g., *"Welcome back, Sarah"*).
 - Shows **only** emails classified as `Client to Reply`.
@@ -88,13 +126,13 @@ Clients are spared the noise of a 500-email inbox:
 - **"Delegate to Assistant"**: The client types a quick note (e.g., *"Tell them Friday works and ask for the deck"*) which immediately hands it back to the assistant.
 - Collapsible original thread view if they want to inspect full details.
 
-### 4. ✍️ AI Reply Studio
+### 6. ✍️ AI Reply Studio
 - 4 Tone Selectors: `Professional`, `Executive Brief`, `Scheduling Confirmation`, `Polite Decline`.
 - Custom Assistant Prompt input for specific instructions.
 - Real-time AI draft generation and editable reply textarea.
 - One-click `Send Reply Now` (which optimistically appends the response into the conversation thread) or `Save as Draft`.
 
-### 5. 💬 Interactive Inbox AI Copilot
+### 7. 💬 Interactive Inbox AI Copilot
 A slide-over drawer enabling natural language inbox queries:
 - *"Show me emails that need my attention"*
 - *"Which emails require the client's attention?"*
@@ -103,22 +141,27 @@ A slide-over drawer enabling natural language inbox queries:
 - *"Summarize top conversations"*
 - Returns rich natural language responses with clickable conversation pills that open the exact thread directly!
 
-### 6. 📅 Intelligent Meeting & Action Item Extraction
+### 8. 📅 Intelligent Meeting & Action Item Extraction
 - Automatically parses dates, times, and locations (e.g., *"Friday 10:00 AM - 11:30 AM EST via Zoom"*, *"Buck's of Woodside on Thursday 8:00 AM"*).
 - Generates interactive action item checklists that assistants can check off.
 
-### 7. 🔔 Notification Center, Profile & Keyboard Shortcuts
+### 9. 🔔 Notification Center, Profile & Keyboard Shortcuts
 - **Live Notification Center**: Bell icon in navbar with an unread counter showing live updates (client approvals, reschedules, auto-triage alerts).
-- **Assistant Profile Menu**: Shows active auto-triage status, client count (3), and AI accuracy rating (96.8%).
+- **Assistant Profile Menu**: Shows active auto-triage status, client count (3), AI accuracy rating (96.8%), and workspace sign-out.
 - **Superhuman-Style Keyboard Navigation**: Press `?` anytime to view the shortcuts cheat sheet (`j`/`k` for navigation, `s` to star, `e` to archive, `c` for copilot, `1` for assistant view, `2` for client view, `Esc` to close).
 
-### 8. ⚡ Live Inflow Simulator
+### 10. 📱 Universal Cross-Device Responsiveness
+- **Desktop & Laptop**: Full 3-column panoramic layout with floating glass island navbar and stats strip.
+- **Tablet & Mobile**: Adaptive single-column drilldown with dedicated mobile hamburger menu drawer, touch-friendly tap targets, and back-button headers.
+
+### 11. ⚡ Live Inflow Simulator
 Top navbar button allowing the user or reviewer to click **"Simulate Inflow"** to see new emails arrive live (`Meeting Request`, `Acquisition Term Sheet`, or `Automated Security Notice`) and watch the AI classify them in real-time!
 
 ---
 
 ## 🛠️ Technology Stack & AI Architecture
 
+- **Development IDE**: **Google Antigravity IDE**
 - **AI Engine & LLM**:
   - **Google Gemini LLM** (`gemini-3.5-flash-lite`, `gemini-3.5-flash`, `gemini-flash-latest` via Google AI Studio API)
   - Autonomous responsibility classification (`Assistant to Reply`, `Client to Reply`, `No Reply Needed`)
@@ -126,8 +169,8 @@ Top navbar button allowing the user or reviewer to click **"Simulate Inflow"** t
   - Built-in Zero-Latency NLP heuristic engine (providing automatic offline fallback for 100% uptime)
 - **Frontend**:
   - React 18+ (Vite)
-  - Tailwind CSS (ambient deep navy glassmorphism, responsive drawers & floating island navbar)
-  - Lucide React (modern icons)
+  - Tailwind CSS (ambient deep obsidian glassmorphism, responsive drawers & floating island navbar)
+  - Lucide React (modern vector icons)
   - Canvas Confetti (delightful micro-interactions)
 - **Backend (Node / Express / MongoDB)**:
   - Node.js & Express.js
@@ -170,6 +213,22 @@ AI_API_KEY=your_gemini_api_key
 
 ---
 
+## 🌐 Recommended Vercel Deployment Domains
+
+If `auramail-ai.vercel.app` is already taken, you can use any of the following highly recommended professional domain names on Vercel:
+
+| Recommended Domain | Vibe / Purpose |
+| :--- | :--- |
+| **`auramail-copilot.vercel.app`** | Exact match for the Executive Email Copilot theme |
+| **`auramail-hq.vercel.app`** | Executive headquarters feel |
+| **`auramail-assistant.vercel.app`** | Highlights the Personal Assistant focus |
+| **`auramail-app.vercel.app`** | Clean, direct SaaS application naming |
+| **`prince-auramail.vercel.app`** | Personal candidate evaluation branding |
+
+*To set this in Vercel: Go to your project dashboard on Vercel -> **Settings** -> **Domains** -> Type in your preferred domain and click **Add**.*
+
+---
+
 ## 🚀 Running Locally
 
 ### Prerequisites
@@ -207,7 +266,6 @@ Open your browser to: **`http://localhost:5000`**
    ```
    *(Frontend runs on `http://localhost:3000`)*
 
-
 ---
 
 ## 👨‍💻 Author & Developer
@@ -216,4 +274,5 @@ Open your browser to: **`http://localhost:5000`**
 - **GitHub**: [@pjha91275](https://github.com/pjha91275)
 - **Project**: **AuraMail AI** — Personal Assistant Email Management Dashboard
 - **Submission for**: **Humanity Founders** AI Full-Stack Engineer Internship Selection
+- **Built with**: **Google Antigravity IDE**
 - **License**: MIT

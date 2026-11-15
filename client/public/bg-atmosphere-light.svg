@@ -1,40 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" fill="none">
   <defs>
-    <!-- Light Pearlescent Canvas Base -->
+    <!-- Crisp Pearlescent Light Canvas Base -->
     <radialGradient id="lightBase" cx="50%" cy="30%" r="85%">
       <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="45%" stop-color="#f6f9fe"/>
-      <stop offset="100%" stop-color="#ebf2fc"/>
+      <stop offset="45%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#edf2f9"/>
     </radialGradient>
 
-    <!-- Top Left Indigo Aurora -->
-    <radialGradient id="lightIndigo" cx="15%" cy="15%" r="42%">
-      <stop offset="0%" stop-color="#c7d2fe" stop-opacity="0.55"/>
-      <stop offset="55%" stop-color="#e0e7ff" stop-opacity="0.2"/>
-      <stop offset="100%" stop-color="#f6f9fe" stop-opacity="0"/>
-    </radialGradient>
+    <!-- Multi-Layered Glow & Shine Filter for Light Mode -->
+    <filter id="intenseLightGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feDropShadow dx="0" dy="4" stdDeviation="14" flood-color="rgba(37, 99, 235, 0.28)"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="5" flood-color="rgba(99, 102, 241, 0.35)"/>
+    </filter>
 
-    <!-- Top Right Cyan Aurora -->
-    <radialGradient id="lightCyan" cx="85%" cy="20%" r="40%">
-      <stop offset="0%" stop-color="#bae6fd" stop-opacity="0.5"/>
-      <stop offset="50%" stop-color="#e0f2fe" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#f6f9fe" stop-opacity="0"/>
-    </radialGradient>
+    <filter id="starShineBurstLight" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
 
-    <!-- Bottom Center Violet Glow -->
-    <radialGradient id="lightViolet" cx="50%" cy="85%" r="50%">
-      <stop offset="0%" stop-color="#ddd6fe" stop-opacity="0.45"/>
-      <stop offset="50%" stop-color="#ede9fe" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="#f6f9fe" stop-opacity="0"/>
-    </radialGradient>
+    <filter id="nebulaSmudgeLight" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="80"/>
+    </filter>
 
-    <!-- Light Grid Pattern -->
+    <!-- Clean Tech Matrix Grid -->
     <pattern id="lightGrid" width="60" height="60" patternUnits="userSpaceOnUse">
-      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(148, 163, 184, 0.12)" stroke-width="1"/>
-      <circle cx="0" cy="0" r="1.5" fill="rgba(99, 102, 241, 0.18)"/>
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(148, 163, 184, 0.14)" stroke-width="1"/>
+      <circle cx="0" cy="0" r="1.5" fill="rgba(99, 102, 241, 0.2)"/>
     </pattern>
 
-    <!-- Official AuraMail Logo Ribbon Gradient for Light Mode -->
+    <!-- Logo Gradients for Light Mode -->
     <linearGradient id="logoRibbonLight" x1="0%" y1="100%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#2563eb"/>
       <stop offset="35%" stop-color="#4f46e5"/>
@@ -44,103 +41,175 @@
 
     <linearGradient id="logoFlapLight" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="50%" stop-color="#3b82f6"/>
       <stop offset="100%" stop-color="#6366f1"/>
     </linearGradient>
 
     <linearGradient id="logoStarLight" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#fef08a"/>
       <stop offset="100%" stop-color="#f59e0b"/>
     </linearGradient>
 
-    <filter id="lightGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="55" result="blur"/>
-    </filter>
+    <!-- ============================================================ -->
+    <!-- RICH COLOR SMUDGE GRADIENTS FOR LIGHT MODE (HOLLOW PORTIONS) -->
+    <!-- ============================================================ -->
+    
+    <!-- 1. Upper-Center Hollow Smudge (Sky Cyan Aurora) -->
+    <radialGradient id="lightSmudgeUpperCenter" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#bae6fd" stop-opacity="0.65"/>
+      <stop offset="45%" stop-color="#e0f2fe" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#f8fafc" stop-opacity="0"/>
+    </radialGradient>
 
-    <filter id="vectorDropLight" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="rgba(79, 70, 229, 0.18)"/>
-    </filter>
+    <!-- 2. Mid-Center Hollow Smudge (Lavender Violet & Orchid Bloom) -->
+    <radialGradient id="lightSmudgeMidCenter" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ddd6fe" stop-opacity="0.6"/>
+      <stop offset="45%" stop-color="#ede9fe" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#f8fafc" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- 3. Left-Center Hollow Smudge (Peach / Soft Coral Sunset) -->
+    <radialGradient id="lightSmudgeLeftCenter" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fed7aa" stop-opacity="0.55"/>
+      <stop offset="45%" stop-color="#fce7f3" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#f8fafc" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- 4. Right-Center Hollow Smudge (Mint / Aquamarine Refresh) -->
+    <radialGradient id="lightSmudgeRightCenter" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#a7f3d0" stop-opacity="0.55"/>
+      <stop offset="45%" stop-color="#ccfbf1" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#f8fafc" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- 5. Bottom-Center Hollow Smudge (Indigo Glow) -->
+    <radialGradient id="lightSmudgeBottomCenter" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c7d2fe" stop-opacity="0.65"/>
+      <stop offset="45%" stop-color="#e0e7ff" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#f8fafc" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Halo Gradients for Light Mode Logos -->
+    <radialGradient id="haloCyanLight" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#bae6fd" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="haloIndigoLight" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.28"/>
+      <stop offset="60%" stop-color="#c7d2fe" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="haloPurpleLight" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.28"/>
+      <stop offset="60%" stop-color="#ddd6fe" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="haloTealLight" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0d9488" stop-opacity="0.25"/>
+      <stop offset="60%" stop-color="#99f6e4" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Reusable Logo Symbol Template for Light Mode -->
+    <g id="auraMailLogoLightWatermark">
+      <path d="M16 38 C16 30 22 24 30 24 L98 24 C106 24 112 30 112 38 L112 94 C112 102 106 108 98 108 L30 108 C22 108 16 102 16 94 Z" 
+            fill="none" 
+            stroke="url(#logoRibbonLight)" 
+            stroke-width="7.5" 
+            stroke-linecap="round" 
+            stroke-linejoin="round"/>
+
+      <path d="M18 32 L64 74 L110 32" 
+            fill="none" 
+            stroke="url(#logoFlapLight)" 
+            stroke-width="7.5" 
+            stroke-linecap="round" 
+            stroke-linejoin="round"/>
+
+      <path d="M18 100 L50 68" fill="none" stroke="url(#logoRibbonLight)" stroke-width="6.5" stroke-linecap="round" stroke-opacity="0.95"/>
+      <path d="M110 100 L78 68" fill="none" stroke="url(#logoRibbonLight)" stroke-width="6.5" stroke-linecap="round" stroke-opacity="0.95"/>
+
+      <circle cx="64" cy="74" r="8" fill="#38bdf8" opacity="0.4"/>
+      <circle cx="64" cy="74" r="5" fill="#0284c7"/>
+      <circle cx="64" cy="74" r="2.5" fill="#ffffff"/>
+
+      <g transform="translate(86, 6)" filter="url(#starShineBurstLight)">
+        <!-- Horizontal & Vertical Shine Rays -->
+        <line x1="16" y1="-12" x2="16" y2="42" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+        <line x1="-12" y1="15" x2="44" y2="15" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+
+        <!-- Star Diamond Geometry -->
+        <path d="M16 0 L20 11.5 L31 15 L20 18.5 L16 30 L12 18.5 L1 15 L12 11.5 Z" fill="url(#logoStarLight)"/>
+        <circle cx="16" cy="15" r="4" fill="#ffffff"/>
+      </g>
+    </g>
   </defs>
 
-  <!-- Background Base -->
+  <!-- Crisp Pearlescent Background Base -->
   <rect width="100%" height="100%" fill="url(#lightBase)"/>
 
-  <!-- High-Tech Matrix Grid -->
+  <!-- Tech Matrix Grid -->
   <rect width="100%" height="100%" fill="url(#lightGrid)"/>
 
-  <!-- Color Blobs -->
-  <circle cx="300" cy="180" r="480" fill="url(#lightIndigo)" filter="url(#lightGlow)"/>
-  <circle cx="1650" cy="220" r="420" fill="url(#lightCyan)" filter="url(#lightGlow)"/>
-  <circle cx="960" cy="920" r="500" fill="url(#lightViolet)" filter="url(#lightGlow)"/>
+  <!-- ========================================================================= -->
+  <!-- RICH COLOR SMUDGES IN HOLLOW PORTIONS WHERE NO LOGO IS USED              -->
+  <!-- ========================================================================= -->
+
+  <!-- 1. Upper-Center Hollow Smudge -->
+  <circle cx="960" cy="160" r="460" fill="url(#lightSmudgeUpperCenter)" filter="url(#nebulaSmudgeLight)"/>
+
+  <!-- 2. Mid-Center Hollow Smudge -->
+  <circle cx="960" cy="540" r="480" fill="url(#lightSmudgeMidCenter)" filter="url(#nebulaSmudgeLight)"/>
+
+  <!-- 3. Left-Center Hollow Smudge -->
+  <circle cx="80" cy="480" r="380" fill="url(#lightSmudgeLeftCenter)" filter="url(#nebulaSmudgeLight)"/>
+
+  <!-- 4. Right-Center Hollow Smudge -->
+  <circle cx="1840" cy="460" r="400" fill="url(#lightSmudgeRightCenter)" filter="url(#nebulaSmudgeLight)"/>
+
+  <!-- 5. Bottom-Center Hollow Smudge -->
+  <circle cx="960" cy="940" r="520" fill="url(#lightSmudgeBottomCenter)" filter="url(#nebulaSmudgeLight)"/>
+
 
   <!-- ========================================================================= -->
-  <!-- 1. OFFICIAL LOGO WATERMARK #1 (TOP-RIGHT: PURE VECTOR, ZERO GREY BUBBLE) -->
+  <!-- EXACTLY 4 HIGH-GLOW & SHINING LOGOS IN THE 4 MAIN QUADRANTS              -->
   <!-- ========================================================================= -->
-  <g transform="translate(1420, 80) scale(2.6)" opacity="0.25" filter="url(#vectorDropLight)">
-    <!-- Base Envelope Shield Wings (No grey box, pure transparent glowing strokes) -->
-    <path d="M16 38 C16 30 22 24 30 24 L98 24 C106 24 112 30 112 38 L112 94 C112 102 106 108 98 108 L30 108 C22 108 16 102 16 94 Z" 
-          fill="none" 
-          stroke="url(#logoRibbonLight)" 
-          stroke-width="6.5" 
-          stroke-linecap="round" 
-          stroke-linejoin="round"/>
 
-    <!-- Intersecting Wing Fold (Aura Wings 'A' / 'M') -->
-    <path d="M18 32 L64 74 L110 32" 
-          fill="none" 
-          stroke="url(#logoFlapLight)" 
-          stroke-width="6.5" 
-          stroke-linecap="round" 
-          stroke-linejoin="round"/>
-
-    <!-- Bottom Wings -->
-    <path d="M18 100 L50 68" fill="none" stroke="url(#logoRibbonLight)" stroke-width="5.5" stroke-linecap="round" stroke-opacity="0.9"/>
-    <path d="M110 100 L78 68" fill="none" stroke="url(#logoRibbonLight)" stroke-width="5.5" stroke-linecap="round" stroke-opacity="0.9"/>
-
-    <!-- Central Neural AI Node -->
-    <circle cx="64" cy="74" r="5.5" fill="#0284c7"/>
-    <circle cx="64" cy="74" r="2" fill="#ffffff"/>
-
-    <!-- Sparkle Star -->
-    <g transform="translate(86, 10)">
-      <path d="M16 0 L19.5 11.5 L31 15 L19.5 18.5 L16 30 L12.5 18.5 L1 15 L12.5 11.5 Z" fill="url(#logoStarLight)"/>
-      <circle cx="16" cy="15" r="3" fill="#ffffff"/>
-    </g>
+  <!-- ------------------------------------------------------------------------- -->
+  <!-- 1. LOGO WATERMARK #1: TOP-RIGHT QUADRANT                                  -->
+  <!-- ------------------------------------------------------------------------- -->
+  <circle cx="1580" cy="190" r="260" fill="url(#haloCyanLight)" filter="url(#nebulaSmudgeLight)"/>
+  <g transform="translate(1420, 60) scale(2.8)" opacity="0.45" filter="url(#intenseLightGlow)">
+    <use href="#auraMailLogoLightWatermark"/>
   </g>
 
-  <!-- ========================================================================= -->
-  <!-- 2. OFFICIAL LOGO WATERMARK #2 (CENTER-LEFT: BEHIND INBOX THREADS)        -->
-  <!-- ========================================================================= -->
-  <g transform="translate(160, 320) scale(2.4)" opacity="0.22" filter="url(#vectorDropLight)">
-    <path d="M16 38 C16 30 22 24 30 24 L98 24 C106 24 112 30 112 38 L112 94 C112 102 106 108 98 108 L30 108 C22 108 16 102 16 94 Z" 
-          fill="none" stroke="url(#logoRibbonLight)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M18 32 L64 74 L110 32" fill="none" stroke="url(#logoFlapLight)" stroke-width="6.5" stroke-linecap="round"/>
-    <path d="M18 100 L50 68" fill="none" stroke="url(#logoRibbonLight)" stroke-width="5.5" stroke-linecap="round"/>
-    <path d="M110 100 L78 68" fill="none" stroke="url(#logoRibbonLight)" stroke-width="5.5" stroke-linecap="round"/>
-    <circle cx="64" cy="74" r="5.5" fill="#0284c7"/>
-    <g transform="translate(86, 10)">
-      <path d="M16 0 L19.5 11.5 L31 15 L19.5 18.5 L16 30 L12.5 18.5 L1 15 L12.5 11.5 Z" fill="url(#logoStarLight)"/>
-    </g>
+  <!-- ------------------------------------------------------------------------- -->
+  <!-- 2. LOGO WATERMARK #2: TOP-LEFT QUADRANT                                   -->
+  <!-- ------------------------------------------------------------------------- -->
+  <circle cx="280" cy="220" r="260" fill="url(#haloIndigoLight)" filter="url(#nebulaSmudgeLight)"/>
+  <g transform="translate(120, 90) scale(2.7)" opacity="0.42" filter="url(#intenseLightGlow)">
+    <use href="#auraMailLogoLightWatermark"/>
   </g>
 
-  <!-- ========================================================================= -->
-  <!-- 3. OFFICIAL LOGO WATERMARK #3 (LOWER-RIGHT: QUADRANT BALANCE)            -->
-  <!-- ========================================================================= -->
-  <g transform="translate(1380, 680) scale(2.5)" opacity="0.20" filter="url(#vectorDropLight)">
-    <path d="M16 38 C16 30 22 24 30 24 L98 24 C106 24 112 30 112 38 L112 94 C112 102 106 108 98 108 L30 108 C22 108 16 102 16 94 Z" 
-          fill="none" stroke="url(#logoRibbonLight)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M18 32 L64 74 L110 32" fill="none" stroke="url(#logoFlapLight)" stroke-width="6.5" stroke-linecap="round"/>
-    <path d="M18 100 L50 68" fill="none" stroke="url(#logoRibbonLight)" stroke-width="5.5" stroke-linecap="round"/>
-    <path d="M110 100 L78 68" fill="none" stroke="url(#logoRibbonLight)" stroke-width="5.5" stroke-linecap="round"/>
-    <circle cx="64" cy="74" r="5.5" fill="#0284c7"/>
-    <g transform="translate(86, 10)">
-      <path d="M16 0 L19.5 11.5 L31 15 L19.5 18.5 L16 30 L12.5 18.5 L1 15 L12.5 11.5 Z" fill="url(#logoStarLight)"/>
-    </g>
+  <!-- ------------------------------------------------------------------------- -->
+  <!-- 3. LOGO WATERMARK #3: BOTTOM-LEFT QUADRANT                                -->
+  <!-- ------------------------------------------------------------------------- -->
+  <circle cx="300" cy="780" r="270" fill="url(#haloPurpleLight)" filter="url(#nebulaSmudgeLight)"/>
+  <g transform="translate(140, 640) scale(2.7)" opacity="0.42" filter="url(#intenseLightGlow)">
+    <use href="#auraMailLogoLightWatermark"/>
   </g>
 
-  <!-- Subtle Perspective Lines at bottom -->
-  <g opacity="0.35">
-    <line x1="0" y1="880" x2="1920" y2="880" stroke="rgba(99, 102, 241, 0.08)" stroke-width="1"/>
-    <line x1="0" y1="940" x2="1920" y2="940" stroke="rgba(99, 102, 241, 0.1)" stroke-width="1"/>
-    <line x1="0" y1="1000" x2="1920" y2="1000" stroke="rgba(99, 102, 241, 0.12)" stroke-width="1"/>
+  <!-- ------------------------------------------------------------------------- -->
+  <!-- 4. LOGO WATERMARK #4: BOTTOM-RIGHT QUADRANT                               -->
+  <!-- ------------------------------------------------------------------------- -->
+  <circle cx="1570" cy="770" r="280" fill="url(#haloTealLight)" filter="url(#nebulaSmudgeLight)"/>
+  <g transform="translate(1400, 630) scale(2.8)" opacity="0.45" filter="url(#intenseLightGlow)">
+    <use href="#auraMailLogoLightWatermark"/>
   </g>
+
 </svg>
