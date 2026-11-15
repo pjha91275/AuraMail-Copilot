@@ -128,7 +128,7 @@ Every conversation is continuously evaluated by the AI engine and classified int
 *Each classification provides confidence scores (e.g., `98%`), urgency indicators (`Urgent`, `High`, `Med`), and an explicit reason explaining **why** the email was assigned.*
 
 ### 4. 🎛️ Assistant 1-Click Manual Override
-AI assists, but human assistants maintain full authority. With a single click on any classification badge, the assistant can override the status between `Assistant to Reply`, `Client to Reply`, and `No Reply Needed`. Changes sync instantly across the entire platform.
+AI assists, but human assistants maintain full authority. With a single click on any classification badge, the assistant can override the status between `Assistant to Reply`, `Client to Reply`, and `No Reply Needed`. Changes sync instantly across the entire platform with optimistic UI updates and persistent dual-writes to MongoDB using resilient query filters.
 
 ### 5. 👤 Minimalist Client VIP Portal
 Clients are spared the noise of a 500-email inbox:
@@ -139,20 +139,20 @@ Clients are spared the noise of a 500-email inbox:
 - **"Delegate to Assistant"**: The client types a quick note (e.g., *"Tell them Friday works and ask for the deck"*) which immediately hands it back to the assistant.
 - Collapsible original thread view if they want to inspect full details.
 
-### 6. ✍️ AI Reply Studio
-- 4 Tone Selectors: `Professional`, `Executive Brief`, `Scheduling Confirmation`, `Polite Decline`.
-- Custom Assistant Prompt input for specific instructions.
-- Real-time AI draft generation and editable reply textarea.
-- One-click `Send Reply Now` (which optimistically appends the response into the conversation thread) or `Save as Draft`.
+### 6. ✍️ AI Reply Studio with 0ms Instant Tone Activation
+- **4 Instant Tone Selectors**: `Professional`, `Executive Brief`, `Scheduling Confirmation`, `Polite Decline`.
+- **0ms Instant Draft Generation**: Clicking any tone pill immediately populates the draft textarea with intelligent context-aware reply text and activates the **Send Reply Now** button with zero wait time.
+- **Custom Assistant Prompts**: Text input for specific guidelines (e.g., *"Confirm 10 AM Friday, CC Jason"*).
+- **Real-Time Thread Appending**: Clicking `Send Reply Now` optimistically appends the sent message bubble directly into the conversation history timeline, marks the thread resolved, and fires celebratory confetti.
 
-### 7. 💬 Interactive Inbox AI Copilot
+### 7. 💬 Interactive Inbox AI Copilot with Smart Pill Navigation
 A slide-over drawer enabling natural language inbox queries:
 - *"Show me emails that need my attention"*
 - *"Which emails require the client's attention?"*
 - *"What am I waiting for a response on?"*
 - *"Why was this email assigned to the client?"*
 - *"Summarize top conversations"*
-- Returns rich natural language responses with clickable conversation pills that open the exact thread directly!
+- **Smart Pill Navigation**: Returns rich natural language responses with clickable conversation pills. Clicking any pill automatically resets restrictive segment/urgency filters, switches from Client Portal to Assistant View if needed, and loads that exact email thread into the reading pane!
 
 ### 8. 📅 Intelligent Meeting & Action Item Extraction
 - Automatically parses dates, times, and locations (e.g., *"Friday 10:00 AM - 11:30 AM EST via Zoom"*, *"Buck's of Woodside on Thursday 8:00 AM"*).
@@ -161,7 +161,14 @@ A slide-over drawer enabling natural language inbox queries:
 ### 9. 🔔 Notification Center, Profile & Keyboard Shortcuts
 - **Live Notification Center**: Bell icon in navbar with an unread counter showing live updates (client approvals, reschedules, auto-triage alerts).
 - **Assistant Profile Menu**: Shows active auto-triage status, client count (3), AI accuracy rating (96.8%), and workspace sign-out.
-- **Superhuman-Style Keyboard Navigation**: Press `?` anytime to view the shortcuts cheat sheet (`j`/`k` for navigation, `s` to star, `e` to archive, `c` for copilot, `1` for assistant view, `2` for client view, `Esc` to close).
+- **Superhuman-Style Keyboard Navigation**: Press `?` anytime to view the shortcuts cheat sheet:
+  - `j` / `k` / `↓` / `↑` for conversation navigation.
+  - `s` to star / mark conversation as VIP.
+  - `e` to archive selected conversation.
+  - `#` / `d` / `Delete` to delete / remove conversation thread.
+  - `c` to toggle Inbox AI Copilot chat drawer.
+  - `1` for Assistant Command Center, `2` for Client VIP Portal.
+  - `Esc` to close modals, drawers, or exit mobile drilldown.
 
 ### 10. 📱 Universal Cross-Device Responsiveness
 - **Desktop & Laptop**: Full 3-column panoramic layout with floating glass island navbar and stats strip.
@@ -169,6 +176,13 @@ A slide-over drawer enabling natural language inbox queries:
 
 ### 11. ⚡ Live Inflow Simulator
 Top navbar button allowing the user or reviewer to click **"Simulate Inflow"** to see new emails arrive live (`Meeting Request`, `Acquisition Term Sheet`, or `Automated Security Notice`) and watch the AI classify them in real-time!
+
+### 12. 🗑️ Interactive Thread Deletion & Pristine Demo Inbox Reset
+- **Individual Thread Delete**: Permanently delete any simulated or unwanted thread:
+  - **Header Action Bar**: Click the red-hover **Trash Can (`Trash2`)** icon next to Star and Archive in the email reading pane.
+  - **Email Card Hover**: Quick-action Trash icon on card hover in the middle list.
+  - **Keyboard Shortcut**: Press `#`, `d`, or `Delete` on any selected thread.
+- **1-Click "Reset Demo Threads"**: Located at the bottom of the left sidebar, clicking *Reset Demo Threads* calls `POST /api/emails/reset` to purge all simulated emails and reseed both MongoDB Atlas and in-memory caches back to the pristine 10 starting demo threads, ideal for clean presentation resets.
 
 ---
 
