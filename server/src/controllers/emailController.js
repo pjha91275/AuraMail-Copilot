@@ -155,7 +155,7 @@ const handleClientAction = async (req, res) => {
 const updateDraftReply = async (req, res) => {
   try {
     const { id } = req.params;
-    const { content, tone, status } = req.body;
+    const { content, tone, status, sender, senderEmail, avatar, isFromAssistant } = req.body;
 
     const email = await store.getEmailById(id);
     if (!email) {
@@ -173,25 +173,34 @@ const updateDraftReply = async (req, res) => {
 
     // If sent, add message to thread and mark unread false
     if (status === 'sent') {
+      const client = await store.getClientById(email.clientId);
+      const clientName = client?.name || email.messages?.[0]?.recipient || 'Sarah Jenkins';
+      const clientEmail = client?.email || email.messages?.[0]?.recipientEmail || 'sarah.jenkins@techflow.io';
+      const clientAvatar = client?.avatar || (clientEmail.includes('pjha') ? '/prince-jha.jpg' : '/prince-jha.jpg');
+
+      const resolvedSender = sender || clientName;
+      const resolvedEmail = senderEmail || clientEmail;
+      const resolvedAvatar = avatar || clientAvatar;
+
       const newMessage = {
         id: `msg-out-${Date.now()}`,
-        sender: 'Alex Vance (Assistant)',
-        senderEmail: 'alex.assistant@techflow.io',
-        avatar: '/alex-vance.jpg',
-        recipient: email.messages[0]?.sender || 'Recipient',
-        recipientEmail: email.messages[0]?.senderEmail || '',
+        sender: resolvedSender,
+        senderEmail: resolvedEmail,
+        avatar: resolvedAvatar,
+        recipient: email.messages?.[0]?.sender || 'Recipient',
+        recipientEmail: email.messages?.[0]?.senderEmail || '',
         timestamp: new Date().toISOString(),
         body: content,
-        isFromClient: false,
-        isFromAssistant: true
+        isFromClient: true,
+        isFromAssistant: Boolean(isFromAssistant)
       };
 
-      updates.messages = [...email.messages, newMessage];
+      updates.messages = [...(email.messages || []), newMessage];
       updates.unread = false;
       updates.classification = {
         ...email.classification,
         type: 'No Reply Needed',
-        reason: 'Reply sent by assistant. Thread concluded or waiting for counterparty.'
+        reason: `Reply sent from ${clientName}'s mailbox. Thread concluded or waiting for counterparty.`
       };
     }
 

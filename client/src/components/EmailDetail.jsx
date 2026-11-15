@@ -454,16 +454,19 @@ export default function EmailDetail({
                         <span className="text-xs font-bold text-surface-900 dark:text-white">
                           {msg.sender}
                         </span>
-                        {isAssistantMsg && (
+                        {isAssistantMsg && isClientMsg ? (
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-100 text-brand-700 dark:bg-brand-900/60 dark:text-brand-300 border border-brand-200/50 dark:border-brand-500/20">
+                            Assistant Delegated
+                          </span>
+                        ) : isAssistantMsg ? (
                           <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300">
                             Assistant
                           </span>
-                        )}
-                        {isClientMsg && (
+                        ) : isClientMsg ? (
                           <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300">
                             Client
                           </span>
-                        )}
+                        ) : null}
                       </div>
                       <div className="text-[11px] text-surface-400">
                         {msg.senderEmail}

@@ -390,18 +390,30 @@ export default function App() {
   const handleSendReply = async (emailId, content, tone) => {
     try {
       const matchEmail = (e) => e.id === emailId || e.threadId === emailId || (e._id && String(e._id) === String(emailId));
+      const targetEmail = emails.find(matchEmail) || selectedEmail;
+      const targetClient = clients.find(c => c.id === (targetEmail?.clientId || activeClientId)) || activeClient;
+
+      // Ensure reply originates from active client's mailbox
+      const clientName = targetClient?.name || 'Sarah Jenkins';
+      const clientEmail = targetClient?.email || targetEmail?.messages?.[0]?.recipientEmail || 'sarah.jenkins@techflow.io';
+      const clientAvatar = targetClient?.avatar || (clientEmail.includes('pjha') ? '/prince-jha.jpg' : '/prince-jha.jpg');
+
+      const isAssistantUser = currentUser?.role === 'assistant' || currentUser?.name?.toLowerCase().includes('alex');
+      const senderDisplayName = isAssistantUser && currentUser?.name !== clientName
+        ? `${clientName} (via ${currentUser?.name || 'Alex Vance'})`
+        : clientName;
 
       const newOutMessage = {
         id: `msg-out-${Date.now()}`,
-        sender: `${currentUser?.name || 'Alex Vance'} (Assistant)`,
-        senderEmail: currentUser?.email || 'alex.assistant@techflow.io',
-        avatar: currentUser?.avatar || '/alex-vance.jpg',
-        recipient: selectedEmail?.messages?.[0]?.sender || 'Recipient',
-        recipientEmail: selectedEmail?.messages?.[0]?.senderEmail || '',
+        sender: senderDisplayName,
+        senderEmail: clientEmail,
+        avatar: clientAvatar,
+        recipient: targetEmail?.messages?.[0]?.sender || 'Recipient',
+        recipientEmail: targetEmail?.messages?.[0]?.senderEmail || '',
         timestamp: new Date().toISOString(),
         body: content,
-        isFromClient: false,
-        isFromAssistant: true
+        isFromClient: true,
+        isFromAssistant: isAssistantUser
       };
 
       // 1. Optimistically append message to local state immediately
@@ -413,7 +425,7 @@ export default function App() {
             classification: {
               ...e.classification,
               type: 'No Reply Needed',
-              reason: 'Reply sent by assistant. Thread concluded.'
+              reason: `Reply sent from ${clientName}'s mailbox. Thread concluded.`
             },
             messages: [...(e.messages || []), newOutMessage],
             draftReply: {
@@ -434,7 +446,7 @@ export default function App() {
           classification: {
             ...prev.classification,
             type: 'No Reply Needed',
-            reason: 'Reply sent by assistant. Thread concluded.'
+            reason: `Reply sent from ${clientName}'s mailbox. Thread concluded.`
           },
           messages: [...(prev.messages || []), newOutMessage],
           draftReply: {
@@ -446,8 +458,17 @@ export default function App() {
         }));
       }
 
-      // 2. Persist to backend
-      const res = await updateDraftReply(emailId, { content, tone, status: 'sent' });
+      // 2. Persist to backend with resolved client mailbox & delegation metadata
+      const res = await updateDraftReply(emailId, {
+        content,
+        tone,
+        status: 'sent',
+        sender: senderDisplayName,
+        senderEmail: clientEmail,
+        avatar: clientAvatar,
+        isFromAssistant: isAssistantUser
+      });
+
       if (res && res.data) {
         setEmails(prev => prev.map(e => matchEmail(e) ? { ...e, ...res.data } : e));
         if (selectedEmail && matchEmail(selectedEmail)) {
@@ -457,7 +478,7 @@ export default function App() {
 
       pushToast({
         title: 'Reply Sent Successfully!',
-        message: 'Your reply has been delivered and appended to the thread timeline.',
+        message: `Reply delivered from ${clientName}'s mailbox (${clientEmail}) and appended to thread.`,
         type: 'success'
       });
       loadEmails();

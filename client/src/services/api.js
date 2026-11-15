@@ -73,11 +73,11 @@ export const handleClientAction = async (id, { action, note }) => {
   return await res.json();
 };
 
-export const updateDraftReply = async (id, { content, tone, status }) => {
+export const updateDraftReply = async (id, payload) => {
   const res = await fetch(`${API_BASE}/emails/${id}/draft`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ content, tone, status })
+    body: JSON.stringify(payload)
   });
   return await res.json();
 };
