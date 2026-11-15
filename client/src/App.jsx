@@ -11,6 +11,7 @@ import AccountsModal from './components/AccountsModal';
 import ShortcutsModal from './components/ShortcutsModal';
 import Toast from './components/Toast';
 import AuthPage from './components/AuthPage';
+import DynamicBackgroundLogos from './components/DynamicBackgroundLogos';
 
 import {
   fetchClients,
@@ -479,7 +480,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-surface-50 dark:bg-[#03060f] text-surface-900 dark:text-surface-100 flex flex-col font-sans transition-colors duration-300 relative overflow-x-hidden">
       
-      {/* Ambient Self-Crafted Dynamic Background with Floating Light Orbs & 4 Radiant Logo Images */}
+      {/* Ambient Self-Crafted Dynamic Background with Floating Light Orbs */}
       <div
         className="ambient-bg"
         style={{
@@ -491,44 +492,10 @@ export default function App() {
         <div className="ambient-orb ambient-orb-2 animate-float-delayed" />
         <div className="ambient-orb ambient-orb-3 animate-float-slow" />
         <div className="ambient-orb ambient-orb-4 animate-float-delayed" />
-
-        {/* Harmonious 4-Logo Constellation Pattern (Reduced glare & balanced depth) */}
-        {/* 1. Top-Right Upper Anchor (Cyan) */}
-        <div className="absolute top-[5%] right-[4%] md:right-[6%] w-[270px] h-[270px] md:w-[350px] md:h-[350px] opacity-20 dark:opacity-30 pointer-events-none select-none animate-float-slow rotate-6 z-0">
-          <img
-            src="/logo-emblem.svg"
-            alt="AuraMail Constellation Emblem 1"
-            className="w-full h-full object-contain filter drop-shadow-[0_0_22px_rgba(6,182,212,0.55)]"
-          />
-        </div>
-
-        {/* 2. Mid-Left Floating Anchor (Indigo) */}
-        <div className="absolute top-[34%] left-[-20px] md:left-[3%] w-[220px] h-[220px] md:w-[280px] md:h-[280px] opacity-18 dark:opacity-25 pointer-events-none select-none animate-float-delayed -rotate-6 z-0">
-          <img
-            src="/logo-emblem.svg"
-            alt="AuraMail Constellation Emblem 2"
-            className="w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(99,102,241,0.5)]"
-          />
-        </div>
-
-        {/* 3. Center-Right Ambient Depth (Purple) */}
-        <div className="absolute top-[56%] right-[8%] md:right-[12%] w-[190px] h-[190px] md:w-[240px] md:h-[240px] opacity-15 dark:opacity-22 pointer-events-none select-none animate-float-slow rotate-3 z-0">
-          <img
-            src="/logo-emblem.svg"
-            alt="AuraMail Constellation Emblem 3"
-            className="w-full h-full object-contain filter drop-shadow-[0_0_18px_rgba(168,85,247,0.45)]"
-          />
-        </div>
-
-        {/* 4. Bottom-Left Foundation Anchor (Sky Blue) */}
-        <div className="absolute bottom-[4%] left-[4%] md:left-[6%] w-[240px] h-[240px] md:w-[300px] md:h-[300px] opacity-18 dark:opacity-28 pointer-events-none select-none animate-float-delayed -rotate-3 z-0">
-          <img
-            src="/logo-emblem.svg"
-            alt="AuraMail Constellation Emblem 4"
-            className="w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(56,189,248,0.5)]"
-          />
-        </div>
       </div>
+
+      {/* Dynamic 5-Second Smooth Pattern Changing Logos (Lag-Free & Hardware Accelerated) */}
+      <DynamicBackgroundLogos />
 
       {/* Toast Notification Container */}
       <Toast toasts={toasts} onDismiss={dismissToast} />

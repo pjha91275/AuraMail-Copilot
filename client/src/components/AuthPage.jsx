@@ -11,6 +11,7 @@ import {
   Moon,
   ExternalLink
 } from 'lucide-react';
+import DynamicBackgroundLogos from './DynamicBackgroundLogos';
 
 export default function AuthPage({ onLogin, darkMode, onToggleDarkMode }) {
   const [email, setEmail] = useState('alex.vance@techflow.io');
@@ -78,42 +79,8 @@ export default function AuthPage({ onLogin, darkMode, onToggleDarkMode }) {
       <div className="ambient-orb ambient-orb-3 animate-float-slow pointer-events-none" />
       <div className="ambient-orb ambient-orb-4 animate-float-delayed pointer-events-none" />
 
-      {/* Harmonious 4-Logo Constellation Layout (Reduced glow & balanced depth) */}
-      {/* 1. Top-Right Upper Anchor (Cyan) */}
-      <div className="absolute top-[5%] right-[4%] md:right-[6%] w-[270px] h-[270px] md:w-[350px] md:h-[350px] opacity-20 dark:opacity-30 pointer-events-none select-none animate-float-slow rotate-6 z-0">
-        <img
-          src="/logo-emblem.svg"
-          alt="AuraMail Constellation Emblem 1"
-          className="w-full h-full object-contain filter drop-shadow-[0_0_22px_rgba(6,182,212,0.55)]"
-        />
-      </div>
-
-      {/* 2. Mid-Left Floating Anchor (Indigo) */}
-      <div className="absolute top-[34%] left-[-20px] md:left-[3%] w-[220px] h-[220px] md:w-[280px] md:h-[280px] opacity-18 dark:opacity-25 pointer-events-none select-none animate-float-delayed -rotate-6 z-0">
-        <img
-          src="/logo-emblem.svg"
-          alt="AuraMail Constellation Emblem 2"
-          className="w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(99,102,241,0.5)]"
-        />
-      </div>
-
-      {/* 3. Center-Right Ambient Depth (Purple) */}
-      <div className="absolute top-[56%] right-[8%] md:right-[12%] w-[190px] h-[190px] md:w-[240px] md:h-[240px] opacity-15 dark:opacity-22 pointer-events-none select-none animate-float-slow rotate-3 z-0">
-        <img
-          src="/logo-emblem.svg"
-          alt="AuraMail Constellation Emblem 3"
-          className="w-full h-full object-contain filter drop-shadow-[0_0_18px_rgba(168,85,247,0.45)]"
-        />
-      </div>
-
-      {/* 4. Bottom-Left Foundation Anchor (Sky Blue) */}
-      <div className="absolute bottom-[4%] left-[4%] md:left-[6%] w-[240px] h-[240px] md:w-[300px] md:h-[300px] opacity-18 dark:opacity-28 pointer-events-none select-none animate-float-delayed -rotate-3 z-0">
-        <img
-          src="/logo-emblem.svg"
-          alt="AuraMail Constellation Emblem 4"
-          className="w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(56,189,248,0.5)]"
-        />
-      </div>
+      {/* Dynamic 5-Second Smooth Pattern Changing Logos (Lag-Free & Hardware Accelerated) */}
+      <DynamicBackgroundLogos />
 
       {/* Top Header Bar */}
       <header className="w-full max-w-7xl mx-auto px-6 sm:px-10 py-6 flex items-center justify-between relative z-20">
@@ -245,8 +212,14 @@ export default function AuthPage({ onLogin, darkMode, onToggleDarkMode }) {
                 disabled={isLoading}
                 className="w-full py-3.5 px-4 rounded-2xl bg-white hover:bg-surface-50 dark:bg-surface-800 dark:hover:bg-surface-700/80 border-2 border-brand-500/30 dark:border-brand-400/30 text-surface-900 dark:text-white text-xs font-black shadow-md hover:shadow-glow-brand transition-all flex items-center justify-center space-x-3 group disabled:opacity-50"
               >
-                {/* Official Google Multi-Color G Logo */}
-                <svg className="w-4.5 h-4.5 shrink-0" viewBox="0 0 24 24">
+                {/* Official Google Multi-Color G Logo (Strictly sized 20x20) */}
+                <svg
+                  className="w-5 h-5 shrink-0"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  style={{ width: '20px', height: '20px', minWidth: '20px', minHeight: '20px' }}
+                >
                   <path
                     fill="#4285F4"
                     d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
