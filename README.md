@@ -231,7 +231,7 @@ GOOGLE_CALLBACK_URL=https://auramail-copilot.vercel.app/api/auth/google/callback
   - RESTful architecture with modular controllers, services, and routes
   - Mongoose & MongoDB Atlas support (with automated in-memory JSON sync fallback if Atlas IP whitelist is not configured)
 - **Deployment**:
-  - 1-Click Serverless setup for **Vercel** (`vercel.json` + `api/index.js`) and **Render** (`render.yaml`).
+  - Optimized 1-Click Serverless deployment on **Vercel** (`vercel.json` + `api/index.js`).
 
 ---
 
