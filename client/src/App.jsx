@@ -40,6 +40,15 @@ export default function App() {
     return localStorage.getItem('auramail_auth') === 'true';
   });
 
+  // Current Authenticated User (Personalized for logged-in Google Workspace account)
+  const [currentUser, setCurrentUser] = useState(() => {
+    const email = localStorage.getItem('auramail_user_email') || 'pjha91275@gmail.com';
+    const name = localStorage.getItem('auramail_user_name') || (email.toLowerCase().includes('pjha') ? 'Prince Jha' : 'Alex Vance');
+    const avatar = localStorage.getItem('auramail_user_avatar') || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=256&q=80';
+    const role = localStorage.getItem('auramail_user_role') || (email.toLowerCase().includes('pjha') ? 'client' : 'assistant');
+    return { name, email, avatar, role };
+  });
+
   // Core Data
   const [clients, setClients] = useState([]);
   const [activeClientId, setActiveClientId] = useState('client-1'); // Sarah Jenkins by default
@@ -116,6 +125,19 @@ export default function App() {
     localStorage.setItem('auramail_user_email', email);
     if (name) localStorage.setItem('auramail_user_name', name);
     if (avatar) localStorage.setItem('auramail_user_avatar', avatar);
+    if (role) localStorage.setItem('auramail_user_role', role);
+
+    const resolvedName = name || (email.toLowerCase().includes('pjha') ? 'Prince Jha' : email.split('@')[0]);
+    const resolvedRole = role || (email.toLowerCase().includes('pjha') ? 'client' : 'assistant');
+    const resolvedAvatar = avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=256&q=80';
+
+    setCurrentUser({
+      name: resolvedName,
+      email,
+      avatar: resolvedAvatar,
+      role: resolvedRole
+    });
+
     if (initialViewMode) setViewMode(initialViewMode);
 
     // Refresh client list & account list immediately to load connected Gmail dashboard
@@ -531,7 +553,7 @@ export default function App() {
         className="ambient-bg"
         style={{
           backgroundImage: darkMode ? "url('/bg-atmosphere.svg')" : "url('/bg-atmosphere-light.svg')",
-          backgroundColor: darkMode ? '#020408' : '#f8fafc'
+          backgroundColor: darkMode ? '#020408' : '#e8edf5'
         }}
       >
         <div className="ambient-orb ambient-orb-1 animate-float-slow" />
@@ -550,6 +572,7 @@ export default function App() {
       <Navbar
         clients={clients}
         activeClientId={activeClientId}
+        currentUser={currentUser}
         onSelectClient={handleSelectClient}
         viewMode={viewMode}
         onToggleViewMode={setViewMode}

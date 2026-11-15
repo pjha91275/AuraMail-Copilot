@@ -80,7 +80,7 @@ export default function ClientPortal({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
           <div className="flex items-center space-x-4">
             <img
-              src={client?.avatar || 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=256&q=80'}
+              src={client?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=256&q=80'}
               alt={clientName}
               className="w-14 h-14 rounded-2xl object-cover ring-2 ring-brand-400/40 shadow-md"
             />
@@ -95,7 +95,7 @@ export default function ClientPortal({
                 Welcome back, {firstName}
               </h1>
               <p className="text-xs text-surface-300 mt-1">
-                {client?.role} at {client?.company} • Managed by Executive Assistant Alex
+                {client?.role || 'CEO & Founder'} at {client?.company || 'GMAIL Inc.'} • Powered by AuraMail AI Executive Copilot
               </p>
             </div>
           </div>

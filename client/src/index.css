@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-surface-50 text-surface-900 dark:bg-[#020408] dark:text-surface-100 antialiased font-sans transition-colors duration-300 selection:bg-brand-500 selection:text-white min-h-screen relative overflow-x-hidden;
+    @apply bg-[#e8edf5] text-surface-900 dark:bg-[#020408] dark:text-surface-100 antialiased font-sans transition-colors duration-300 selection:bg-brand-500 selection:text-white min-h-screen relative overflow-x-hidden;
   }
 }
 
@@ -32,11 +32,11 @@ body.dark .ambient-bg {
   background-color: #020408 !important;
 }
 
-/* Explicit Light Mode Background Rule (Softer, less stark glare) */
+/* Explicit Light Mode Background Rule (Comfortable Soft Ice-Slate Tint, NOT bright white) */
 html:not(.dark) .ambient-bg,
 body:not(.dark) .ambient-bg {
   background-image: url('/bg-atmosphere-light.svg') !important;
-  background-color: #f1f5f9 !important;
+  background-color: #e8edf5 !important;
 }
 
 .ambient-orb {

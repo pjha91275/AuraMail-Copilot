@@ -27,6 +27,7 @@ export default function Navbar({
   clients,
   activeClientId,
   onSelectClient,
+  currentUser,
   viewMode,
   onToggleViewMode,
   darkMode,
@@ -315,16 +316,16 @@ export default function Navbar({
               {darkMode ? <Sun className="w-4.5 h-4.5 text-amber-400" /> : <Moon className="w-4.5 h-4.5 text-surface-600" />}
             </button>
 
-            {/* Assistant Profile */}
+            {/* User Profile Menu (Personalized for Authenticated Account) */}
             <div className="relative">
               <button
                 onClick={() => setShowProfileMenu(!showProfileMenu)}
                 className="flex items-center space-x-1.5 pl-1.5 pr-1 py-1 rounded-2xl hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors"
-                title="Assistant Profile & Settings"
+                title={`${currentUser?.name || 'User'} Profile & Workspace Settings`}
               >
                 <img
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
-                  alt="Assistant Avatar"
+                  src={currentUser?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80'}
+                  alt={currentUser?.name || "User Avatar"}
                   className="w-8 h-8 rounded-full object-cover ring-2 ring-brand-500/40"
                 />
                 <ChevronDown className="w-3 h-3 text-surface-400" />
@@ -333,6 +334,7 @@ export default function Navbar({
               <UserProfileMenu
                 isOpen={showProfileMenu}
                 onClose={() => setShowProfileMenu(false)}
+                currentUser={currentUser}
                 onOpenShortcuts={onOpenShortcuts}
                 onOpenAccounts={onOpenAccountsModal}
                 onOpenOnboarding={onOpenOnboarding}

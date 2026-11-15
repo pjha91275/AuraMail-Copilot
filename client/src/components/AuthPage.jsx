@@ -174,7 +174,7 @@ export default function AuthPage({ onLogin, darkMode, onToggleDarkMode }) {
       className="min-h-screen flex flex-col justify-between font-sans relative overflow-x-hidden transition-colors duration-300"
       style={{
         backgroundImage: darkMode ? "url('/bg-atmosphere.svg')" : "url('/bg-atmosphere-light.svg')",
-        backgroundColor: darkMode ? '#020408' : '#f1f5f9',
+        backgroundColor: darkMode ? '#020408' : '#e8edf5',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',

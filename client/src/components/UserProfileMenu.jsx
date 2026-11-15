@@ -15,12 +15,18 @@ import {
 export default function UserProfileMenu({
   isOpen,
   onClose,
+  currentUser,
   onOpenShortcuts,
   onOpenAccounts,
   onOpenOnboarding,
   onLogout
 }) {
   if (!isOpen) return null;
+
+  const displayName = currentUser?.name || localStorage.getItem('auramail_user_name') || 'Prince Jha';
+  const displayEmail = currentUser?.email || localStorage.getItem('auramail_user_email') || 'pjha91275@gmail.com';
+  const userRole = currentUser?.role || localStorage.getItem('auramail_user_role') || (displayEmail.includes('pjha') ? 'client' : 'assistant');
+  const avatarUrl = currentUser?.avatar || localStorage.getItem('auramail_user_avatar') || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80';
 
   return (
     <div
@@ -31,8 +37,8 @@ export default function UserProfileMenu({
       <div className="p-3.5 border-b border-surface-100 dark:border-surface-700 flex items-center space-x-3">
         <div className="relative">
           <img
-            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80"
-            alt="Assistant Profile"
+            src={avatarUrl}
+            alt={displayName}
             className="w-11 h-11 rounded-2xl object-cover ring-2 ring-brand-500/30"
           />
           <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-white dark:border-surface-800 rounded-full" />
@@ -40,14 +46,14 @@ export default function UserProfileMenu({
 
         <div className="min-w-0">
           <div className="text-xs font-bold text-surface-900 dark:text-surface-100 truncate">
-            Alex Vance
+            {displayName}
           </div>
           <div className="text-[11px] text-surface-500 dark:text-surface-400 truncate">
-            alex.vance@techflow.io
+            {displayEmail}
           </div>
-          <div className="inline-flex items-center space-x-1 px-1.5 py-0.2 rounded-full text-[9px] font-bold bg-brand-50 dark:bg-brand-950/80 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-800 mt-1">
+          <div className="inline-flex items-center space-x-1 px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-brand-50 dark:bg-brand-950/80 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-800 mt-1">
             <Zap className="w-2.5 h-2.5" />
-            <span>Executive Assistant Lead</span>
+            <span>{userRole === 'client' ? 'Google Workspace Executive' : 'Executive Assistant Lead'}</span>
           </div>
         </div>
       </div>
@@ -55,8 +61,12 @@ export default function UserProfileMenu({
       {/* Quick Metrics */}
       <div className="grid grid-cols-2 gap-2 p-3 bg-surface-50 dark:bg-surface-800/50 mx-3 my-2 rounded-2xl border border-surface-100 dark:border-surface-700/60 text-center">
         <div>
-          <div className="text-xs font-bold text-surface-900 dark:text-surface-100">3</div>
-          <div className="text-[10px] text-surface-400">Clients Managed</div>
+          <div className="text-xs font-bold text-surface-900 dark:text-surface-100">
+            {userRole === 'client' ? 'Active' : '3'}
+          </div>
+          <div className="text-[10px] text-surface-400">
+            {userRole === 'client' ? 'Workspace Status' : 'Clients Managed'}
+          </div>
         </div>
         <div>
           <div className="text-xs font-bold text-emerald-600 dark:text-emerald-400">96.8%</div>
