@@ -90,9 +90,14 @@ In traditional email clients, a recurring friction occurs when a client reads an
 
 ## ✨ Feature Breakdown
 
-### 1. 🔐 Google Workspace OAuth 2.0 (Zero Password Architecture)
+### 1. 🔐 Google Workspace OAuth 2.0 & Device Account Selector (Zero Password Architecture)
 Following modern production email standards (like Superhuman and Notion), AuraMail Copilot operates with **exclusive Google Workspace OAuth**:
 - **Continue with Google Workspace**: Instant authentication via Google Identity Services & OAuth 2.0 PKCE.
+- **Device Google Account Picker Modal**: Clicking *Continue with Google Workspace* launches a native device account selector showing active Google Workspace profiles:
+  - 👑 **Prince Jha** (`pjha91275@gmail.com`) — CEO & Founder at GMAIL Inc. (with verified executive portrait).
+  - 👑 **Sarah Jenkins** (`sarah.jenkins@techflow.io`) — Founder & CEO at TechFlow.
+  - ⚡ **Alex Vance** (`alex.vance@techflow.io`) — Executive Assistant Lead.
+  - ➕ Option to enter any custom Google Workspace email or trigger direct Google Cloud OAuth with `prompt=select_account`.
 - **Passwordless Enterprise SSO**: No raw email passwords ever handled, transmitted, or stored in MongoDB.
 - **Instant 1-Click Demo Profiles**:
   - ⚡ **Assistant Profile (Alex Vance)**: Launches directly into the full assistant command center with complete triage controls.
@@ -100,10 +105,17 @@ Following modern production email standards (like Superhuman and Notion), AuraMa
 - **Workspace Sign-Out Flow**: Integrated in both desktop profile dropdown and mobile navigation drawer, returning the user instantly to the sign-in screen.
 - **Session Persistence**: Stored via `localStorage` so refreshing preserves active workspace credentials.
 
-### 2. 🌌 Self-Crafted Cyber-Atmospheric Background & 4-Logo Constellation Pattern
-- **4 Floating Logo Emblems in an Elegant Constellation**: Tasteful, balanced distribution across the viewport (Top-Right Upper Anchor, Mid-Left Floating Anchor, Center-Right Depth, Bottom-Left Foundation Anchor) with softened neon glow drop-shadows and subtle rotational angles for organic depth.
-- **5 Radiant Color Smudges**: Positioned in the hollow areas between logos (Upper-Center Cyan Nebula, Mid-Center Violet Aurora, Left-Center Golden Amber, Right-Center Emerald Teal, Bottom-Center Deep Indigo).
-- **Dual Dynamic Themes**: Seamless Dark Mode (deep obsidian `#020408`) and Bright Mode (crisp pearlescent `#f8fafc`).
+### 2. 🌌 Self-Crafted Cyber-Atmospheric Background & 5 Radiant Color Smudges
+- **4 Floating Logo Emblems in an Elegant Constellation**: Tasteful, balanced distribution across the viewport (Top-Right Upper Anchor, Mid-Left Floating Anchor, Center-Right Depth, Bottom-Left Foundation Anchor) with refined, non-glaring brightness (`brightness(0.9)`), softened drop-shadows, and smooth 5-second constellation drift.
+- **5 Radiant Color Smudges**: Positioned in the hollow negative space between and around the background logos:
+  1. **Upper-Center Cyan Nebula**: Elliptical atmospheric aura (`rgba(6, 182, 212, 0.40)` to `rgba(56, 189, 248, 0.22)`) with `blur(75px)`.
+  2. **Mid-Center Violet Aurora**: Central radiant glow (`rgba(168, 85, 247, 0.38)` to `rgba(139, 92, 246, 0.20)`) with `blur(85px)`.
+  3. **Left-Center Golden Amber**: Warm sunset glow (`rgba(245, 158, 11, 0.36)` to `rgba(251, 146, 60, 0.20)`) with `blur(80px)`.
+  4. **Right-Center Emerald Teal**: Fresh cyber luminescence (`rgba(16, 185, 129, 0.35)` to `rgba(20, 184, 166, 0.20)`) with `blur(80px)`.
+  5. **Bottom-Center Deep Indigo**: Foundation electric glow (`rgba(99, 102, 241, 0.42)` to `rgba(79, 70, 229, 0.24)`) with `blur(85px)`.
+- **Dual Dynamic Themes**:
+  - **Dark Mode**: Deep obsidian (`#020408`) with volumetric atmospheric plasma orbs.
+  - **Bright Mode**: Comfortable, soothing soft ice-slate (`#e8edf5`) specifically engineered to eliminate bright white glare and eye fatigue.
 - **Floating Ambient Plasma Orbs**: Smooth floating animation with blurred neon lighting.
 - **Micro-Interactions**: Confetti bursts upon client email approval and smooth drawer slide-overs.
 
@@ -120,10 +132,10 @@ AI assists, but human assistants maintain full authority. With a single click on
 
 ### 5. 👤 Minimalist Client VIP Portal
 Clients are spared the noise of a 500-email inbox:
-- Greets the client (e.g., *"Welcome back, Sarah"*).
+- Personalized greeting and executive banner (e.g., *"Welcome back, Prince"* or *"Welcome back, Sarah"* • *Powered by AuraMail AI Executive Copilot*).
 - Shows **only** emails classified as `Client to Reply`.
 - High-visibility **"Why your input is needed"** callout box.
-- **1-Click "Mark Handled"**: Solves the problem where clients read an email but forget to confirm.
+- **1-Click "Mark Handled"**: Solves the problem where clients read an email but forget to confirm — includes double-cannon celebratory confetti burst feedback.
 - **"Delegate to Assistant"**: The client types a quick note (e.g., *"Tell them Friday works and ask for the deck"*) which immediately hands it back to the assistant.
 - Collapsible original thread view if they want to inspect full details.
 
@@ -228,7 +240,11 @@ GOOGLE_CALLBACK_URL=https://auramail-copilot.vercel.app/api/auth/google/callback
 - **Backend (Node / Express / MongoDB)**:
   - Node.js & Express.js
   - RESTful architecture with modular controllers, services, and routes
-  - Mongoose & MongoDB Atlas support (with automated in-memory JSON sync fallback if Atlas IP whitelist is not configured)
+  - Mongoose & MongoDB Atlas support with **Production Serverless Connection Resilience**:
+    - Global connection pooling (`global.mongoose`) preventing cold-start handshake storms on Vercel AWS Lambda.
+    - `ensureInit()` Express middleware guaranteeing database readiness before route execution.
+    - IPv4-first DNS resolution (`dns.setDefaultResultOrder('ipv4first')`) preventing IPv6 DNS hanging on serverless edge networks.
+    - 15-second handshake timeouts with automatic zero-downtime high-performance in-memory JSON sync fallback if Atlas access is restricted.
 - **Deployment**:
   - Optimized 1-Click Serverless deployment on **Vercel** (`vercel.json` + `api/index.js`).
 
