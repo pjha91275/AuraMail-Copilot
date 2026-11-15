@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" fill="none">
+  <defs>
+    <!-- Glowing Ribbon Gradient -->
+    <linearGradient id="transRibbonGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="35%" stop-color="#6366f1" />
+      <stop offset="70%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+
+    <!-- Flap Accent Gradient -->
+    <linearGradient id="transFlapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+
+    <!-- Star Glow Gradient -->
+    <linearGradient id="transStarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+
+    <filter id="transGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="transStarGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- PURE VECTOR LOGO MARK - ZERO GREY BOX OR BACKGROUND SQUIRCLE -->
+  <g filter="url(#transGlow)">
+    <!-- Base Envelope Shield Wings -->
+    <path d="M16 38 C16 30 22 24 30 24 L98 24 C106 24 112 30 112 38 L112 94 C112 102 106 108 98 108 L30 108 C22 108 16 102 16 94 Z" 
+          fill="none" 
+          stroke="url(#transRibbonGrad)" 
+          stroke-width="7" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+
+    <!-- Dynamic Intersecting Fold (Aura Wings 'A' & 'M') -->
+    <path d="M18 32 L64 74 L110 32" 
+          fill="none" 
+          stroke="url(#transFlapGrad)" 
+          stroke-width="7" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+
+    <!-- Bottom Wing Triangles -->
+    <path d="M18 100 L50 68" 
+          fill="none" 
+          stroke="url(#transRibbonGrad)" 
+          stroke-width="6" 
+          stroke-linecap="round" 
+          stroke-opacity="0.9"/>
+    <path d="M110 100 L78 68" 
+          fill="none" 
+          stroke="url(#transRibbonGrad)" 
+          stroke-width="6" 
+          stroke-linecap="round" 
+          stroke-opacity="0.9"/>
+
+    <!-- Central Neural AI Node -->
+    <circle cx="64" cy="74" r="6" fill="#38bdf8"/>
+    <circle cx="64" cy="74" r="2.5" fill="#ffffff"/>
+  </g>
+
+  <!-- Large Brilliant AI Sparkle Star -->
+  <g filter="url(#transStarGlow)" transform="translate(86, 10)">
+    <path d="M16 0 L19.5 11.5 L31 15 L19.5 18.5 L16 30 L12.5 18.5 L1 15 L12.5 11.5 Z" fill="url(#transStarGrad)"/>
+    <circle cx="16" cy="15" r="3.5" fill="#ffffff"/>
+  </g>
+</svg>

@@ -3,35 +3,35 @@
     <!-- Light Pearlescent Canvas Base -->
     <radialGradient id="lightBase" cx="50%" cy="30%" r="85%">
       <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="45%" stop-color="#f4f7fe"/>
-      <stop offset="100%" stop-color="#e9f0fc"/>
+      <stop offset="45%" stop-color="#f6f9fe"/>
+      <stop offset="100%" stop-color="#ebf2fc"/>
     </radialGradient>
 
     <!-- Top Left Indigo Aurora -->
-    <radialGradient id="lightIndigo" cx="20%" cy="15%" r="45%">
-      <stop offset="0%" stop-color="#c7d2fe" stop-opacity="0.65"/>
-      <stop offset="55%" stop-color="#e0e7ff" stop-opacity="0.25"/>
-      <stop offset="100%" stop-color="#f4f7fe" stop-opacity="0"/>
+    <radialGradient id="lightIndigo" cx="15%" cy="15%" r="42%">
+      <stop offset="0%" stop-color="#c7d2fe" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#e0e7ff" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#f6f9fe" stop-opacity="0"/>
     </radialGradient>
 
     <!-- Top Right Cyan Aurora -->
-    <radialGradient id="lightCyan" cx="80%" cy="20%" r="42%">
-      <stop offset="0%" stop-color="#bae6fd" stop-opacity="0.6"/>
-      <stop offset="50%" stop-color="#e0f2fe" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#f4f7fe" stop-opacity="0"/>
+    <radialGradient id="lightCyan" cx="85%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="#bae6fd" stop-opacity="0.5"/>
+      <stop offset="50%" stop-color="#e0f2fe" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#f6f9fe" stop-opacity="0"/>
     </radialGradient>
 
     <!-- Bottom Center Violet Glow -->
     <radialGradient id="lightViolet" cx="50%" cy="85%" r="50%">
-      <stop offset="0%" stop-color="#ddd6fe" stop-opacity="0.5"/>
-      <stop offset="50%" stop-color="#ede9fe" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#f4f7fe" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#ddd6fe" stop-opacity="0.45"/>
+      <stop offset="50%" stop-color="#ede9fe" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#f6f9fe" stop-opacity="0"/>
     </radialGradient>
 
     <!-- Light Grid Pattern -->
     <pattern id="lightGrid" width="60" height="60" patternUnits="userSpaceOnUse">
-      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(148, 163, 184, 0.15)" stroke-width="1"/>
-      <circle cx="0" cy="0" r="1.5" fill="rgba(99, 102, 241, 0.22)"/>
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(148, 163, 184, 0.12)" stroke-width="1"/>
+      <circle cx="0" cy="0" r="1.5" fill="rgba(99, 102, 241, 0.18)"/>
     </pattern>
 
     <!-- Official AuraMail Logo Ribbon Gradient for Light Mode -->
@@ -56,8 +56,8 @@
       <feGaussianBlur stdDeviation="55" result="blur"/>
     </filter>
 
-    <filter id="logoShadowLight" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="rgba(79, 70, 229, 0.22)"/>
+    <filter id="vectorDropLight" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="rgba(79, 70, 229, 0.18)"/>
     </filter>
   </defs>
 
@@ -68,61 +68,69 @@
   <rect width="100%" height="100%" fill="url(#lightGrid)"/>
 
   <!-- Color Blobs -->
-  <circle cx="350" cy="200" r="520" fill="url(#lightIndigo)" filter="url(#lightGlow)"/>
-  <circle cx="1600" cy="250" r="480" fill="url(#lightCyan)" filter="url(#lightGlow)"/>
-  <circle cx="960" cy="900" r="580" fill="url(#lightViolet)" filter="url(#lightGlow)"/>
+  <circle cx="300" cy="180" r="480" fill="url(#lightIndigo)" filter="url(#lightGlow)"/>
+  <circle cx="1650" cy="220" r="420" fill="url(#lightCyan)" filter="url(#lightGlow)"/>
+  <circle cx="960" cy="920" r="500" fill="url(#lightViolet)" filter="url(#lightGlow)"/>
 
-  <!-- ============================================================== -->
-  <!-- OFFICIAL AURAMAIL AI LOGO WATERMARK 1 (HERO TOP-RIGHT IN BRIGHT MODE) -->
-  <!-- Clearly visible & vibrant on bright backgrounds               -->
-  <!-- ============================================================== -->
-  <g transform="translate(1360, 60) scale(3.8)" opacity="0.48" filter="url(#logoShadowLight)">
-    <!-- Squircle Frame -->
-    <rect x="2" y="2" width="124" height="124" rx="34" fill="rgba(255, 255, 255, 0.85)" stroke="url(#logoRibbonLight)" stroke-width="2.5" stroke-opacity="0.85"/>
-    <rect x="6" y="6" width="116" height="116" rx="30" fill="none" stroke="url(#logoFlapLight)" stroke-width="1.5" stroke-opacity="0.5"/>
+  <!-- ========================================================================= -->
+  <!-- 1. OFFICIAL LOGO WATERMARK #1 (TOP-RIGHT: PURE VECTOR, ZERO GREY BUBBLE) -->
+  <!-- ========================================================================= -->
+  <g transform="translate(1420, 80) scale(2.6)" opacity="0.25" filter="url(#vectorDropLight)">
+    <!-- Base Envelope Shield Wings (No grey box, pure transparent glowing strokes) -->
+    <path d="M16 38 C16 30 22 24 30 24 L98 24 C106 24 112 30 112 38 L112 94 C112 102 106 108 98 108 L30 108 C22 108 16 102 16 94 Z" 
+          fill="none" 
+          stroke="url(#logoRibbonLight)" 
+          stroke-width="6.5" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
 
-    <!-- Glowing Envelope Wings (Aura 'A' / 'M') -->
-    <g>
-      <!-- Base Envelope Shield -->
-      <path d="M16 38 C16 30 22 24 30 24 L98 24 C106 24 112 30 112 38 L112 94 C112 102 106 108 98 108 L30 108 C22 108 16 102 16 94 Z" 
-            fill="none" 
-            stroke="url(#logoRibbonLight)" 
-            stroke-width="7" 
-            stroke-linecap="round" 
-            stroke-linejoin="round"/>
+    <!-- Intersecting Wing Fold (Aura Wings 'A' / 'M') -->
+    <path d="M18 32 L64 74 L110 32" 
+          fill="none" 
+          stroke="url(#logoFlapLight)" 
+          stroke-width="6.5" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
 
-      <!-- Dynamic Intersecting Fold Wings -->
-      <path d="M18 32 L64 74 L110 32" 
-            fill="none" 
-            stroke="url(#logoFlapLight)" 
-            stroke-width="7" 
-            stroke-linecap="round" 
-            stroke-linejoin="round"/>
+    <!-- Bottom Wings -->
+    <path d="M18 100 L50 68" fill="none" stroke="url(#logoRibbonLight)" stroke-width="5.5" stroke-linecap="round" stroke-opacity="0.9"/>
+    <path d="M110 100 L78 68" fill="none" stroke="url(#logoRibbonLight)" stroke-width="5.5" stroke-linecap="round" stroke-opacity="0.9"/>
 
-      <!-- Bottom Wings -->
-      <path d="M18 100 L50 68" fill="none" stroke="url(#logoRibbonLight)" stroke-width="6" stroke-linecap="round" stroke-opacity="0.9"/>
-      <path d="M110 100 L78 68" fill="none" stroke="url(#logoRibbonLight)" stroke-width="6" stroke-linecap="round" stroke-opacity="0.9"/>
+    <!-- Central Neural AI Node -->
+    <circle cx="64" cy="74" r="5.5" fill="#0284c7"/>
+    <circle cx="64" cy="74" r="2" fill="#ffffff"/>
 
-      <!-- Central Neural AI Node -->
-      <circle cx="64" cy="74" r="6" fill="#0284c7"/>
-      <circle cx="64" cy="74" r="2.5" fill="#ffffff"/>
-    </g>
-
-    <!-- AI Sparkle Star -->
+    <!-- Sparkle Star -->
     <g transform="translate(86, 10)">
       <path d="M16 0 L19.5 11.5 L31 15 L19.5 18.5 L16 30 L12.5 18.5 L1 15 L12.5 11.5 Z" fill="url(#logoStarLight)"/>
-      <circle cx="16" cy="15" r="3.5" fill="#ffffff"/>
+      <circle cx="16" cy="15" r="3" fill="#ffffff"/>
     </g>
   </g>
 
-  <!-- ============================================================== -->
-  <!-- OFFICIAL AURAMAIL AI LOGO WATERMARK 2 (BOTTOM-LEFT IN BRIGHT MODE) -->
-  <!-- ============================================================== -->
-  <g transform="translate(60, 520) scale(2.6)" opacity="0.35" filter="url(#logoShadowLight)">
-    <rect x="2" y="2" width="124" height="124" rx="34" fill="rgba(255, 255, 255, 0.75)" stroke="url(#logoRibbonLight)" stroke-width="2" stroke-opacity="0.7"/>
+  <!-- ========================================================================= -->
+  <!-- 2. OFFICIAL LOGO WATERMARK #2 (CENTER-LEFT: BEHIND INBOX THREADS)        -->
+  <!-- ========================================================================= -->
+  <g transform="translate(160, 320) scale(2.4)" opacity="0.22" filter="url(#vectorDropLight)">
     <path d="M16 38 C16 30 22 24 30 24 L98 24 C106 24 112 30 112 38 L112 94 C112 102 106 108 98 108 L30 108 C22 108 16 102 16 94 Z" 
-          fill="none" stroke="url(#logoRibbonLight)" stroke-width="6.5" stroke-linecap="round"/>
+          fill="none" stroke="url(#logoRibbonLight)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M18 32 L64 74 L110 32" fill="none" stroke="url(#logoFlapLight)" stroke-width="6.5" stroke-linecap="round"/>
+    <path d="M18 100 L50 68" fill="none" stroke="url(#logoRibbonLight)" stroke-width="5.5" stroke-linecap="round"/>
+    <path d="M110 100 L78 68" fill="none" stroke="url(#logoRibbonLight)" stroke-width="5.5" stroke-linecap="round"/>
+    <circle cx="64" cy="74" r="5.5" fill="#0284c7"/>
+    <g transform="translate(86, 10)">
+      <path d="M16 0 L19.5 11.5 L31 15 L19.5 18.5 L16 30 L12.5 18.5 L1 15 L12.5 11.5 Z" fill="url(#logoStarLight)"/>
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- 3. OFFICIAL LOGO WATERMARK #3 (LOWER-RIGHT: QUADRANT BALANCE)            -->
+  <!-- ========================================================================= -->
+  <g transform="translate(1380, 680) scale(2.5)" opacity="0.20" filter="url(#vectorDropLight)">
+    <path d="M16 38 C16 30 22 24 30 24 L98 24 C106 24 112 30 112 38 L112 94 C112 102 106 108 98 108 L30 108 C22 108 16 102 16 94 Z" 
+          fill="none" stroke="url(#logoRibbonLight)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M18 32 L64 74 L110 32" fill="none" stroke="url(#logoFlapLight)" stroke-width="6.5" stroke-linecap="round"/>
+    <path d="M18 100 L50 68" fill="none" stroke="url(#logoRibbonLight)" stroke-width="5.5" stroke-linecap="round"/>
+    <path d="M110 100 L78 68" fill="none" stroke="url(#logoRibbonLight)" stroke-width="5.5" stroke-linecap="round"/>
     <circle cx="64" cy="74" r="5.5" fill="#0284c7"/>
     <g transform="translate(86, 10)">
       <path d="M16 0 L19.5 11.5 L31 15 L19.5 18.5 L16 30 L12.5 18.5 L1 15 L12.5 11.5 Z" fill="url(#logoStarLight)"/>
@@ -130,9 +138,9 @@
   </g>
 
   <!-- Subtle Perspective Lines at bottom -->
-  <g opacity="0.45">
-    <line x1="0" y1="850" x2="1920" y2="850" stroke="rgba(99, 102, 241, 0.1)" stroke-width="1"/>
-    <line x1="0" y1="920" x2="1920" y2="920" stroke="rgba(99, 102, 241, 0.12)" stroke-width="1"/>
-    <line x1="0" y1="980" x2="1920" y2="980" stroke="rgba(99, 102, 241, 0.14)" stroke-width="1"/>
+  <g opacity="0.35">
+    <line x1="0" y1="880" x2="1920" y2="880" stroke="rgba(99, 102, 241, 0.08)" stroke-width="1"/>
+    <line x1="0" y1="940" x2="1920" y2="940" stroke="rgba(99, 102, 241, 0.1)" stroke-width="1"/>
+    <line x1="0" y1="1000" x2="1920" y2="1000" stroke="rgba(99, 102, 241, 0.12)" stroke-width="1"/>
   </g>
 </svg>

@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-surface-50 text-surface-900 dark:bg-[#040711] dark:text-surface-100 antialiased font-sans transition-colors duration-300 selection:bg-brand-500 selection:text-white min-h-screen relative overflow-x-hidden;
+    @apply bg-surface-50 text-surface-900 dark:bg-[#020408] dark:text-surface-100 antialiased font-sans transition-colors duration-300 selection:bg-brand-500 selection:text-white min-h-screen relative overflow-x-hidden;
   }
 }
 
@@ -121,15 +121,15 @@ body:not(.dark) .ambient-bg {
    ULTRA GLASSMORPHISM & SPECULAR LIGHT PANELS
    ============================================================ */
 .glass-panel {
-  @apply bg-white/80 dark:bg-[#0B101D]/75 backdrop-blur-2xl border border-surface-200/90 dark:border-white/[0.09] shadow-card transition-all duration-300;
+  @apply bg-white/80 dark:bg-[#070b16]/80 backdrop-blur-2xl border border-surface-200/90 dark:border-white/[0.08] shadow-card transition-all duration-300;
 }
 
 .glass-card {
-  @apply bg-white/70 dark:bg-[#0E1528]/60 backdrop-blur-xl border border-surface-200/70 dark:border-white/[0.07] transition-all duration-200;
+  @apply bg-white/70 dark:bg-[#0a0f1d]/65 backdrop-blur-xl border border-surface-200/70 dark:border-white/[0.06] transition-all duration-200;
 }
 
 .glass-card:hover {
-  @apply bg-white/95 dark:bg-[#141E38]/85 border-surface-300 dark:border-brand-500/40 shadow-card-hover -translate-y-0.5;
+  @apply bg-white/95 dark:bg-[#0f172c]/85 border-surface-300 dark:border-brand-500/40 shadow-card-hover -translate-y-0.5;
 }
 
 /* ============================================================
