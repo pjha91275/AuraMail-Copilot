@@ -23,6 +23,7 @@ export default function EmailCard({
   const isAssistant = email.classification?.type === 'Assistant to Reply';
   const isClient = email.classification?.type === 'Client to Reply';
   const isNoReply = email.classification?.type === 'No Reply Needed';
+  const isUrgent = email.classification?.urgency === 'urgent';
 
   // Format relative timestamp
   const dateStr = new Date(email.updatedAt || email.createdAt).toLocaleDateString([], {
@@ -37,32 +38,38 @@ export default function EmailCard({
   return (
     <div
       onClick={() => onSelect(email)}
-      className={`group relative p-5 rounded-3xl transition-all duration-200 cursor-pointer backdrop-blur-xl border ${
+      className={`group relative p-5 rounded-3xl transition-all duration-300 cursor-pointer backdrop-blur-2xl border overflow-hidden animate-fade-in-up ${
         isSelected
-          ? 'bg-brand-50/80 dark:bg-brand-950/40 border-brand-500 shadow-glow-brand ring-1 ring-brand-500/40 -translate-y-0.5'
+          ? 'bg-brand-50/90 dark:bg-[#121B33]/90 border-brand-500 shadow-glow-brand ring-2 ring-brand-500/50 -translate-y-1'
           : email.unread
-          ? 'bg-white/80 dark:bg-surface-900/60 border-surface-200/90 dark:border-white/[0.08] shadow-card hover:bg-white dark:hover:bg-surface-850 hover:border-surface-300 dark:hover:border-white/[0.18] hover:-translate-y-0.5 hover:shadow-card-hover'
-          : 'bg-surface-50/50 dark:bg-surface-900/30 border-surface-200/50 dark:border-white/[0.04] hover:bg-white/60 dark:hover:bg-surface-900/50 hover:border-surface-300 dark:hover:border-white/[0.1]'
+          ? 'bg-white/80 dark:bg-[#0B101D]/75 border-surface-200/90 dark:border-white/[0.08] shadow-card hover:bg-white/95 dark:hover:bg-[#121A2F]/85 hover:border-brand-500/40 hover:-translate-y-1 hover:shadow-card-hover'
+          : 'bg-surface-50/60 dark:bg-[#080D1A]/50 border-surface-200/60 dark:border-white/[0.05] hover:bg-white/70 dark:hover:bg-[#0F1629]/70 hover:border-surface-300 dark:hover:border-white/[0.12] hover:-translate-y-0.5'
       }`}
     >
-      {/* Classification Accent Left Bar with subtle glow */}
+      {/* Specular light sweep on hover */}
+      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 dark:via-white/[0.05] to-transparent pointer-events-none" />
+
+      {/* Classification Accent Left Bar with luminous glow */}
       <div
-        className={`absolute left-0 top-3.5 bottom-3.5 w-1.5 rounded-r-full transition-all duration-200 ${
+        className={`absolute left-0 top-3 bottom-3 w-1.5 rounded-r-full transition-all duration-300 ${
           isAssistant
-            ? 'bg-brand-500 shadow-[0_0_12px_rgba(74,117,246,0.6)]'
+            ? 'bg-gradient-to-b from-brand-400 to-indigo-600 shadow-[0_0_14px_rgba(74,117,246,0.8)]'
             : isClient
-            ? 'bg-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.6)]'
-            : 'bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.5)]'
+            ? 'bg-gradient-to-b from-amber-400 to-orange-500 shadow-[0_0_14px_rgba(245,158,11,0.8)]'
+            : 'bg-gradient-to-b from-emerald-400 to-teal-600 shadow-[0_0_14px_rgba(16,185,129,0.7)]'
         }`}
       />
 
-      <div className="pl-3">
+      <div className="pl-3 relative z-10">
         {/* Top Row: Sender, Badges, Time */}
         <div className="flex items-center justify-between gap-3 mb-2">
           <div className="flex items-center space-x-2.5 min-w-0 truncate">
-            {/* Unread indicator dot */}
+            {/* Unread indicator dot with sonar ping */}
             {email.unread && (
-              <span className="w-2.5 h-2.5 rounded-full bg-brand-500 shrink-0 ring-4 ring-brand-500/20 animate-pulse" />
+              <span className="relative flex h-2.5 w-2.5 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-500 ring-2 ring-brand-500/40" />
+              </span>
             )}
             
             <img
@@ -82,7 +89,7 @@ export default function EmailCard({
             </span>
 
             {/* Quick action buttons on hover */}
-            <div className="hidden group-hover:flex items-center space-x-1 bg-white dark:bg-surface-800 px-1.5 py-0.5 rounded-xl shadow-md border border-surface-200 dark:border-white/10 animate-fade-in">
+            <div className="hidden group-hover:flex items-center space-x-1 bg-white/90 dark:bg-surface-800/90 backdrop-blur-md px-1.5 py-0.5 rounded-xl shadow-md border border-surface-200 dark:border-white/10 animate-fade-in">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -120,12 +127,12 @@ export default function EmailCard({
         </div>
 
         {/* Subject */}
-        <div className={`text-sm mb-1.5 leading-snug line-clamp-1 ${email.unread ? 'font-bold text-surface-900 dark:text-white' : 'font-medium text-surface-800 dark:text-surface-200'}`}>
+        <div className={`text-sm mb-1.5 leading-snug line-clamp-1 ${email.unread ? 'font-black text-surface-900 dark:text-white' : 'font-semibold text-surface-800 dark:text-surface-200'}`}>
           {email.subject}
         </div>
 
         {/* Snippet */}
-        <p className="text-xs text-surface-500 dark:text-surface-400 line-clamp-2 leading-relaxed mb-3">
+        <p className="text-xs text-surface-500 dark:text-surface-400 line-clamp-2 leading-relaxed mb-3 font-normal">
           {email.snippet}
         </p>
 
@@ -134,14 +141,14 @@ export default function EmailCard({
           
           {/* Classification Badge */}
           {isAssistant && (
-            <span className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-brand-500/15 text-brand-700 dark:text-brand-300 border border-brand-500/30">
+            <span className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-brand-500/15 text-brand-700 dark:text-brand-300 border border-brand-500/35 shadow-sm">
               <Zap className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400" />
               <span>Assistant to Reply</span>
             </span>
           )}
 
           {isClient && (
-            <span className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30">
+            <span className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/40 vip-pulse">
               <UserCheck className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
               <span>Client to Reply</span>
             </span>
@@ -155,8 +162,8 @@ export default function EmailCard({
           )}
 
           {/* Urgency Badge */}
-          {email.classification?.urgency === 'urgent' && (
-            <span className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-rose-500/15 text-rose-700 dark:text-rose-300 border border-rose-500/30">
+          {isUrgent && (
+            <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-500/40 urgent-pulse">
               <AlertTriangle className="w-3 h-3" />
               <span>Urgent</span>
             </span>
@@ -180,13 +187,13 @@ export default function EmailCard({
 
           {/* Client Handled/Delegated Back Badge */}
           {email.clientFeedback?.delegatedBack && (
-            <span className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border border-indigo-500/30">
+            <span className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/40">
               <span>Client Delegated</span>
             </span>
           )}
 
           {email.starred && (
-            <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-500 ml-auto shrink-0" />
+            <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-500 ml-auto shrink-0 drop-shadow-[0_0_6px_rgba(245,158,11,0.5)]" />
           )}
 
         </div>

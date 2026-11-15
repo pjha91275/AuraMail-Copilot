@@ -439,6 +439,7 @@ export default function App() {
         <div className="ambient-orb ambient-orb-1 animate-float-slow" />
         <div className="ambient-orb ambient-orb-2 animate-float-delayed" />
         <div className="ambient-orb ambient-orb-3 animate-float-slow" />
+        <div className="ambient-orb ambient-orb-4 animate-float-delayed" />
       </div>
 
       {/* Toast Notification Container */}

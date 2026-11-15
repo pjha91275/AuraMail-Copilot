@@ -256,29 +256,30 @@ export default function EmailDetail({
       <div className="flex-1 overflow-y-auto p-6 space-y-6">
         
         {/* AI Smart Triage Briefing Card */}
-        <div className="p-5 rounded-3xl bg-gradient-to-br from-brand-500/10 via-surface-900/40 to-surface-900/80 border border-brand-500/30 shadow-card space-y-4">
+        <div className="p-6 rounded-3xl bg-gradient-to-br from-brand-500/15 via-[#0c1426]/70 to-[#070b14]/90 border border-brand-500/40 shadow-[0_0_35px_-5px_rgba(99,102,241,0.25)] space-y-4 ai-scan-effect relative overflow-hidden backdrop-blur-2xl">
           
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between relative z-10">
             <div className="flex items-center space-x-2.5 text-brand-600 dark:text-brand-300">
-              <div className="w-7 h-7 rounded-xl bg-brand-500/20 flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-brand-500" />
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-500 flex items-center justify-center text-white shadow-glow-brand animate-pulse-subtle">
+                <Sparkles className="w-4 h-4" />
               </div>
-              <span className="text-xs font-black uppercase tracking-wider">AI Intelligence Insights</span>
+              <span className="text-xs font-black uppercase tracking-wider text-brand-700 dark:text-brand-300">AI Intelligence Insights</span>
             </div>
-            <span className="text-[11px] text-surface-400 font-semibold bg-surface-100 dark:bg-surface-800/80 px-2.5 py-0.5 rounded-full">
-              Auto-triage active
+            <span className="text-[11px] text-surface-600 dark:text-surface-300 font-semibold bg-white/70 dark:bg-surface-800/80 px-3 py-1 rounded-full flex items-center space-x-2 border border-surface-200 dark:border-white/[0.08] shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Auto-triage active</span>
             </span>
           </div>
 
           {/* AI Reasoning Pill */}
-          <div className="text-xs text-surface-800 dark:text-surface-200 bg-white/70 dark:bg-surface-800/80 p-3.5 rounded-2xl border border-surface-200/80 dark:border-white/[0.08] shadow-subtle leading-relaxed">
+          <div className="relative z-10 text-xs text-surface-800 dark:text-surface-200 bg-white/75 dark:bg-surface-800/80 p-4 rounded-2xl border border-surface-200/80 dark:border-white/[0.08] shadow-subtle leading-relaxed">
             <span className="font-bold text-brand-600 dark:text-brand-400">Why this was assigned: </span>
             {classification.reason}
           </div>
 
           {/* Executive Summary */}
           {email.summary && (
-            <div className="text-xs text-surface-700 dark:text-surface-300 bg-white/50 dark:bg-surface-800/50 p-3.5 rounded-2xl border border-surface-200/50 dark:border-white/[0.05] leading-relaxed">
+            <div className="relative z-10 text-xs text-surface-700 dark:text-surface-300 bg-white/60 dark:bg-surface-800/60 p-4 rounded-2xl border border-surface-200/50 dark:border-white/[0.05] leading-relaxed">
               <span className="font-bold text-surface-900 dark:text-white block mb-1">
                 Executive Digest:
               </span>
@@ -448,7 +449,7 @@ export default function EmailDetail({
             <button
               onClick={handleGenerateAiDraft}
               disabled={isGenerating}
-              className="flex items-center space-x-2 px-4 py-2.5 rounded-2xl bg-surface-100 hover:bg-surface-200 dark:bg-surface-800 dark:hover:bg-surface-700 text-xs font-bold text-surface-800 dark:text-surface-200 transition-colors disabled:opacity-50 shrink-0"
+              className="btn-shimmer flex items-center space-x-2 px-4 py-2.5 rounded-2xl bg-surface-100 hover:bg-surface-200 dark:bg-surface-800 dark:hover:bg-surface-700 text-xs font-bold text-surface-800 dark:text-surface-200 transition-colors disabled:opacity-50 shrink-0 shadow-sm"
             >
               {isGenerating ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Sparkles className="w-3.5 h-3.5 text-brand-500" />}
               <span>{isGenerating ? 'Drafting...' : 'Regenerate Draft'}</span>
@@ -475,7 +476,7 @@ export default function EmailDetail({
             <div className="flex items-center space-x-2.5">
               <button
                 onClick={() => onSaveDraft(email.id, draftContent, selectedTone)}
-                className="px-4 py-2 rounded-2xl text-xs font-bold bg-surface-100 hover:bg-surface-200 dark:bg-surface-800 dark:hover:bg-surface-700 text-surface-700 dark:text-surface-300 transition-colors"
+                className="btn-shimmer px-4 py-2 rounded-2xl text-xs font-bold bg-surface-100 hover:bg-surface-200 dark:bg-surface-800 dark:hover:bg-surface-700 text-surface-700 dark:text-surface-300 transition-colors"
               >
                 Save as Draft
               </button>
@@ -483,7 +484,7 @@ export default function EmailDetail({
               <button
                 onClick={handleSend}
                 disabled={isSending || !draftContent.trim()}
-                className="flex items-center space-x-2 px-5 py-2 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold shadow-glow-brand transition-all disabled:opacity-50"
+                className="btn-shimmer flex items-center space-x-2 px-5 py-2.5 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold shadow-glow-brand transition-all disabled:opacity-50 hover:shadow-[0_0_25px_rgba(74,117,246,0.7)] hover:-translate-y-0.5"
               >
                 {isSending ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Send className="w-3.5 h-3.5" />}
                 <span>Send Reply Now</span>

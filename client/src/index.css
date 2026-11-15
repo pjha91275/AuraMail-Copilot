@@ -4,51 +4,64 @@
 
 @layer base {
   body {
-    @apply bg-surface-50 text-surface-900 dark:bg-surface-950 dark:text-surface-100 antialiased font-sans transition-colors duration-300 selection:bg-brand-500 selection:text-white min-h-screen relative overflow-x-hidden;
+    @apply bg-surface-50 text-surface-900 dark:bg-[#040711] dark:text-surface-100 antialiased font-sans transition-colors duration-300 selection:bg-brand-500 selection:text-white min-h-screen relative overflow-x-hidden;
   }
 }
 
-/* Ambient Crafted Cosmic Background */
+/* ============================================================
+   AMBIENT ATMOSPHERIC BACKGROUND WITH VOLUMETRIC GLOW
+   ============================================================ */
 .ambient-bg {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
+  background-image: url('/bg-atmosphere.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transition: background-image 0.5s ease-in-out;
+}
+
+body:not(.dark) .ambient-bg {
+  background-image: url('/bg-atmosphere-light.svg');
 }
 
 .ambient-orb {
   position: absolute;
   border-radius: 9999px;
-  filter: blur(110px);
+  filter: blur(95px);
   will-change: transform, opacity;
+  pointer-events: none;
 }
 
-/* Dark Mode Cosmic Lights */
+/* Dark Mode Dynamic Glowing Plasma Orbs */
 .dark .ambient-orb-1 {
-  width: 750px;
-  height: 750px;
-  left: -10%;
-  top: -15%;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.5) 0%, rgba(59, 130, 246, 0.3) 40%, rgba(15, 23, 42, 0) 70%);
+  width: 650px;
+  height: 650px;
+  left: -8%;
+  top: -10%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.45) 0%, rgba(59, 130, 246, 0.25) 45%, transparent 70%);
   opacity: 0.85;
 }
 
 .dark .ambient-orb-2 {
-  width: 800px;
-  height: 800px;
-  right: -10%;
+  width: 700px;
+  height: 700px;
+  right: -8%;
   top: 15%;
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.4) 0%, rgba(99, 102, 241, 0.2) 45%, rgba(15, 23, 42, 0) 70%);
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.38) 0%, rgba(99, 102, 241, 0.2) 50%, transparent 70%);
   opacity: 0.8;
 }
 
 .dark .ambient-orb-3 {
-  width: 650px;
-  height: 650px;
-  left: 25%;
-  bottom: -15%;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, rgba(236, 72, 153, 0.15) 50%, rgba(15, 23, 42, 0) 70%);
+  width: 600px;
+  height: 600px;
+  left: 30%;
+  bottom: -12%;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.32) 0%, rgba(236, 72, 153, 0.15) 50%, transparent 70%);
   opacity: 0.75;
 }
 
@@ -56,24 +69,24 @@
   width: 500px;
   height: 500px;
   right: 25%;
-  bottom: 10%;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, rgba(6, 182, 212, 0.1) 50%, transparent 70%);
+  top: 40%;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.25) 0%, rgba(99, 102, 241, 0.1) 50%, transparent 70%);
   opacity: 0.6;
 }
 
 /* Light Mode Soft Pastel Glows */
 .ambient-orb-1 {
-  width: 700px;
-  height: 700px;
+  width: 650px;
+  height: 650px;
   left: -8%;
-  top: -12%;
+  top: -10%;
   background: radial-gradient(circle, rgba(199, 210, 254, 0.75) 0%, rgba(224, 231, 255, 0.35) 50%, transparent 70%);
   opacity: 0.9;
 }
 
 .ambient-orb-2 {
-  width: 750px;
-  height: 750px;
+  width: 700px;
+  height: 700px;
   right: -8%;
   top: 15%;
   background: radial-gradient(circle, rgba(186, 230, 253, 0.7) 0%, rgba(224, 242, 254, 0.35) 50%, transparent 70%);
@@ -81,8 +94,8 @@
 }
 
 .ambient-orb-3 {
-  width: 650px;
-  height: 650px;
+  width: 600px;
+  height: 600px;
   left: 30%;
   bottom: -10%;
   background: radial-gradient(circle, rgba(233, 213, 255, 0.65) 0%, transparent 65%);
@@ -91,35 +104,128 @@
 
 /* High-Tech Dot Matrix Pattern Overlay */
 .bg-grid-pattern {
-  background-size: 36px 36px;
+  background-size: 40px 40px;
   background-image: 
-    radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.15) 1px, transparent 0);
-  mask-image: radial-gradient(ellipse at 50% 50%, black 50%, transparent 95%);
-  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 50%, transparent 95%);
+    radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.12) 1px, transparent 0);
+  mask-image: radial-gradient(ellipse at 50% 50%, black 60%, transparent 95%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 60%, transparent 95%);
 }
 
 .dark .bg-grid-pattern {
   background-image: 
-    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.12) 1px, transparent 0);
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.1) 1px, transparent 0);
 }
 
-/* Ultra Glassmorphic Panels */
+/* ============================================================
+   ULTRA GLASSMORPHISM & SPECULAR LIGHT PANELS
+   ============================================================ */
 .glass-panel {
-  @apply bg-white/75 dark:bg-surface-900/70 backdrop-blur-2xl border border-surface-200/90 dark:border-white/[0.09] shadow-card transition-all;
+  @apply bg-white/80 dark:bg-[#0B101D]/75 backdrop-blur-2xl border border-surface-200/90 dark:border-white/[0.09] shadow-card transition-all duration-300;
 }
 
 .glass-card {
-  @apply bg-white/60 dark:bg-surface-850/50 backdrop-blur-xl border border-surface-200/60 dark:border-white/[0.06] transition-all;
+  @apply bg-white/70 dark:bg-[#0E1528]/60 backdrop-blur-xl border border-surface-200/70 dark:border-white/[0.07] transition-all duration-200;
 }
 
 .glass-card:hover {
-  @apply bg-white/90 dark:bg-surface-800/80 border-surface-300 dark:border-white/[0.15] shadow-card-hover -translate-y-0.5;
+  @apply bg-white/95 dark:bg-[#141E38]/85 border-surface-300 dark:border-brand-500/40 shadow-card-hover -translate-y-0.5;
 }
 
-/* Custom modern scrollbars */
+/* ============================================================
+   INTERACTIVE BUTTON SHIMMER & SPECIAL EFFECTS
+   ============================================================ */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.btn-shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transform: skewX(-20deg);
+  transition: transform 0.65s ease;
+  pointer-events: none;
+}
+
+.btn-shimmer:hover::before {
+  transform: translateX(380%) skewX(-20deg);
+}
+
+/* Holographic AI Scanning Line */
+.ai-scan-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-scan-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.9), rgba(6, 182, 212, 0.9), transparent);
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.9);
+  animation: scanline 4.5s linear infinite;
+  pointer-events: none;
+}
+
+/* ============================================================
+   STATUS HALO BREATHING PULSES
+   ============================================================ */
+.urgent-pulse {
+  animation: urgentHalo 2.2s ease-in-out infinite;
+}
+@keyframes urgentHalo {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 14px 2px rgba(239, 68, 68, 0.7);
+  }
+}
+
+.vip-pulse {
+  animation: vipHalo 2.5s ease-in-out infinite;
+}
+@keyframes vipHalo {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 15px 3px rgba(245, 158, 11, 0.7);
+  }
+}
+
+.assistant-pulse {
+  animation: assistantHalo 2.8s ease-in-out infinite;
+}
+@keyframes assistantHalo {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(74, 117, 246, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 12px 2px rgba(74, 117, 246, 0.65);
+  }
+}
+
+/* Border Beam for Active Cards */
+.border-beam-active {
+  position: relative;
+  border-color: rgba(99, 102, 241, 0.6) !important;
+  box-shadow: 0 0 24px -2px rgba(99, 102, 241, 0.35), 0 0 0 1px rgba(99, 102, 241, 0.5) !important;
+}
+
+/* Custom Modern Scrollbars */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -136,9 +242,9 @@
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.3);
 }

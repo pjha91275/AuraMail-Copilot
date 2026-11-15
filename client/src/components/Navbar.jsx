@@ -58,17 +58,20 @@ export default function Navbar({
           
           {/* Brand / Logo */}
           <div className="flex items-center space-x-3.5 shrink-0">
-            <img
-              src="/favicon.svg"
-              alt="AuraMail AI Logo"
-              className="w-10 h-10 object-contain rounded-2xl shadow-glow-brand ring-1 ring-white/10 hover:scale-105 transition-transform"
-            />
+            <div className="relative group cursor-pointer">
+              <div className="absolute -inset-1 bg-gradient-to-r from-brand-500 via-indigo-500 to-cyan-500 rounded-2xl blur-sm opacity-60 group-hover:opacity-100 transition duration-500 group-hover:scale-105" />
+              <img
+                src="/favicon.svg"
+                alt="AuraMail AI Logo"
+                className="relative w-10 h-10 object-contain rounded-2xl shadow-glow-brand ring-1 ring-white/20 transition-transform group-hover:scale-105"
+              />
+            </div>
             <div>
               <div className="flex items-center space-x-2">
                 <span className="font-black text-lg tracking-tight bg-gradient-to-r from-surface-900 via-brand-600 to-indigo-600 dark:from-white dark:via-brand-400 dark:to-cyan-400 bg-clip-text text-transparent">
                   AuraMail AI
                 </span>
-                <span className="hidden sm:inline-flex text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-brand-50 text-brand-700 dark:bg-brand-950 dark:text-brand-300 border border-brand-200 dark:border-brand-800">
+                <span className="hidden sm:inline-flex text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-brand-50 text-brand-700 dark:bg-brand-950 dark:text-brand-300 border border-brand-200 dark:border-brand-800 shadow-sm">
                   Assistant Co-Pilot
                 </span>
               </div>
@@ -216,7 +219,7 @@ export default function Navbar({
             <div className="relative">
               <button
                 onClick={() => setShowSimulateMenu(!showSimulateMenu)}
-                className="flex items-center space-x-1.5 px-3 py-1.5 rounded-2xl bg-brand-500/10 hover:bg-brand-500/20 text-brand-700 dark:text-brand-300 border border-brand-500/30 text-xs font-black transition-all"
+                className="btn-shimmer flex items-center space-x-1.5 px-3 py-1.5 rounded-2xl bg-brand-500/10 hover:bg-brand-500/20 text-brand-700 dark:text-brand-300 border border-brand-500/30 text-xs font-black transition-all shadow-sm"
                 title="Test Real-time AI Email Inflow"
               >
                 <PlusCircle className="w-3.5 h-3.5" />
@@ -269,7 +272,7 @@ export default function Navbar({
             {/* Ask AI Copilot Button */}
             <button
               onClick={onOpenCopilot}
-              className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-2xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-700 hover:to-indigo-700 text-white text-xs font-bold shadow-glow-brand transition-all"
+              className="btn-shimmer flex items-center space-x-1.5 px-3.5 py-1.5 rounded-2xl bg-gradient-to-r from-brand-600 via-indigo-600 to-brand-600 hover:from-brand-500 hover:to-indigo-500 text-white text-xs font-black shadow-glow-brand transition-all hover:scale-105"
               title="Open AI Inbox Assistant Chat"
             >
               <Sparkles className="w-3.5 h-3.5" />

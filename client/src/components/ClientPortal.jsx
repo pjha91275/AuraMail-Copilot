@@ -38,10 +38,18 @@ export default function ClientPortal({
 
   const handleMarkHandled = async (emailId) => {
     await onClientAction(emailId, { action: 'mark_handled' });
+    // Celebratory dual cannon confetti burst
     confetti({
-      particleCount: 50,
-      spread: 70,
-      origin: { y: 0.7 }
+      particleCount: 60,
+      angle: 60,
+      spread: 60,
+      origin: { x: 0.2, y: 0.7 }
+    });
+    confetti({
+      particleCount: 60,
+      angle: 120,
+      spread: 60,
+      origin: { x: 0.8, y: 0.7 }
     });
   };
 
@@ -298,7 +306,7 @@ export default function ClientPortal({
                               setDelegatingEmailId(email.id);
                               setDelegateNote('');
                             }}
-                            className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-surface-100 hover:bg-surface-200 dark:bg-surface-800 dark:hover:bg-surface-700 text-surface-700 dark:text-surface-200 text-xs font-semibold transition-all"
+                            className="btn-shimmer flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-surface-100 hover:bg-surface-200 dark:bg-surface-800 dark:hover:bg-surface-700 text-surface-700 dark:text-surface-200 text-xs font-bold transition-all shadow-sm"
                           >
                             <CornerDownLeft className="w-3.5 h-3.5 text-brand-500" />
                             <span>Delegate to Assistant</span>
@@ -306,7 +314,7 @@ export default function ClientPortal({
 
                           <button
                             onClick={() => handleMarkHandled(email.id)}
-                            className="flex items-center space-x-1.5 px-4 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm shadow-emerald-600/20 transition-all"
+                            className="btn-shimmer flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black shadow-glow-emerald hover:shadow-[0_0_20px_rgba(16,185,129,0.7)] transition-all hover:scale-105"
                           >
                             <Check className="w-3.5 h-3.5" />
                             <span>Mark Handled</span>
