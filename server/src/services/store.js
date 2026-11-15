@@ -34,6 +34,13 @@ const initStore = async () => {
         await Account.insertMany(seedAccounts);
         await Email.insertMany(seedEmails);
         console.log('✅ MongoDB successfully seeded.');
+      } else {
+        // Ensure existing records have latest avatars for Claire Montgomery & Prince Jha
+        await Email.updateMany(
+          { 'messages.sender': { $regex: 'claire', $options: 'i' } },
+          { $set: { 'messages.$[elem].avatar': '/claire-montgomery.jpg' } },
+          { arrayFilters: [{ 'elem.sender': { $regex: 'claire', $options: 'i' } }] }
+        ).catch(() => {});
       }
     } catch (err) {
       console.error('Error seeding MongoDB:', err.message);

@@ -172,7 +172,11 @@ export default function ClientPortal({
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex items-center space-x-3 min-w-0">
                       <img
-                        src={latestMsg.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80'}
+                        src={
+                          (latestMsg.sender?.toLowerCase().includes('claire') || latestMsg.senderEmail?.toLowerCase().includes('claire'))
+                            ? '/claire-montgomery.jpg'
+                            : (latestMsg.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80')
+                        }
                         alt={latestMsg.sender}
                         className="w-10 h-10 rounded-xl object-cover ring-1 ring-surface-200 dark:ring-surface-700 shrink-0"
                       />

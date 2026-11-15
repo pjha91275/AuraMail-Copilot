@@ -445,7 +445,11 @@ export default function EmailDetail({
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center space-x-3">
                     <img
-                      src={msg.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80'}
+                      src={
+                        (msg.sender?.toLowerCase().includes('claire') || msg.senderEmail?.toLowerCase().includes('claire'))
+                          ? '/claire-montgomery.jpg'
+                          : (msg.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80')
+                      }
                       alt={msg.sender}
                       className="w-8 h-8 rounded-full object-cover ring-2 ring-surface-200 dark:ring-white/20 shadow-sm"
                     />

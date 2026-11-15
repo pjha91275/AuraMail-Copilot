@@ -316,7 +316,7 @@ const emails = [
         id: 'msg-104-1',
         sender: 'Claire Montgomery',
         senderEmail: 'claire.m@techcrunch.com',
-        avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80',
+        avatar: '/claire-montgomery.jpg',
         recipient: 'Sarah Jenkins',
         recipientEmail: 'sarah.jenkins@techflow.io',
         timestamp: new Date(Date.now() - 6 * 3600 * 1000).toISOString(),

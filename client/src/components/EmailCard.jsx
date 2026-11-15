@@ -37,6 +37,12 @@ export default function EmailCard({
     ? email.messages[email.messages.length - 1]
     : { sender: 'Unknown', avatar: '' };
 
+  const senderName = latestMsg.sender || '';
+  const senderEmail = latestMsg.senderEmail || '';
+  const avatarSrc = (senderName.toLowerCase().includes('claire') || senderEmail.toLowerCase().includes('claire'))
+    ? '/claire-montgomery.jpg'
+    : (latestMsg.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80');
+
   return (
     <div
       onClick={() => onSelect(email)}
@@ -75,7 +81,7 @@ export default function EmailCard({
             )}
             
             <img
-              src={latestMsg.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80'}
+              src={avatarSrc}
               alt={latestMsg.sender}
               className="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-surface-300 dark:ring-white/20 shadow-sm"
             />

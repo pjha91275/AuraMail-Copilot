@@ -1,11 +1,27 @@
 const store = require('../services/store');
 const aiService = require('../services/aiService');
 
+const formatEmail = (email) => {
+  if (!email) return email;
+  const obj = email.toObject ? email.toObject() : { ...email };
+  if (obj.messages && Array.isArray(obj.messages)) {
+    obj.messages = obj.messages.map(m => {
+      const sender = (m.sender || '').toLowerCase();
+      const senderEmail = (m.senderEmail || '').toLowerCase();
+      if (sender.includes('claire') || senderEmail.includes('claire')) {
+        return { ...m, avatar: '/claire-montgomery.jpg' };
+      }
+      return m;
+    });
+  }
+  return obj;
+};
+
 // Get all emails with rich filtering
 const getEmails = async (req, res) => {
   try {
     const { clientId, category, search, urgency, unreadOnly, waitingOnly } = req.query;
-    const emails = await store.getEmails({
+    const rawEmails = await store.getEmails({
       clientId,
       category,
       search,
@@ -13,6 +29,7 @@ const getEmails = async (req, res) => {
       unreadOnly: unreadOnly === 'true',
       waitingOnly: waitingOnly === 'true'
     });
+    const emails = (rawEmails || []).map(formatEmail);
 
     // Compute live stats for dashboard badges
     const allEmails = await store.getEmails({ clientId: clientId || 'all' });
@@ -47,7 +64,7 @@ const getEmailById = async (req, res) => {
     if (!email) {
       return res.status(404).json({ success: false, message: 'Email thread not found' });
     }
-    res.json({ success: true, data: email });
+    res.json({ success: true, data: formatEmail(email) });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
