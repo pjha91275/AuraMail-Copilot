@@ -15,11 +15,11 @@ import {
 export default function AuthPage({ onLogin, darkMode, onToggleDarkMode }) {
   const [email, setEmail] = useState('alex.vance@techflow.io');
   const [isLoading, setIsLoading] = useState(false);
-  const [oauthLoadingProvider, setOauthLoadingProvider] = useState(null); // 'google' | 'microsoft' | null
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [selectedRole, setSelectedRole] = useState('assistant'); // 'assistant' | 'client'
 
-  const handleOAuthLogin = (provider) => {
-    setOauthLoadingProvider(provider);
+  const handleGoogleOAuthLogin = () => {
+    setIsGoogleLoading(true);
     setIsLoading(true);
     setTimeout(() => {
       onLogin({
@@ -28,8 +28,8 @@ export default function AuthPage({ onLogin, darkMode, onToggleDarkMode }) {
         viewMode: selectedRole === 'client' ? 'client' : 'assistant'
       });
       setIsLoading(false);
-      setOauthLoadingProvider(null);
-    }, 500);
+      setIsGoogleLoading(false);
+    }, 450);
   };
 
   const handleSsoSubmit = (e) => {
@@ -42,7 +42,7 @@ export default function AuthPage({ onLogin, darkMode, onToggleDarkMode }) {
         viewMode: selectedRole === 'client' ? 'client' : 'assistant'
       });
       setIsLoading(false);
-    }, 400);
+    }, 350);
   };
 
   const handleQuickDemo = (role) => {
@@ -78,40 +78,40 @@ export default function AuthPage({ onLogin, darkMode, onToggleDarkMode }) {
       <div className="ambient-orb ambient-orb-3 animate-float-slow pointer-events-none" />
       <div className="ambient-orb ambient-orb-4 animate-float-delayed pointer-events-none" />
 
-      {/* 4 Radiant Glowing Logo Images in Background Quadrants */}
-      {/* 1. Top-Right Logo (Cyan Neon Glow) */}
-      <div className="absolute top-[40px] right-[-20px] md:right-[2.5%] w-[260px] h-[260px] md:w-[360px] md:h-[360px] opacity-25 dark:opacity-40 pointer-events-none select-none animate-float-slow z-0">
+      {/* Harmonious 4-Logo Constellation Layout (Reduced glow & balanced depth) */}
+      {/* 1. Top-Right Upper Anchor (Cyan) */}
+      <div className="absolute top-[5%] right-[4%] md:right-[6%] w-[270px] h-[270px] md:w-[350px] md:h-[350px] opacity-20 dark:opacity-30 pointer-events-none select-none animate-float-slow rotate-6 z-0">
         <img
           src="/logo-emblem.svg"
-          alt="AuraMail Top-Right Emblem"
-          className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(6,182,212,0.85)]"
+          alt="AuraMail Constellation Emblem 1"
+          className="w-full h-full object-contain filter drop-shadow-[0_0_22px_rgba(6,182,212,0.55)]"
         />
       </div>
 
-      {/* 2. Top-Left Logo (Royal Indigo Glow) */}
-      <div className="absolute top-[100px] left-[-20px] md:left-[2%] w-[240px] h-[240px] md:w-[330px] md:h-[330px] opacity-20 dark:opacity-35 pointer-events-none select-none animate-float-delayed z-0">
+      {/* 2. Mid-Left Floating Anchor (Indigo) */}
+      <div className="absolute top-[34%] left-[-20px] md:left-[3%] w-[220px] h-[220px] md:w-[280px] md:h-[280px] opacity-18 dark:opacity-25 pointer-events-none select-none animate-float-delayed -rotate-6 z-0">
         <img
           src="/logo-emblem.svg"
-          alt="AuraMail Top-Left Emblem"
-          className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(99,102,241,0.85)]"
+          alt="AuraMail Constellation Emblem 2"
+          className="w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(99,102,241,0.5)]"
         />
       </div>
 
-      {/* 3. Bottom-Left Logo (Violet Purple Glow) */}
-      <div className="absolute bottom-[50px] left-[-20px] md:left-[2.5%] w-[250px] h-[250px] md:w-[350px] md:h-[350px] opacity-20 dark:opacity-35 pointer-events-none select-none animate-float-slow z-0">
+      {/* 3. Center-Right Ambient Depth (Purple) */}
+      <div className="absolute top-[56%] right-[8%] md:right-[12%] w-[190px] h-[190px] md:w-[240px] md:h-[240px] opacity-15 dark:opacity-22 pointer-events-none select-none animate-float-slow rotate-3 z-0">
         <img
           src="/logo-emblem.svg"
-          alt="AuraMail Bottom-Left Emblem"
-          className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(168,85,247,0.85)]"
+          alt="AuraMail Constellation Emblem 3"
+          className="w-full h-full object-contain filter drop-shadow-[0_0_18px_rgba(168,85,247,0.45)]"
         />
       </div>
 
-      {/* 4. Bottom-Right Logo (Electric Sky Blue Glow) */}
-      <div className="absolute bottom-[40px] right-[-20px] md:right-[2%] w-[260px] h-[260px] md:w-[360px] md:h-[360px] opacity-25 dark:opacity-40 pointer-events-none select-none animate-float-delayed z-0">
+      {/* 4. Bottom-Left Foundation Anchor (Sky Blue) */}
+      <div className="absolute bottom-[4%] left-[4%] md:left-[6%] w-[240px] h-[240px] md:w-[300px] md:h-[300px] opacity-18 dark:opacity-28 pointer-events-none select-none animate-float-delayed -rotate-3 z-0">
         <img
           src="/logo-emblem.svg"
-          alt="AuraMail Bottom-Right Emblem"
-          className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(56,189,248,0.85)]"
+          alt="AuraMail Constellation Emblem 4"
+          className="w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(56,189,248,0.5)]"
         />
       </div>
 
@@ -122,12 +122,12 @@ export default function AuthPage({ onLogin, darkMode, onToggleDarkMode }) {
             <div className="absolute -inset-1 bg-gradient-to-r from-brand-500 via-indigo-500 to-cyan-500 rounded-2xl blur-sm opacity-70 group-hover:opacity-100 transition duration-500" />
             <img
               src="/favicon.svg"
-              alt="AuraMail AI Logo"
+              alt="AuraMail Copilot Logo"
               className="relative w-10 h-10 object-contain rounded-2xl shadow-glow-brand ring-1 ring-white/20"
             />
           </div>
           <span className="font-black text-xl tracking-tight bg-gradient-to-r from-surface-900 via-brand-600 to-indigo-600 dark:from-white dark:via-brand-400 dark:to-cyan-400 bg-clip-text text-transparent">
-            AuraMail AI
+            AuraMail Copilot
           </span>
         </div>
 
@@ -159,7 +159,7 @@ export default function AuthPage({ onLogin, darkMode, onToggleDarkMode }) {
           </h1>
 
           <p className="text-sm sm:text-base text-surface-600 dark:text-surface-300 leading-relaxed max-w-xl font-normal">
-            AuraMail AI connects personal assistants and executives into one unified autonomous hub.
+            AuraMail Copilot connects personal assistants and executives into one unified autonomous hub.
             Automatically identify high-priority conversations, eliminate ambiguity with AI reply responsibility,
             and keep clients focused on decisions that matter.
           </p>
@@ -237,18 +237,16 @@ export default function AuthPage({ onLogin, darkMode, onToggleDarkMode }) {
               </button>
             </div>
 
-            {/* Modern Enterprise Google OAuth & Microsoft 365 Buttons */}
+            {/* Exclusive Google Workspace OAuth Button */}
             <div className="space-y-3">
-              
-              {/* 1. Official Google Workspace OAuth Button */}
               <button
                 type="button"
-                onClick={() => handleOAuthLogin('google')}
+                onClick={handleGoogleOAuthLogin}
                 disabled={isLoading}
-                className="w-full py-3 px-4 rounded-2xl bg-white hover:bg-surface-50 dark:bg-surface-800 dark:hover:bg-surface-700/80 border border-surface-200 dark:border-white/10 text-surface-800 dark:text-surface-100 text-xs font-bold shadow-sm transition-all flex items-center justify-center space-x-3 group disabled:opacity-50"
+                className="w-full py-3.5 px-4 rounded-2xl bg-white hover:bg-surface-50 dark:bg-surface-800 dark:hover:bg-surface-700/80 border-2 border-brand-500/30 dark:border-brand-400/30 text-surface-900 dark:text-white text-xs font-black shadow-md hover:shadow-glow-brand transition-all flex items-center justify-center space-x-3 group disabled:opacity-50"
               >
-                {/* Official Google G Logo */}
-                <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+                {/* Official Google Multi-Color G Logo */}
+                <svg className="w-4.5 h-4.5 shrink-0" viewBox="0 0 24 24">
                   <path
                     fill="#4285F4"
                     d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -267,30 +265,9 @@ export default function AuthPage({ onLogin, darkMode, onToggleDarkMode }) {
                   />
                 </svg>
                 <span>
-                  {oauthLoadingProvider === 'google'
+                  {isGoogleLoading
                     ? 'Verifying Google Workspace OAuth...'
                     : 'Continue with Google Workspace'}
-                </span>
-              </button>
-
-              {/* 2. Official Microsoft 365 OAuth Button */}
-              <button
-                type="button"
-                onClick={() => handleOAuthLogin('microsoft')}
-                disabled={isLoading}
-                className="w-full py-3 px-4 rounded-2xl bg-white hover:bg-surface-50 dark:bg-surface-800 dark:hover:bg-surface-700/80 border border-surface-200 dark:border-white/10 text-surface-800 dark:text-surface-100 text-xs font-bold shadow-sm transition-all flex items-center justify-center space-x-3 group disabled:opacity-50"
-              >
-                {/* Official Microsoft 4-Square Logo */}
-                <svg className="w-4 h-4 shrink-0" viewBox="0 0 21 21">
-                  <rect x="1" y="1" width="9" height="9" fill="#f25022" />
-                  <rect x="11" y="1" width="9" height="9" fill="#7fba00" />
-                  <rect x="1" y="11" width="9" height="9" fill="#00a4ef" />
-                  <rect x="11" y="11" width="9" height="9" fill="#ffb900" />
-                </svg>
-                <span>
-                  {oauthLoadingProvider === 'microsoft'
-                    ? 'Connecting Microsoft 365...'
-                    : 'Continue with Microsoft 365'}
                 </span>
               </button>
             </div>
@@ -307,7 +284,7 @@ export default function AuthPage({ onLogin, darkMode, onToggleDarkMode }) {
               </div>
             </div>
 
-            {/* Single Sign-On Email Input (No Password Needed) */}
+            {/* Single Sign-On Email Input (Passwordless) */}
             <form onSubmit={handleSsoSubmit} className="space-y-3">
               <div className="relative">
                 <Mail className="w-4 h-4 text-surface-400 absolute left-3.5 top-3 pointer-events-none" />
@@ -326,7 +303,7 @@ export default function AuthPage({ onLogin, darkMode, onToggleDarkMode }) {
                 disabled={isLoading}
                 className="btn-shimmer w-full py-2.5 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-black shadow-glow-brand transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
               >
-                <span>{isLoading ? 'Authorizing Session...' : 'Continue with Enterprise SSO'}</span>
+                <span>{isLoading && !isGoogleLoading ? 'Authorizing Session...' : 'Continue with Enterprise SSO'}</span>
                 {!isLoading && <ArrowRight className="w-4 h-4" />}
               </button>
             </form>
@@ -371,7 +348,7 @@ export default function AuthPage({ onLogin, darkMode, onToggleDarkMode }) {
             {/* Security Footer Note */}
             <div className="mt-4 text-center">
               <span className="text-[10px] text-surface-400 leading-tight block">
-                Zero passwords stored. Powered by Google Workspace & Microsoft 365 OAuth 2.0 PKCE.
+                Zero passwords stored. Powered by Google Workspace OAuth 2.0 PKCE.
               </span>
             </div>
 
@@ -383,7 +360,7 @@ export default function AuthPage({ onLogin, darkMode, onToggleDarkMode }) {
       {/* Footer Info */}
       <footer className="w-full max-w-7xl mx-auto px-6 sm:px-10 py-5 flex flex-col sm:flex-row items-center justify-between text-xs text-surface-400 border-t border-surface-200/50 dark:border-white/[0.05] relative z-20 gap-2">
         <div className="flex items-center space-x-2">
-          <span>AuraMail AI — Executive Email Assistant</span>
+          <span>AuraMail Copilot — Executive Email Assistant</span>
           <span>•</span>
           <a
             href="https://auramail-copilot.vercel.app"

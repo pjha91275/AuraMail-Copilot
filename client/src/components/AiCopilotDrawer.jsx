@@ -24,7 +24,7 @@ export default function AiCopilotDrawer({
   const [messages, setMessages] = useState([
     {
       sender: 'ai',
-      text: `Hello! I'm your AuraMail AI Assistant Co-pilot. I analyze your clients' communications, track reply obligations, extract deadlines, and draft executive responses.\n\nHow can I help you manage the inbox today?`,
+      text: `Hello! I'm your AuraMail Copilot. I analyze your clients' communications, track reply obligations, extract deadlines, and draft executive responses.\n\nHow can I help you manage the inbox today?`,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       highlightedEmails: [],
       suggestedActions: [

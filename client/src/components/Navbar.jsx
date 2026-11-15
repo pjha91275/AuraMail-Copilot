@@ -71,10 +71,10 @@ export default function Navbar({
             <div>
               <div className="flex items-center space-x-2">
                 <span className="font-black text-lg tracking-tight bg-gradient-to-r from-surface-900 via-brand-600 to-indigo-600 dark:from-white dark:via-brand-400 dark:to-cyan-400 bg-clip-text text-transparent">
-                  AuraMail AI
+                  AuraMail Copilot
                 </span>
                 <span className="hidden sm:inline-flex text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-brand-50 text-brand-700 dark:bg-brand-950 dark:text-brand-300 border border-brand-200 dark:border-brand-800 shadow-sm">
-                  Assistant Co-Pilot
+                  Executive Suite
                 </span>
               </div>
               <p className="text-[11px] text-surface-500 dark:text-surface-400 hidden sm:block font-medium">
@@ -383,9 +383,9 @@ export default function Navbar({
             {/* Drawer Header */}
             <div className="flex items-center justify-between pb-4 border-b border-surface-100 dark:border-surface-800">
               <div className="flex items-center space-x-3">
-                <img src="/favicon.svg" alt="AuraMail AI" className="w-9 h-9 rounded-2xl" />
+                <img src="/favicon.svg" alt="AuraMail Copilot" className="w-9 h-9 rounded-2xl" />
                 <div>
-                  <h3 className="text-sm font-black text-surface-900 dark:text-white">AuraMail AI</h3>
+                  <h3 className="text-sm font-black text-surface-900 dark:text-white">AuraMail Copilot</h3>
                   <p className="text-[11px] text-surface-400">Mobile Control Center</p>
                 </div>
               </div>

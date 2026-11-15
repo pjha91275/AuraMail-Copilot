@@ -1,6 +1,11 @@
 <div align="center">
 
-  <img src="client/public/logo.svg" alt="AuraMail AI Logo" width="420" />
+  <img src="client/public/logo.svg" alt="AuraMail Copilot Logo" width="440" />
+
+  <h1 align="center">
+    <span style="color: #38bdf8; font-weight: 900;">AuraMail</span>
+    <span style="color: #818cf8; font-weight: 900;"> Copilot</span>
+  </h1>
 
   <p align="center">
     <strong>An Intelligent Email Management & Autonomous Triage Dashboard for Personal Assistants & Executives</strong>
@@ -23,6 +28,7 @@
     <img src="https://img.shields.io/badge/Author-Prince%20Jha-purple?style=flat-square" alt="Author" />
     <img src="https://img.shields.io/badge/Status-10%2F10%20Production%20Ready-emerald?style=flat-square" alt="Status" />
     <img src="https://img.shields.io/badge/IDE-Google%20Antigravity-4285F4?style=flat-square" alt="Google Antigravity" />
+    <img src="https://img.shields.io/badge/Auth-Google%20OAuth%202.0-EA4335?style=flat-square&logo=google" alt="Google OAuth" />
     <img src="https://img.shields.io/badge/License-MIT-gray?style=flat-square" alt="License" />
   </p>
 
@@ -44,7 +50,7 @@
       </tr>
       <tr>
         <td colspan="2" align="center">
-          <em>Alternative Vercel Domain Options: <code>auramail-copilot.vercel.app</code> | <code>auramail-hq.vercel.app</code> | <code>auramail-assistant.vercel.app</code> | <code>auramail-app.vercel.app</code></em>
+          <em>GitHub Repository: <a href="https://github.com/pjha91275/AuraMail-Copilot">https://github.com/pjha91275/AuraMail-Copilot</a></em>
         </td>
       </tr>
     </table>
@@ -55,7 +61,7 @@
 ---
 
 ### 📌 Project Context & Assignment Submission
-> **AuraMail AI** was engineered, designed, and built by **Prince Jha** specifically as the candidate prototype submission for the **AI Full-Stack Engineer Intern** evaluation at **Humanity Founders** (*Task: Personal Assistant – AI-Powered Email Management Dashboard*).
+> **AuraMail Copilot** was engineered, designed, and built by **Prince Jha** specifically as the candidate prototype submission for the **AI Full-Stack Engineer Intern** evaluation at **Humanity Founders** (*Task: Personal Assistant – AI-Powered Email Management Dashboard*).
 > 
 > The objective of this assignment is to solve one of the most persistent bottlenecks in executive assistance: **automatically determining email reply responsibility**, providing assistants with full triage authority, and offering clients an ultra-minimalist, distraction-free VIP experience.
 
@@ -65,7 +71,7 @@
 This entire platform was developed and architected using **Google Antigravity IDE**, Google DeepMind's next-generation autonomous engineering environment. Google Antigravity enabled:
 - High-velocity full-stack MERN scaffolding with Vite and Tailwind CSS.
 - Precision heuristic and Gemini LLM prompt orchestration for autonomous email responsibility classification.
-- Dynamic atmospheric background visual design with multi-quadrant vector shining watermarks and color-smudge nebula rendering.
+- Dynamic atmospheric background visual design with 4-quadrant constellation vector watermarks and color-smudge nebula rendering.
 - Continuous zero-downtime dual-mode fallback architecture (MERN + in-memory store + offline heuristic engine).
 
 ---
@@ -76,8 +82,8 @@ Personal assistants often manage a heavy inflow of correspondence across multipl
 
 In traditional email clients, a recurring friction occurs when a client reads an email on mobile but provides no signal on whether they intend to handle it personally or expect their assistant to draft the response. 
 
-**AuraMail AI** eliminates this friction through a dual-experience architecture:
-1. **Google OAuth 2.0 Authentication Hub**: A dedicated split-screen portal featuring official **Google Workspace** & **Microsoft 365** OAuth sign-in, enterprise passwordless SSO, and 1-click quick demo access profiles (`Assistant: Alex Vance` and `Client / CEO: Sarah Jenkins`) alongside a workspace sign-out flow.
+**AuraMail Copilot** eliminates this friction through a dual-experience architecture:
+1. **Google OAuth 2.0 Authentication Hub**: A dedicated split-screen portal featuring official **Google Workspace OAuth** sign-in, enterprise passwordless SSO, and 1-click quick demo access profiles (`Assistant: Alex Vance` and `Client / CEO: Sarah Jenkins`) alongside a workspace sign-out flow.
 2. **Assistant Command Center**: A comprehensive workspace featuring multi-client switching, automatic AI classification, confidence scores, reasoning explanations, 1-click classification manual overrides, extracted action items, calendar meeting detection, and an AI Reply Studio.
 3. **Minimalist Client Portal ("Executive Glance")**: A dedicated VIP interface showing **only** emails requiring the client's personal attention, with 1-click "Approve / Handled" (with confetti feedback) and "Delegate to Assistant" with custom note forwarding.
 
@@ -85,10 +91,9 @@ In traditional email clients, a recurring friction occurs when a client reads an
 
 ## ✨ Feature Breakdown
 
-### 1. 🔐 Google Workspace & Microsoft 365 OAuth 2.0 (Zero Password Architecture)
-Following standard modern production email clients (like Superhuman and Notion), AuraMail AI operates with **zero password handling**:
+### 1. 🔐 Google Workspace OAuth 2.0 (Zero Password Architecture)
+Following modern production email standards (like Superhuman and Notion), AuraMail Copilot operates with **exclusive Google Workspace OAuth**:
 - **Continue with Google Workspace**: Instant authentication via Google Identity Services & OAuth 2.0 PKCE.
-- **Continue with Microsoft 365**: Enterprise single-sign-on integration for corporate Office 365 accounts.
 - **Passwordless Enterprise SSO**: No raw email passwords ever handled, transmitted, or stored in MongoDB.
 - **Instant 1-Click Demo Profiles**:
   - ⚡ **Assistant Profile (Alex Vance)**: Launches directly into the full assistant command center with complete triage controls.
@@ -96,8 +101,8 @@ Following standard modern production email clients (like Superhuman and Notion),
 - **Workspace Sign-Out Flow**: Integrated in both desktop profile dropdown and mobile navigation drawer, returning the user instantly to the sign-in screen.
 - **Session Persistence**: Stored via `localStorage` so refreshing preserves active workspace credentials.
 
-### 2. 🌌 Self-Crafted Cyber-Atmospheric Background & 4 Glowing Floating Logos
-- **4 Radiant Glowing & Floating Logo Images**: Real floating logo emblems positioned in the DOM across all 4 key quadrants of the viewport (Top-Left, Top-Right, Bottom-Left, Bottom-Right) with multi-layered neon glow drop-shadows (`cyan`, `indigo`, `purple`, `sky blue`) and smooth CSS float animations (`animate-float-slow` & `animate-float-delayed`).
+### 2. 🌌 Self-Crafted Cyber-Atmospheric Background & 4-Logo Constellation Pattern
+- **4 Floating Logo Emblems in an Elegant Constellation**: Tasteful, balanced distribution across the viewport (Top-Right Upper Anchor, Mid-Left Floating Anchor, Center-Right Depth, Bottom-Left Foundation Anchor) with softened neon glow drop-shadows and subtle rotational angles for organic depth.
 - **5 Radiant Color Smudges**: Positioned in the hollow areas between logos (Upper-Center Cyan Nebula, Mid-Center Violet Aurora, Left-Center Golden Amber, Right-Center Emerald Teal, Bottom-Center Deep Indigo).
 - **Dual Dynamic Themes**: Seamless Dark Mode (deep obsidian `#020408`) and Bright Mode (crisp pearlescent `#f8fafc`).
 - **Floating Ambient Plasma Orbs**: Smooth floating animation with blurred neon lighting.
@@ -156,9 +161,61 @@ Top navbar button allowing the user or reviewer to click **"Simulate Inflow"** t
 
 ---
 
+## 🔑 How to Setup Google OAuth 2.0 (Step-by-Step Guide)
+
+To connect AuraMail Copilot to live Google Workspace / Gmail OAuth accounts:
+
+### Step 1: Create a Google Cloud Project
+1. Navigate to the **[Google Cloud Console](https://console.cloud.google.com/)**.
+2. Click the project dropdown at the top and select **New Project**.
+3. Name your project **`AuraMail-Copilot`** and click **Create**.
+
+### Step 2: Configure the OAuth Consent Screen
+1. In the left navigation, go to **APIs & Services** > **OAuth consent screen**.
+2. Select **External** (or **Internal** if using a Google Workspace organization) and click **Create**.
+3. Enter App information:
+   - **App name**: `AuraMail Copilot`
+   - **User support email**: Your email address
+   - **Developer contact information**: Your email address
+4. Click **Save and Continue**.
+5. Under **Scopes**, click **Add or Remove Scopes** and select:
+   - `.../auth/userinfo.email`
+   - `.../auth/userinfo.profile`
+   - `openid`
+   - *(Optional for live email read)*: `https://www.googleapis.com/auth/gmail.readonly`
+6. Under **Test users**, add your Google email address so you can test during development.
+
+### Step 3: Create OAuth 2.0 Client ID Credentials
+1. In the left navigation, go to **APIs & Services** > **Credentials**.
+2. Click **Create Credentials** > **OAuth client ID**.
+3. Set **Application type** to **Web application**.
+4. Name: `AuraMail Copilot Web Client`.
+5. Under **Authorized JavaScript origins**, add:
+   - `http://localhost:5000`
+   - `http://localhost:3000`
+   - `https://auramail-copilot.vercel.app`
+6. Under **Authorized redirect URIs**, add:
+   - `http://localhost:5000/api/auth/google/callback`
+   - `https://auramail-copilot.vercel.app/api/auth/google/callback`
+7. Click **Create**. A modal will display your **Client ID** and **Client Secret**.
+
+### Step 4: Add Credentials to `.env`
+Paste the generated credentials into your root `.env` (or `server/.env`):
+```env
+# Google OAuth 2.0 Credentials
+GOOGLE_CLIENT_ID=your_google_client_id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+GOOGLE_CALLBACK_URL=https://auramail-copilot.vercel.app/api/auth/google/callback
+```
+
+*Note: In the live evaluation prototype, 1-Click Instant Demo Profiles are also provided so evaluators can test the complete system immediately without configuring cloud credentials.*
+
+---
+
 ## 🛠️ Technology Stack & AI Architecture
 
 - **Development IDE**: **Google Antigravity IDE**
+- **Authentication**: **Google Workspace OAuth 2.0 (PKCE)**
 - **AI Engine & LLM**:
   - **Google Gemini LLM** (`gemini-3.5-flash-lite`, `gemini-3.5-flash`, `gemini-flash-latest` via Google AI Studio API)
   - Autonomous responsibility classification (`Assistant to Reply`, `Client to Reply`, `No Reply Needed`)
@@ -180,7 +237,7 @@ Top navbar button allowing the user or reviewer to click **"Simulate Inflow"** t
 
 ## ⚙️ Environment Variables & Live Integrations
 
-AuraMail AI is engineered with **Dual-Mode Fault-Tolerant Architecture**: it connects to live production services (MongoDB Atlas & Google Gemini API) when keys are provided, while gracefully maintaining a zero-latency fallback mode if credentials or networks are restricted.
+AuraMail Copilot is engineered with **Dual-Mode Fault-Tolerant Architecture**: it connects to live production services (MongoDB Atlas & Google Gemini API) when keys are provided, while gracefully maintaining a zero-latency fallback mode if credentials or networks are restricted.
 
 Create a `.env` file in the root directory (or `server/.env`):
 
@@ -194,35 +251,12 @@ NODE_ENV=development
 MONGODB_URI=your_mongodb_connection_string
 
 # 2. Google Gemini LLM API Key (from Google AI Studio: https://aistudio.google.com/app/apikey)
-# Enables live autonomous email classification, executive summaries, AI draft replies, and Inbox Copilot
 AI_API_KEY=your_gemini_api_key
+
+# 3. Google OAuth 2.0 (Optional for custom Google Workspace integration)
+GOOGLE_CLIENT_ID=your_google_client_id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your_google_client_secret
 ```
-
-### 💡 Why Both Features Run Reliably:
-1. **Google Gemini LLM Integration**:
-   - When `AI_API_KEY` (or `GEMINI_API_KEY`) is provided, AuraMail AI directly invokes Google Gemini's latest flash models (`gemini-3.5-flash-lite`, `gemini-3.5-flash`, `gemini-flash-latest`) via REST endpoints with structured JSON schemas.
-   - If the API key is not present, hits temporary rate-limits (429/503), or network latency occurs, AuraMail seamlessly falls back to its built-in heuristic NLP engine, ensuring the assistant experience is never interrupted.
-2. **MongoDB Atlas Database**:
-   - When `MONGODB_URI` is provided, AuraMail connects to your live MongoDB Atlas cluster and seeds the initial email threads, client profiles, and connected accounts.
-   - **Important Atlas Tip**: In MongoDB Atlas, ensure your current IP address (or `0.0.0.0/0` - Allow Access From Anywhere) is added under **Security > Network Access**. If Atlas rejects the connection due to an unwhitelisted IP, AuraMail automatically catches the exception and falls back to its in-memory store so the app continues running smoothly.
-3. **Smart Path Resolution**:
-   - The backend automatically resolves `.env` from both the project root directory and `server/.env`, so running either `npm start` from root or `cd server && npm start` will effortlessly load your configuration.
-
----
-
-## 🌐 Recommended Vercel Deployment Domains
-
-If `auramail-ai.vercel.app` is already taken, you can use any of the following highly recommended professional domain names on Vercel:
-
-| Recommended Domain | Vibe / Purpose |
-| :--- | :--- |
-| **`auramail-copilot.vercel.app`** | Exact match for the Executive Email Copilot theme |
-| **`auramail-hq.vercel.app`** | Executive headquarters feel |
-| **`auramail-assistant.vercel.app`** | Highlights the Personal Assistant focus |
-| **`auramail-app.vercel.app`** | Clean, direct SaaS application naming |
-| **`prince-auramail.vercel.app`** | Personal candidate evaluation branding |
-
-*To set this in Vercel: Go to your project dashboard on Vercel -> **Settings** -> **Domains** -> Type in your preferred domain and click **Add**.*
 
 ---
 
@@ -269,7 +303,7 @@ Open your browser to: **`http://localhost:5000`**
 
 **Prince Jha**
 - **GitHub**: [@pjha91275](https://github.com/pjha91275)
-- **Project**: **AuraMail AI** — Personal Assistant Email Management Dashboard
+- **Project**: **AuraMail Copilot** — Personal Assistant Email Management Dashboard
 - **Submission for**: **Humanity Founders** AI Full-Stack Engineer Internship Selection
 - **Built with**: **Google Antigravity IDE**
 - **License**: MIT

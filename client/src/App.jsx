@@ -115,7 +115,7 @@ export default function App() {
     localStorage.setItem('auramail_user_email', email);
     if (initialViewMode) setViewMode(initialViewMode);
     pushToast({
-      title: 'Welcome to AuraMail AI',
+      title: 'Welcome to AuraMail Copilot',
       message: `Signed in as ${role === 'client' ? 'Sarah Jenkins (Client / CEO)' : 'Alex Vance (Executive Assistant)'}`,
       type: 'success'
     });
@@ -492,40 +492,40 @@ export default function App() {
         <div className="ambient-orb ambient-orb-3 animate-float-slow" />
         <div className="ambient-orb ambient-orb-4 animate-float-delayed" />
 
-        {/* 4 Radiant Glowing & Floating Logo Images in the 4 Viewport Quadrants */}
-        {/* 1. Top-Right Logo (Cyan Neon Glow) */}
-        <div className="absolute top-[40px] right-[-20px] md:right-[2.5%] w-[280px] h-[280px] md:w-[380px] md:h-[380px] opacity-30 dark:opacity-45 pointer-events-none select-none animate-float-slow z-0">
+        {/* Harmonious 4-Logo Constellation Pattern (Reduced glare & balanced depth) */}
+        {/* 1. Top-Right Upper Anchor (Cyan) */}
+        <div className="absolute top-[5%] right-[4%] md:right-[6%] w-[270px] h-[270px] md:w-[350px] md:h-[350px] opacity-20 dark:opacity-30 pointer-events-none select-none animate-float-slow rotate-6 z-0">
           <img
             src="/logo-emblem.svg"
-            alt="AuraMail Top-Right Emblem"
-            className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(6,182,212,0.9)]"
+            alt="AuraMail Constellation Emblem 1"
+            className="w-full h-full object-contain filter drop-shadow-[0_0_22px_rgba(6,182,212,0.55)]"
           />
         </div>
 
-        {/* 2. Top-Left Logo (Royal Indigo Glow) */}
-        <div className="absolute top-[100px] left-[-20px] md:left-[2%] w-[250px] h-[250px] md:w-[340px] md:h-[340px] opacity-25 dark:opacity-40 pointer-events-none select-none animate-float-delayed z-0">
+        {/* 2. Mid-Left Floating Anchor (Indigo) */}
+        <div className="absolute top-[34%] left-[-20px] md:left-[3%] w-[220px] h-[220px] md:w-[280px] md:h-[280px] opacity-18 dark:opacity-25 pointer-events-none select-none animate-float-delayed -rotate-6 z-0">
           <img
             src="/logo-emblem.svg"
-            alt="AuraMail Top-Left Emblem"
-            className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(99,102,241,0.9)]"
+            alt="AuraMail Constellation Emblem 2"
+            className="w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(99,102,241,0.5)]"
           />
         </div>
 
-        {/* 3. Bottom-Left Logo (Violet Purple Glow) */}
-        <div className="absolute bottom-[50px] left-[-20px] md:left-[2.5%] w-[260px] h-[260px] md:w-[360px] md:h-[360px] opacity-25 dark:opacity-40 pointer-events-none select-none animate-float-slow z-0">
+        {/* 3. Center-Right Ambient Depth (Purple) */}
+        <div className="absolute top-[56%] right-[8%] md:right-[12%] w-[190px] h-[190px] md:w-[240px] md:h-[240px] opacity-15 dark:opacity-22 pointer-events-none select-none animate-float-slow rotate-3 z-0">
           <img
             src="/logo-emblem.svg"
-            alt="AuraMail Bottom-Left Emblem"
-            className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(168,85,247,0.9)]"
+            alt="AuraMail Constellation Emblem 3"
+            className="w-full h-full object-contain filter drop-shadow-[0_0_18px_rgba(168,85,247,0.45)]"
           />
         </div>
 
-        {/* 4. Bottom-Right Logo (Electric Sky Blue Glow) */}
-        <div className="absolute bottom-[40px] right-[-20px] md:right-[2%] w-[270px] h-[270px] md:w-[370px] md:h-[370px] opacity-30 dark:opacity-45 pointer-events-none select-none animate-float-delayed z-0">
+        {/* 4. Bottom-Left Foundation Anchor (Sky Blue) */}
+        <div className="absolute bottom-[4%] left-[4%] md:left-[6%] w-[240px] h-[240px] md:w-[300px] md:h-[300px] opacity-18 dark:opacity-28 pointer-events-none select-none animate-float-delayed -rotate-3 z-0">
           <img
             src="/logo-emblem.svg"
-            alt="AuraMail Bottom-Right Emblem"
-            className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(56,189,248,0.9)]"
+            alt="AuraMail Constellation Emblem 4"
+            className="w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(56,189,248,0.5)]"
           />
         </div>
       </div>

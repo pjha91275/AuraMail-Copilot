@@ -35,7 +35,7 @@ app.use('/api/accounts', require('./routes/accountRoutes'));
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'healthy',
-    product: 'AuraMail AI - Personal Assistant Email Management Platform',
+    product: 'AuraMail Copilot - Personal Assistant Email Management Platform',
     version: '1.0.0',
     timestamp: new Date().toISOString()
   });

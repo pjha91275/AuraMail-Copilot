@@ -119,7 +119,7 @@ export default function UserProfileMenu({
       </div>
 
       <div className="pt-2 px-3 mt-1 border-t border-surface-100 dark:border-surface-700 flex items-center justify-between text-[11px] text-surface-400">
-        <span>AuraMail AI v1.0.0</span>
+        <span>AuraMail Copilot v1.0.0</span>
         <span className="flex items-center space-x-1 text-emerald-500 font-medium">
           <ShieldCheck className="w-3 h-3" />
           <span>Verified MERN</span>

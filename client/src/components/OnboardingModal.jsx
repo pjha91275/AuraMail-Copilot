@@ -74,7 +74,7 @@ export default function OnboardingModal({
             </div>
             <div>
               <h2 className="text-sm font-bold text-surface-900 dark:text-surface-100">
-                Welcome to AuraMail AI
+                Welcome to AuraMail Copilot
               </h2>
               <p className="text-[11px] text-surface-400">
                 Step {step} of 3 • Intelligent Executive Assistant Setup
