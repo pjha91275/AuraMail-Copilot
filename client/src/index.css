@@ -17,17 +17,26 @@
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
-  background-image: url('/bg-atmosphere.svg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  transition: background-image 0.5s ease-in-out;
+  transition: background-image 0.4s ease-in-out, background-color 0.4s ease-in-out;
 }
 
+/* Explicit Dark Mode Background Rule */
+.dark .ambient-bg,
+html.dark .ambient-bg,
+body.dark .ambient-bg {
+  background-image: url('/bg-atmosphere.svg') !important;
+  background-color: #020408 !important;
+}
+
+/* Explicit Light Mode Background Rule */
 html:not(.dark) .ambient-bg,
 body:not(.dark) .ambient-bg {
-  background-image: url('/bg-atmosphere-light.svg');
+  background-image: url('/bg-atmosphere-light.svg') !important;
+  background-color: #f8fafc !important;
 }
 
 .ambient-orb {
@@ -38,41 +47,41 @@ body:not(.dark) .ambient-bg {
   pointer-events: none;
 }
 
-/* Dark Mode Dynamic Glowing Plasma Orbs */
+/* Dark Mode Dynamic Glowing Plasma Orbs (Subtle deep glow, zero grey cast) */
 .dark .ambient-orb-1 {
-  width: 650px;
-  height: 650px;
+  width: 550px;
+  height: 550px;
   left: -8%;
   top: -10%;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.45) 0%, rgba(59, 130, 246, 0.25) 45%, transparent 70%);
-  opacity: 0.85;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.22) 0%, rgba(59, 130, 246, 0.1) 45%, transparent 70%);
+  opacity: 0.6;
 }
 
 .dark .ambient-orb-2 {
-  width: 700px;
-  height: 700px;
+  width: 600px;
+  height: 600px;
   right: -8%;
   top: 15%;
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.38) 0%, rgba(99, 102, 241, 0.2) 50%, transparent 70%);
-  opacity: 0.8;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.18) 0%, rgba(99, 102, 241, 0.08) 50%, transparent 70%);
+  opacity: 0.55;
 }
 
 .dark .ambient-orb-3 {
-  width: 600px;
-  height: 600px;
+  width: 500px;
+  height: 500px;
   left: 30%;
   bottom: -12%;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.32) 0%, rgba(236, 72, 153, 0.15) 50%, transparent 70%);
-  opacity: 0.75;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(236, 72, 153, 0.06) 50%, transparent 70%);
+  opacity: 0.5;
 }
 
 .dark .ambient-orb-4 {
-  width: 500px;
-  height: 500px;
+  width: 450px;
+  height: 450px;
   right: 25%;
   top: 40%;
-  background: radial-gradient(circle, rgba(14, 165, 233, 0.25) 0%, rgba(99, 102, 241, 0.1) 50%, transparent 70%);
-  opacity: 0.6;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, rgba(99, 102, 241, 0.05) 50%, transparent 70%);
+  opacity: 0.45;
 }
 
 /* Light Mode Soft Pastel Glows */

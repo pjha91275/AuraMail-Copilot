@@ -102,13 +102,15 @@ export default function App() {
     setToasts(prev => prev.filter(t => t.id !== id));
   };
 
-  // Sync dark mode class on <html>
+  // Sync dark mode class on <html> and <body>
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
+      document.body.classList.add('dark');
       localStorage.setItem('auramail_theme', 'dark');
     } else {
       document.documentElement.classList.remove('dark');
+      document.body.classList.remove('dark');
       localStorage.setItem('auramail_theme', 'light');
     }
   }, [darkMode]);
@@ -435,7 +437,13 @@ export default function App() {
     <div className="min-h-screen bg-surface-50 dark:bg-[#03060f] text-surface-900 dark:text-surface-100 flex flex-col font-sans transition-colors duration-300 relative overflow-x-hidden">
       
       {/* Ambient Self-Crafted Dynamic Background with Floating Light Orbs */}
-      <div className="ambient-bg">
+      <div
+        className="ambient-bg"
+        style={{
+          backgroundImage: darkMode ? "url('/bg-atmosphere.svg')" : "url('/bg-atmosphere-light.svg')",
+          backgroundColor: darkMode ? '#020408' : '#f8fafc'
+        }}
+      >
         <div className="ambient-orb ambient-orb-1 animate-float-slow" />
         <div className="ambient-orb ambient-orb-2 animate-float-delayed" />
         <div className="ambient-orb ambient-orb-3 animate-float-slow" />
