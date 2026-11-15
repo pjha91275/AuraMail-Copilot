@@ -64,9 +64,9 @@ const RADIANT_SMUDGES = [
       filter: 'blur(85px)'
     }
   },
-  // 3. Left-Center Golden Amber
+  // 3. Left-Center Orchid Violet
   {
-    name: 'Left-Center Golden Amber',
+    name: 'Left-Center Orchid Violet',
     style: {
       top: '50%',
       left: '-8%',
@@ -75,7 +75,7 @@ const RADIANT_SMUDGES = [
       height: '540px',
       maxWidth: '45vw',
       maxHeight: '55vh',
-      background: 'radial-gradient(circle at 35% 50%, rgba(245, 158, 11, 0.36) 0%, rgba(251, 146, 60, 0.20) 45%, rgba(217, 119, 6, 0.05) 68%, transparent 80%)',
+      background: 'radial-gradient(circle at 35% 50%, rgba(216, 70, 239, 0.36) 0%, rgba(168, 85, 247, 0.22) 45%, rgba(126, 34, 206, 0.06) 68%, transparent 80%)',
       filter: 'blur(80px)'
     }
   },

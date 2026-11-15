@@ -71,11 +71,11 @@
       <stop offset="100%" stop-color="#e2eaf4" stop-opacity="0"/>
     </radialGradient>
 
-    <!-- 3. Left-Center Golden Amber -->
+    <!-- 3. Left-Center Orchid Violet -->
     <radialGradient id="lightSmudgeLeftCenter" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.30"/>
-      <stop offset="45%" stop-color="#fbbf24" stop-opacity="0.16"/>
-      <stop offset="75%" stop-color="#fed7aa" stop-opacity="0.07"/>
+      <stop offset="0%" stop-color="#d946ef" stop-opacity="0.30"/>
+      <stop offset="45%" stop-color="#e879f9" stop-opacity="0.16"/>
+      <stop offset="75%" stop-color="#f5d0fe" stop-opacity="0.07"/>
       <stop offset="100%" stop-color="#e2eaf4" stop-opacity="0"/>
     </radialGradient>
 

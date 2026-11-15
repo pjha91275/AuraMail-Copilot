@@ -110,7 +110,7 @@ Following modern production email standards (like Superhuman and Notion), AuraMa
 - **5 Radiant Color Smudges**: Positioned in the hollow negative space between and around the background logos:
   1. **Upper-Center Cyan Nebula**: Elliptical atmospheric aura (`rgba(6, 182, 212, 0.40)` to `rgba(56, 189, 248, 0.22)`) with `blur(75px)`.
   2. **Mid-Center Violet Aurora**: Central radiant glow (`rgba(168, 85, 247, 0.38)` to `rgba(139, 92, 246, 0.20)`) with `blur(85px)`.
-  3. **Left-Center Golden Amber**: Warm sunset glow (`rgba(245, 158, 11, 0.36)` to `rgba(251, 146, 60, 0.20)`) with `blur(80px)`.
+  3. **Left-Center Orchid Violet**: Luminous electric orchid & fuchsia violet glow (`rgba(216, 70, 239, 0.36)` to `rgba(168, 85, 247, 0.22)`) with `blur(80px)`.
   4. **Right-Center Emerald Teal**: Fresh cyber luminescence (`rgba(16, 185, 129, 0.35)` to `rgba(20, 184, 166, 0.20)`) with `blur(80px)`.
   5. **Bottom-Center Deep Indigo**: Foundation electric glow (`rgba(99, 102, 241, 0.42)` to `rgba(79, 70, 229, 0.24)`) with `blur(85px)`.
 - **Dual Dynamic Themes**:
