@@ -76,6 +76,10 @@
     <!-- Bottom Flap Wings -->
     <path d="M18 100 L50 68" fill="none" stroke="url(#emblemRibbon)" stroke-width="6.5" stroke-linecap="round" stroke-opacity="0.95"/>
     <path d="M110 100 L78 68" fill="none" stroke="url(#emblemRibbon)" stroke-width="6.5" stroke-linecap="round" stroke-opacity="0.95"/>
+
+    <!-- Central Neural AI Node (Clean & Authentic to Official Logo) -->
+    <circle cx="64" cy="74" r="6" fill="#38bdf8"/>
+    <circle cx="64" cy="74" r="2.5" fill="#ffffff"/>
   </g>
 
   <!-- ======================================================== -->
@@ -95,51 +99,18 @@
         stroke-opacity="0.9"/>
 
   <!-- ======================================================== -->
-  <!-- 3. CENTRAL QUANTUM NEURAL NODE (SPARKLING CORE)          -->
+  <!-- 3. OFFICIAL AI SPARK SHAPE DESIGN (ONLY ON TOP RIGHT)    -->
   <!-- ======================================================== -->
-  <g transform="translate(64, 74)">
-    <circle cx="0" cy="0" r="9" fill="#00f0ff" opacity="0.4"/>
-    <circle cx="0" cy="0" r="5.5" fill="#38bdf8"/>
-    <circle cx="0" cy="0" r="3" fill="#ffffff"/>
-    <!-- Micro Quantum Cross Rays -->
-    <line x1="0" y1="-8" x2="0" y2="8" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
-    <line x1="-8" y1="0" x2="8" y2="0" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
-  </g>
-
-  <!-- ======================================================== -->
-  <!-- 4. BRILLIANT PRIMARY SPARKLE STAR (TOP-RIGHT VERTEX)     -->
-  <!-- ======================================================== -->
-  <g transform="translate(86, 4)" filter="url(#intenseSparkle)">
-    <!-- Multi-Directional Lens Flare Rays -->
-    <line x1="16" y1="-12" x2="16" y2="42" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="-12" y1="15" x2="44" y2="15" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+  <g transform="translate(86, 6)" filter="url(#intenseSparkle)">
+    <!-- Lens Flare Spark Rays -->
+    <line x1="16" y1="-10" x2="16" y2="40" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="-10" y1="15" x2="42" y2="15" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
     <line x1="-2" y1="-3" x2="34" y2="33" stroke="#fef08a" stroke-width="1.6" stroke-linecap="round" opacity="0.85"/>
     <line x1="34" y1="-3" x2="-2" y2="33" stroke="#fef08a" stroke-width="1.6" stroke-linecap="round" opacity="0.85"/>
 
-    <!-- Sharp Diamond Star Geometry -->
+    <!-- Sharp Diamond Star Geometry (Exact Official AI Logo Spark) -->
     <path d="M16 0 L20.5 11 L32 15 L20.5 19 L16 30 L11.5 19 L0 15 L11.5 11 Z" fill="url(#emblemStar)"/>
     <circle cx="16" cy="15" r="4.5" fill="#ffffff"/>
     <circle cx="16" cy="15" r="2" fill="#fffbeb"/>
-  </g>
-
-  <!-- ======================================================== -->
-  <!-- 5. SECONDARY SPARKLE GLINT (TOP-LEFT VERTEX)             -->
-  <!-- ======================================================== -->
-  <g transform="translate(8, 16) scale(0.65)" filter="url(#intenseSparkle)">
-    <!-- Secondary Lens Flare Rays -->
-    <line x1="16" y1="-8" x2="16" y2="38" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
-    <line x1="-8" y1="15" x2="40" y2="15" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
-    <!-- Diamond Star Shape -->
-    <path d="M16 2 L19.5 11.5 L29 15 L19.5 18.5 L16 28 L12.5 18.5 L3 15 L12.5 11.5 Z" fill="url(#emblemStar)"/>
-    <circle cx="16" cy="15" r="3.5" fill="#ffffff"/>
-  </g>
-
-  <!-- ======================================================== -->
-  <!-- 6. TERTIARY SPARKLE GLINT (BOTTOM-RIGHT WING APEX)       -->
-  <!-- ======================================================== -->
-  <g transform="translate(102, 94) scale(0.48)" filter="url(#intenseSparkle)">
-    <line x1="16" y1="-6" x2="16" y2="36" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="-6" y1="15" x2="38" y2="15" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
-    <circle cx="16" cy="15" r="4" fill="#ffffff"/>
   </g>
 </svg>
