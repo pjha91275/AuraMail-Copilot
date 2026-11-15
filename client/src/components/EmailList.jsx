@@ -12,6 +12,7 @@ export default function EmailList({
   onToggleStar,
   onToggleRead,
   onArchive,
+  onDelete,
   urgencyFilter,
   onSelectUrgency,
   isLoading
@@ -117,6 +118,7 @@ export default function EmailList({
               onToggleStar={onToggleStar}
               onToggleRead={onToggleRead}
               onArchive={onArchive}
+              onDelete={onDelete}
             />
           ))
         )}

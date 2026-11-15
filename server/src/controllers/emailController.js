@@ -312,6 +312,37 @@ const simulateIncomingEmail = async (req, res) => {
   }
 };
 
+// Delete single email thread
+const deleteEmail = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleted = await store.deleteEmail(id);
+    if (!deleted) {
+      return res.status(404).json({ success: false, message: 'Email thread not found or already deleted' });
+    }
+    res.json({ success: true, message: 'Email thread deleted successfully', id });
+  } catch (error) {
+    console.error('Error deleting email:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// Reset demo threads to pristine initial seed state
+const resetEmails = async (req, res) => {
+  try {
+    await store.resetStore();
+    const emails = await store.getEmails({ clientId: 'all' });
+    res.json({
+      success: true,
+      message: 'Demo threads reset to pristine seed state',
+      data: emails
+    });
+  } catch (error) {
+    console.error('Error resetting emails:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 module.exports = {
   getEmails,
   getEmailById,
@@ -319,5 +350,7 @@ module.exports = {
   updateEmailStatus,
   handleClientAction,
   updateDraftReply,
-  simulateIncomingEmail
+  simulateIncomingEmail,
+  deleteEmail,
+  resetEmails
 };

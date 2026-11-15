@@ -26,7 +26,9 @@ import {
   syncAccount,
   addAccount,
   askCopilot,
-  generateAiDraft
+  generateAiDraft,
+  deleteEmail,
+  resetEmails
 } from './services/api';
 
 export default function App() {
@@ -546,17 +548,64 @@ export default function App() {
     }
   };
 
-  // Reset Data
-  const handleResetData = () => {
-    loadEmails();
-    pushToast({
-      title: 'Data Refreshed',
-      message: 'Demo email threads restored.',
-      type: 'info'
-    });
+  // Delete Email Thread
+  const handleDeleteEmail = async (emailId) => {
+    const matchEmail = (e) => e.id === emailId || e.threadId === emailId || (e._id && String(e._id) === String(emailId));
+    const target = emails.find(matchEmail) || selectedEmail;
+    const subjectSnippet = target?.subject ? `"${target.subject.slice(0, 35)}..."` : 'Email conversation';
+
+    // Optimistically remove from state
+    setEmails(prev => prev.filter(e => !matchEmail(e)));
+    if (selectedEmail && matchEmail(selectedEmail)) {
+      const remaining = emails.filter(e => !matchEmail(e));
+      setSelectedEmail(remaining.length > 0 ? remaining[0] : null);
+    }
+
+    try {
+      await deleteEmail(emailId);
+      pushToast({
+        title: 'Thread Deleted',
+        message: `${subjectSnippet} was removed. You can re-simulate it anytime!`,
+        type: 'info'
+      });
+      loadEmails();
+    } catch (err) {
+      pushToast({ title: 'Error', message: 'Failed to delete email thread', type: 'error' });
+      loadEmails();
+    }
   };
 
-  // Keyboard Shortcuts (j/k navigation, s to star, e to archive, c for copilot, esc to close)
+  // Reset Data (Purges all simulated emails & restores pristine seed threads in memory and MongoDB)
+  const handleResetData = async () => {
+    setIsSyncing(true);
+    try {
+      const res = await resetEmails();
+      if (res.success && res.data) {
+        setEmails(res.data);
+        if (res.data.length > 0) {
+          setSelectedEmail(res.data[0]);
+        }
+      } else {
+        await loadEmails();
+      }
+      pushToast({
+        title: 'Demo Threads Restored',
+        message: 'Inbox and mailboxes reset to clean presentation state. All simulated emails cleared.',
+        type: 'success'
+      });
+    } catch (err) {
+      await loadEmails();
+      pushToast({
+        title: 'Data Refreshed',
+        message: 'Demo email threads reloaded.',
+        type: 'info'
+      });
+    } finally {
+      setTimeout(() => setIsSyncing(false), 500);
+    }
+  };
+
+  // Keyboard Shortcuts (j/k navigation, s to star, e to archive, #/d to delete, c for copilot, esc to close)
   useEffect(() => {
     const handleKeyDown = (e) => {
       // Don't trigger if user is actively typing in an input or textarea
@@ -597,13 +646,16 @@ export default function App() {
         } else if ((e.key === 'e' || e.key === 'E') && selectedEmail) {
           e.preventDefault();
           handleArchive(selectedEmail.id);
+        } else if ((e.key === '#' || e.key === 'd' || e.key === 'Delete') && selectedEmail) {
+          e.preventDefault();
+          handleDeleteEmail(selectedEmail.id);
         }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [emails, selectedEmail, handleToggleStar, handleArchive]);
+  }, [emails, selectedEmail, handleToggleStar, handleArchive, handleDeleteEmail]);
 
   // Select Email from Copilot or external reference (resets restrictive filters & switches view)
   const handleSelectEmailById = async (emailId) => {
@@ -771,6 +823,7 @@ export default function App() {
                   onToggleStar={handleToggleStar}
                   onToggleRead={handleToggleRead}
                   onArchive={handleArchive}
+                  onDelete={handleDeleteEmail}
                   urgencyFilter={urgencyFilter}
                   onSelectUrgency={setUrgencyFilter}
                   isLoading={isLoading}
@@ -785,6 +838,7 @@ export default function App() {
                   onToggleStar={handleToggleStar}
                   onToggleRead={handleToggleRead}
                   onArchive={handleArchive}
+                  onDelete={handleDeleteEmail}
                   onSendReply={handleSendReply}
                   onSaveDraft={handleSaveDraft}
                   onGenerateDraft={generateAiDraft}

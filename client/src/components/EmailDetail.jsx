@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   Star,
   Archive,
+  Trash2,
   Mail,
   MailOpen,
   Zap,
@@ -29,6 +30,7 @@ export default function EmailDetail({
   onToggleStar,
   onToggleRead,
   onArchive,
+  onDelete,
   onSendReply,
   onSaveDraft,
   onGenerateDraft,
@@ -311,10 +313,17 @@ export default function EmailDetail({
             </button>
             <button
               onClick={() => onArchive(email.id)}
-              className="p-2 rounded-xl hover:bg-surface-100 dark:hover:bg-surface-800 text-surface-500 hover:text-rose-500 transition-colors"
+              className="p-2 rounded-xl hover:bg-surface-100 dark:hover:bg-surface-800 text-surface-500 hover:text-amber-500 transition-colors"
               title="Archive thread"
             >
               <Archive className="w-4.5 h-4.5" />
+            </button>
+            <button
+              onClick={() => onDelete && onDelete(email.id)}
+              className="p-2 rounded-xl hover:bg-rose-50 dark:hover:bg-rose-950/40 text-surface-500 hover:text-rose-500 transition-colors"
+              title="Delete thread (Remove permanently)"
+            >
+              <Trash2 className="w-4.5 h-4.5" />
             </button>
           </div>
         </div>

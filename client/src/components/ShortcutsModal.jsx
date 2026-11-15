@@ -9,6 +9,7 @@ export default function ShortcutsModal({ isOpen, onClose }) {
     { key: 'k / ↑', desc: 'Select previous conversation thread' },
     { key: 's', desc: 'Star / mark conversation as VIP' },
     { key: 'e', desc: 'Archive selected conversation' },
+    { key: '# / d', desc: 'Delete / remove conversation thread' },
     { key: 'c', desc: 'Open / toggle Inbox AI Copilot chat' },
     { key: '1', desc: 'Switch to Assistant Command Center' },
     { key: '2', desc: 'Switch to Client VIP Portal' },

@@ -108,3 +108,17 @@ export const generateAiDraft = async ({ subject, messages, tone, instructions, c
   });
   return await res.json();
 };
+
+export const deleteEmail = async (id) => {
+  const res = await fetch(`${API_BASE}/emails/${id}`, {
+    method: 'DELETE'
+  });
+  return await res.json();
+};
+
+export const resetEmails = async () => {
+  const res = await fetch(`${API_BASE}/emails/reset`, {
+    method: 'POST'
+  });
+  return await res.json();
+};

@@ -8,6 +8,7 @@ import {
   CheckCircle2,
   AlertTriangle,
   Archive,
+  Trash2,
   Mail,
   MailOpen
 } from 'lucide-react';
@@ -18,7 +19,8 @@ export default function EmailCard({
   onSelect,
   onToggleStar,
   onToggleRead,
-  onArchive
+  onArchive,
+  onDelete
 }) {
   const isAssistant = email.classification?.type === 'Assistant to Reply';
   const isClient = email.classification?.type === 'Client to Reply';
@@ -120,7 +122,18 @@ export default function EmailCard({
                 className="p-1 rounded-lg hover:bg-surface-100 dark:hover:bg-surface-700 transition-colors"
                 title="Archive conversation"
               >
-                <Archive className="w-3.5 h-3.5 text-surface-400 hover:text-rose-500" />
+                <Archive className="w-3.5 h-3.5 text-surface-400 hover:text-amber-500" />
+              </button>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDelete && onDelete(email.id);
+                }}
+                className="p-1 rounded-lg hover:bg-surface-100 dark:hover:bg-surface-700 hover:text-rose-500 text-surface-400 transition-colors"
+                title="Delete email"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>

@@ -261,10 +261,48 @@ const addEmail = async (emailData) => {
   return newEmail;
 };
 
-const resetStore = () => {
+const deleteEmail = async (id) => {
+  const { isConnected } = getStorageMode();
+  const strId = String(id);
+
+  // Remove from in-memory emails
+  const beforeLen = inMemoryEmails.length;
+  inMemoryEmails = inMemoryEmails.filter(e => !(e.id === strId || e.threadId === strId || (e._id && String(e._id) === strId)));
+  const removedFromMem = inMemoryEmails.length < beforeLen;
+
+  let removedFromDb = false;
+  if (isConnected) {
+    try {
+      const filter = buildIdFilter(id);
+      const res = await Email.deleteOne(filter);
+      removedFromDb = res && res.deletedCount > 0;
+    } catch (err) {
+      console.warn(`MongoDB deleteEmail warning for ${id}:`, err.message);
+    }
+  }
+
+  return removedFromMem || removedFromDb;
+};
+
+const resetStore = async () => {
   inMemoryClients = JSON.parse(JSON.stringify(seedClients));
   inMemoryAccounts = JSON.parse(JSON.stringify(seedAccounts));
   inMemoryEmails = JSON.parse(JSON.stringify(seedEmails));
+
+  const { isConnected } = getStorageMode();
+  if (isConnected) {
+    try {
+      await Email.deleteMany({});
+      await Email.insertMany(seedEmails);
+      await ClientProfile.deleteMany({});
+      await ClientProfile.insertMany(seedClients);
+      await Account.deleteMany({});
+      await Account.insertMany(seedAccounts);
+      console.log('✅ MongoDB reset to clean initial seed data.');
+    } catch (err) {
+      console.error('Error resetting MongoDB:', err.message);
+    }
+  }
 };
 
 module.exports = {
@@ -278,5 +316,6 @@ module.exports = {
   getEmailById,
   updateEmail,
   addEmail,
+  deleteEmail,
   resetStore
 };
