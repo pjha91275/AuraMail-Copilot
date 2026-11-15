@@ -256,42 +256,42 @@ export default function EmailDetail({
       <div className="flex-1 overflow-y-auto p-6 space-y-6">
         
         {/* AI Smart Triage Briefing Card */}
-        <div className="p-6 rounded-3xl bg-gradient-to-br from-brand-500/15 via-[#0c1426]/70 to-[#070b14]/90 border border-brand-500/40 shadow-[0_0_35px_-5px_rgba(99,102,241,0.25)] space-y-4 ai-scan-effect relative overflow-hidden backdrop-blur-2xl">
+        <div className="p-6 rounded-3xl bg-gradient-to-br from-blue-50/90 via-indigo-50/70 to-purple-50/60 dark:from-brand-500/15 dark:via-[#0c1426]/75 dark:to-[#070b14]/90 border border-brand-200/90 dark:border-brand-500/40 shadow-[0_8px_30px_rgba(74,117,246,0.12)] dark:shadow-[0_0_35px_-5px_rgba(99,102,241,0.25)] space-y-4 ai-scan-effect relative overflow-hidden backdrop-blur-2xl">
           
           <div className="flex items-center justify-between relative z-10">
-            <div className="flex items-center space-x-2.5 text-brand-600 dark:text-brand-300">
+            <div className="flex items-center space-x-2.5">
               <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-500 flex items-center justify-center text-white shadow-glow-brand animate-pulse-subtle">
                 <Sparkles className="w-4 h-4" />
               </div>
               <span className="text-xs font-black uppercase tracking-wider text-brand-700 dark:text-brand-300">AI Intelligence Insights</span>
             </div>
-            <span className="text-[11px] text-surface-600 dark:text-surface-300 font-semibold bg-white/70 dark:bg-surface-800/80 px-3 py-1 rounded-full flex items-center space-x-2 border border-surface-200 dark:border-white/[0.08] shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-surface-800/80 dark:text-surface-300 dark:border-white/[0.08] px-3 py-1 rounded-full flex items-center space-x-2 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span>Auto-triage active</span>
             </span>
           </div>
 
           {/* AI Reasoning Pill */}
-          <div className="relative z-10 text-xs text-surface-800 dark:text-surface-200 bg-white/75 dark:bg-surface-800/80 p-4 rounded-2xl border border-surface-200/80 dark:border-white/[0.08] shadow-subtle leading-relaxed">
-            <span className="font-bold text-brand-600 dark:text-brand-400">Why this was assigned: </span>
-            {classification.reason}
+          <div className="relative z-10 text-xs text-surface-900 dark:text-surface-200 bg-white/95 dark:bg-surface-800/80 p-4 rounded-2xl border border-brand-200/80 dark:border-white/[0.08] shadow-sm leading-relaxed">
+            <span className="font-black text-brand-600 dark:text-brand-400">Why this was assigned: </span>
+            <span className="font-medium text-surface-800 dark:text-surface-200">{classification.reason}</span>
           </div>
 
           {/* Executive Summary */}
           {email.summary && (
-            <div className="relative z-10 text-xs text-surface-700 dark:text-surface-300 bg-white/60 dark:bg-surface-800/60 p-4 rounded-2xl border border-surface-200/50 dark:border-white/[0.05] leading-relaxed">
-              <span className="font-bold text-surface-900 dark:text-white block mb-1">
+            <div className="relative z-10 text-xs text-surface-800 dark:text-surface-300 bg-white/90 dark:bg-surface-800/60 p-4 rounded-2xl border border-purple-200/70 dark:border-white/[0.05] shadow-sm leading-relaxed">
+              <span className="font-black text-purple-700 dark:text-white block mb-1">
                 Executive Digest:
               </span>
-              <p>{email.summary}</p>
+              <p className="font-medium">{email.summary}</p>
             </div>
           )}
 
           {/* Action Items Checklist */}
           {email.actionItems && email.actionItems.length > 0 && (
-            <div className="space-y-2 pt-1">
-              <div className="text-[11px] font-black text-surface-500 uppercase tracking-widest flex items-center space-x-2">
-                <FileText className="w-3.5 h-3.5" />
+            <div className="relative z-10 space-y-2 pt-1">
+              <div className="text-[11px] font-black text-brand-700 dark:text-brand-300 uppercase tracking-widest flex items-center space-x-2">
+                <FileText className="w-3.5 h-3.5 text-brand-500" />
                 <span>Extracted Action Items</span>
               </div>
               <div className="space-y-1.5">
@@ -299,16 +299,16 @@ export default function EmailDetail({
                   <div
                     key={idx}
                     onClick={() => toggleAction(idx)}
-                    className="flex items-center space-x-3 p-2.5 rounded-xl hover:bg-white/80 dark:hover:bg-surface-800/80 transition-colors cursor-pointer text-xs"
+                    className="flex items-center space-x-3 p-3 rounded-2xl bg-white/95 dark:bg-surface-800/50 hover:bg-white dark:hover:bg-surface-800/80 border border-brand-100 dark:border-white/[0.06] shadow-sm transition-all cursor-pointer text-xs"
                   >
-                    <div className={`w-4.5 h-4.5 rounded-lg border flex items-center justify-center transition-colors ${
+                    <div className={`w-5 h-5 rounded-lg border flex items-center justify-center transition-colors shrink-0 ${
                       completedActions[idx]
                         ? 'bg-brand-600 border-brand-600 text-white shadow-sm'
-                        : 'border-surface-300 dark:border-surface-600'
+                        : 'border-brand-300 dark:border-surface-600 bg-brand-50/50 dark:bg-surface-850'
                     }`}>
                       {completedActions[idx] && <Check className="w-3.5 h-3.5" />}
                     </div>
-                    <span className={`flex-1 font-medium ${completedActions[idx] ? 'line-through text-surface-400' : 'text-surface-800 dark:text-surface-200'}`}>
+                    <span className={`flex-1 font-semibold ${completedActions[idx] ? 'line-through text-surface-400' : 'text-surface-800 dark:text-surface-200'}`}>
                       {item}
                     </span>
                   </div>

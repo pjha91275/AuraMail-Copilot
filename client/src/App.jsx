@@ -434,8 +434,17 @@ export default function App() {
   return (
     <div className="min-h-screen bg-surface-50 dark:bg-surface-950 text-surface-900 dark:text-surface-100 flex flex-col font-sans transition-colors duration-300 relative overflow-x-hidden">
       
-      {/* Ambient Self-Crafted Dynamic Background with Floating Light Orbs */}
-      <div className="ambient-bg bg-grid-pattern">
+      {/* Ambient Self-Crafted Dynamic Background with Official Logo Watermark & Floating Light Orbs */}
+      <div className="ambient-bg">
+        {/* Prominent Official Logo Watermark embedded in the background */}
+        <div className="absolute right-[-20px] top-[30px] md:right-[3%] md:top-[70px] w-[320px] h-[320px] md:w-[460px] md:h-[460px] opacity-20 dark:opacity-25 pointer-events-none select-none transition-opacity duration-500 animate-float-slow z-0">
+          <img
+            src="/favicon.svg"
+            alt="AuraMail AI Background Emblem"
+            className="w-full h-full object-contain filter drop-shadow-[0_0_30px_rgba(99,102,241,0.6)]"
+          />
+        </div>
+
         <div className="ambient-orb ambient-orb-1 animate-float-slow" />
         <div className="ambient-orb ambient-orb-2 animate-float-delayed" />
         <div className="ambient-orb ambient-orb-3 animate-float-slow" />
