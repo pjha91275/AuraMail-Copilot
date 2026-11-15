@@ -31,6 +31,7 @@ export default function EmailDetail({
   onToggleRead,
   onArchive,
   onDelete,
+  onDeleteMessage,
   onSendReply,
   onSaveDraft,
   onGenerateDraft,
@@ -478,9 +479,20 @@ export default function EmailDetail({
                     </div>
                   </div>
 
-                  <span className="text-xs text-surface-400 font-medium">
-                    {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                  </span>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-xs text-surface-400 font-medium">
+                      {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </span>
+                    {(index > 0 || isAssistantMsg) && onDeleteMessage && (
+                      <button
+                        onClick={() => onDeleteMessage(email.id, msg.id)}
+                        className="p-1 rounded-lg hover:bg-rose-100 dark:hover:bg-rose-950/50 text-surface-400 hover:text-rose-500 transition-colors"
+                        title="Delete / recall this reply"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
                 </div>
 
                 <div className="text-xs text-surface-700 dark:text-surface-300 leading-relaxed whitespace-pre-line pl-11">

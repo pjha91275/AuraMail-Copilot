@@ -353,6 +353,42 @@ const deleteEmail = async (req, res) => {
   }
 };
 
+// Delete individual message from thread (e.g. recall sent reply)
+const deleteMessageFromThread = async (req, res) => {
+  try {
+    const { id, messageId } = req.params;
+    const email = await store.getEmailById(id);
+    if (!email) {
+      return res.status(404).json({ success: false, message: 'Email not found' });
+    }
+
+    const updatedMessages = (email.messages || []).filter(m => m.id !== messageId && String(m.id) !== String(messageId));
+
+    // If sent reply was removed, revert classification back to actionable state
+    const updates = {
+      messages: updatedMessages
+    };
+
+    if (email.classification?.type === 'No Reply Needed') {
+      const isClientEmail = email.subject?.toLowerCase().includes('term sheet') || email.subject?.toLowerCase().includes('keynote');
+      updates.classification = {
+        ...email.classification,
+        type: isClientEmail ? 'Client to Reply' : 'Assistant to Reply',
+        reason: 'Reply was recalled/removed. Conversation awaiting response.'
+      };
+      updates.draftReply = {
+        ...email.draftReply,
+        status: 'draft'
+      };
+    }
+
+    const updated = await store.updateEmail(id, updates);
+    res.json({ success: true, message: 'Message removed from thread', data: updated });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 // Reset demo threads to pristine initial seed state
 const resetEmails = async (req, res) => {
   try {
@@ -378,5 +414,6 @@ module.exports = {
   updateDraftReply,
   simulateIncomingEmail,
   deleteEmail,
+  deleteMessageFromThread,
   resetEmails
 };

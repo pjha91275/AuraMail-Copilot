@@ -28,6 +28,7 @@ import {
   askCopilot,
   generateAiDraft,
   deleteEmail,
+  deleteMessage,
   resetEmails
 } from './services/api';
 
@@ -596,6 +597,57 @@ export default function App() {
     }
   };
 
+  // Delete Individual Message / Recall Reply from Thread
+  const handleDeleteMessage = async (emailId, messageId) => {
+    try {
+      const matchEmail = (e) => e.id === emailId || e.threadId === emailId || (e._id && String(e._id) === String(emailId));
+
+      setEmails(prev => prev.map(e => {
+        if (matchEmail(e)) {
+          const updatedMessages = (e.messages || []).filter(m => m.id !== messageId && String(m.id) !== String(messageId));
+          const isClientEmail = e.subject?.toLowerCase().includes('term sheet') || e.subject?.toLowerCase().includes('keynote');
+          return {
+            ...e,
+            messages: updatedMessages,
+            classification: {
+              ...e.classification,
+              type: isClientEmail ? 'Client to Reply' : 'Assistant to Reply',
+              reason: 'Sent reply was removed. Conversation awaiting response.'
+            }
+          };
+        }
+        return e;
+      }));
+
+      if (selectedEmail && matchEmail(selectedEmail)) {
+        setSelectedEmail(prev => {
+          const updatedMessages = (prev.messages || []).filter(m => m.id !== messageId && String(m.id) !== String(messageId));
+          const isClientEmail = prev.subject?.toLowerCase().includes('term sheet') || prev.subject?.toLowerCase().includes('keynote');
+          return {
+            ...prev,
+            messages: updatedMessages,
+            classification: {
+              ...prev.classification,
+              type: isClientEmail ? 'Client to Reply' : 'Assistant to Reply',
+              reason: 'Sent reply was removed. Conversation awaiting response.'
+            }
+          };
+        });
+      }
+
+      await deleteMessage(emailId, messageId);
+      pushToast({
+        title: 'Reply Recalled & Removed',
+        message: 'The sent reply was deleted from the conversation timeline.',
+        type: 'info'
+      });
+      loadEmails();
+    } catch (err) {
+      pushToast({ title: 'Error', message: 'Failed to remove message', type: 'error' });
+      loadEmails();
+    }
+  };
+
   // Reset Data (Purges all simulated emails & restores pristine seed threads in memory and MongoDB)
   const handleResetData = async () => {
     setIsSyncing(true);
@@ -860,6 +912,7 @@ export default function App() {
                   onToggleRead={handleToggleRead}
                   onArchive={handleArchive}
                   onDelete={handleDeleteEmail}
+                  onDeleteMessage={handleDeleteMessage}
                   onSendReply={handleSendReply}
                   onSaveDraft={handleSaveDraft}
                   onGenerateDraft={generateAiDraft}

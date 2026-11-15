@@ -116,6 +116,13 @@ export const deleteEmail = async (id) => {
   return await res.json();
 };
 
+export const deleteMessage = async (emailId, messageId) => {
+  const res = await fetch(`${API_BASE}/emails/${emailId}/messages/${messageId}`, {
+    method: 'DELETE'
+  });
+  return await res.json();
+};
+
 export const resetEmails = async () => {
   const res = await fetch(`${API_BASE}/emails/reset`, {
     method: 'POST'
