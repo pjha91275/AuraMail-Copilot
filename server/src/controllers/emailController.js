@@ -234,7 +234,7 @@ const simulateIncomingEmail = async (req, res) => {
     const chosen = scenarios[scenario] || scenarios.scheduling;
 
     // Run AI analysis on the simulated incoming email
-    const classification = aiService.classifyEmailContent({
+    const classification = await aiService.classifyEmailContent({
       subject: chosen.subject,
       body: chosen.body,
       sender: chosen.sender,
@@ -251,10 +251,16 @@ const simulateIncomingEmail = async (req, res) => {
       body: chosen.body
     });
 
-    const summary = aiService.generateSummary({
+    const summary = await aiService.generateSummary({
       subject: chosen.subject,
       body: chosen.body,
       sender: chosen.sender
+    });
+
+    const draftContent = await aiService.draftReply({
+      subject: chosen.subject,
+      messages: [{ sender: chosen.sender, body: chosen.body }],
+      tone: 'Professional'
     });
 
     const newEmail = await store.addEmail({
@@ -284,11 +290,7 @@ const simulateIncomingEmail = async (req, res) => {
         }
       ],
       draftReply: {
-        content: aiService.draftReply({
-          subject: chosen.subject,
-          messages: [{ sender: chosen.sender, body: chosen.body }],
-          tone: 'Professional'
-        }),
+        content: draftContent,
         tone: 'Professional',
         status: 'draft',
         generatedAt: new Date().toISOString()

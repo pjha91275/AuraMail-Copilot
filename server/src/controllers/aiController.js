@@ -9,10 +9,10 @@ const classify = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Subject and body are required' });
     }
 
-    const classification = aiService.classifyEmailContent({ subject, body, sender, clientName });
+    const classification = await aiService.classifyEmailContent({ subject, body, sender, clientName });
     const meetingDetails = aiService.extractMeetingDetails({ subject, body });
     const actionItems = aiService.extractActionItems({ subject, body });
-    const summary = aiService.generateSummary({ subject, body, sender });
+    const summary = await aiService.generateSummary({ subject, body, sender });
 
     res.json({
       success: true,
@@ -32,7 +32,7 @@ const classify = async (req, res) => {
 const summarize = async (req, res) => {
   try {
     const { subject, body, sender } = req.body;
-    const summary = aiService.generateSummary({ subject, body, sender });
+    const summary = await aiService.generateSummary({ subject, body, sender });
     res.json({ success: true, summary });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -43,7 +43,7 @@ const summarize = async (req, res) => {
 const generateDraft = async (req, res) => {
   try {
     const { subject, messages, tone, instructions, clientName } = req.body;
-    const draft = aiService.draftReply({ subject, messages, tone, instructions, clientName });
+    const draft = await aiService.draftReply({ subject, messages, tone, instructions, clientName });
     res.json({ success: true, draft });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

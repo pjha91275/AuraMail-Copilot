@@ -11,6 +11,7 @@
     <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" /></a>
     <a href="https://expressjs.com/"><img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express" /></a>
     <a href="https://www.mongodb.com/"><img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" /></a>
+    <a href="https://ai.google.dev/"><img src="https://img.shields.io/badge/Google_Gemini_LLM-8E75B2?style=for-the-badge&logo=google&logoColor=white" alt="Google Gemini LLM" /></a>
     <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" /></a>
     <a href="https://vitejs.dev/"><img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" /></a>
   </p>
@@ -116,19 +117,56 @@ Top navbar button allowing the user or reviewer to click **"Simulate Inflow"** t
 
 ---
 
-## 🛠️ Technology Stack (MERN)
+## 🛠️ Technology Stack & AI Architecture
 
+- **AI Engine & LLM**:
+  - **Google Gemini LLM** (`gemini-3.5-flash-lite`, `gemini-3.5-flash`, `gemini-flash-latest` via Google AI Studio API)
+  - Autonomous responsibility classification (`Assistant to Reply`, `Client to Reply`, `No Reply Needed`)
+  - Executive TL;DR summarization, tone-tailored draft replies, and interactive Inbox Copilot
+  - Built-in Zero-Latency NLP heuristic engine (providing automatic offline fallback for 100% uptime)
 - **Frontend**:
   - React 18+ (Vite)
-  - Tailwind CSS (custom modern palette, subtle glassmorphism, responsive mobile drawers)
+  - Tailwind CSS (ambient deep navy glassmorphism, responsive drawers & floating island navbar)
   - Lucide React (modern icons)
   - Canvas Confetti (delightful micro-interactions)
-- **Backend**:
+- **Backend (Node / Express / MongoDB)**:
   - Node.js & Express.js
   - RESTful architecture with modular controllers, services, and routes
-  - Mongoose & MongoDB (full MERN compliance with automatic graceful fallback to in-memory datastore so it runs out-of-the-box anywhere)
+  - Mongoose & MongoDB Atlas support (with automated in-memory JSON sync fallback if Atlas IP whitelist is not configured)
 - **Deployment**:
   - 1-Click Serverless setup for **Vercel** (`vercel.json` + `api/index.js`) and **Render** (`render.yaml`).
+
+---
+
+## ⚙️ Environment Variables & Live Integrations
+
+AuraMail AI is engineered with **Dual-Mode Fault-Tolerant Architecture**: it connects to live production services (MongoDB Atlas & Google Gemini API) when keys are provided, while gracefully maintaining a zero-latency fallback mode if credentials or networks are restricted.
+
+Create a `.env` file in the root directory (or `server/.env`):
+
+```env
+# Server Port & Mode
+PORT=5000
+NODE_ENV=development
+
+# 1. MongoDB Atlas Connection URI
+# Example: mongodb+srv://<username>:<password>@cluster0.kof6tuh.mongodb.net/auramail?retryWrites=true&w=majority
+MONGODB_URI=your_mongodb_connection_string
+
+# 2. Google Gemini LLM API Key (from Google AI Studio: https://aistudio.google.com/app/apikey)
+# Enables live autonomous email classification, executive summaries, AI draft replies, and Inbox Copilot
+AI_API_KEY=your_gemini_api_key
+```
+
+### 💡 Why Both Features Run Reliably:
+1. **Google Gemini LLM Integration**:
+   - When `AI_API_KEY` (or `GEMINI_API_KEY`) is provided, AuraMail AI directly invokes Google Gemini's latest flash models (`gemini-3.5-flash-lite`, `gemini-3.5-flash`, `gemini-flash-latest`) via REST endpoints with structured JSON schemas.
+   - If the API key is not present, hits temporary rate-limits (429/503), or network latency occurs, AuraMail seamlessly falls back to its built-in heuristic NLP engine, ensuring the assistant experience is never interrupted.
+2. **MongoDB Atlas Database**:
+   - When `MONGODB_URI` is provided, AuraMail connects to your live MongoDB Atlas cluster and seeds the initial email threads, client profiles, and connected accounts.
+   - **Important Atlas Tip**: In MongoDB Atlas, ensure your current IP address (or `0.0.0.0/0` - Allow Access From Anywhere) is added under **Security > Network Access**. If Atlas rejects the connection due to an unwhitelisted IP, AuraMail automatically catches the exception and falls back to its in-memory store so the app continues running smoothly.
+3. **Smart Path Resolution**:
+   - The backend automatically resolves `.env` from both the project root directory and `server/.env`, so running either `npm start` from root or `cd server && npm start` will effortlessly load your configuration.
 
 ---
 

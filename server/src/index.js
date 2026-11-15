@@ -1,11 +1,22 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 const dotenv = require('dotenv');
+
+// Load environment variables from root .env or server/.env
+const rootEnvPath = path.resolve(__dirname, '../../.env');
+const serverEnvPath = path.resolve(__dirname, '../.env');
+if (fs.existsSync(rootEnvPath)) {
+  dotenv.config({ path: rootEnvPath });
+}
+if (fs.existsSync(serverEnvPath)) {
+  dotenv.config({ path: serverEnvPath });
+}
+dotenv.config();
+
 const { connectDB } = require('./config/db');
 const { initStore } = require('./services/store');
-
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
