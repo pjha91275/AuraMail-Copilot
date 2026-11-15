@@ -4,6 +4,19 @@ const ClientProfile = require('../models/ClientProfile');
 const Account = require('../models/Account');
 const { getStorageMode } = require('../config/db');
 
+const mongoose = require('mongoose');
+
+// Helper to build safe query for email lookup across id, threadId, and valid MongoDB _id
+const buildIdFilter = (id) => {
+  if (!id) return { id: '__invalid__' };
+  const strId = String(id);
+  const filters = [{ id: strId }, { threadId: strId }];
+  if (mongoose.Types.ObjectId.isValid(strId)) {
+    filters.push({ _id: strId });
+  }
+  return { $or: filters };
+};
+
 // In-memory data store with deep clones of seed data
 let inMemoryClients = JSON.parse(JSON.stringify(seedClients));
 let inMemoryAccounts = JSON.parse(JSON.stringify(seedAccounts));
@@ -126,7 +139,12 @@ const getEmails = async ({ clientId, category, search, urgency, unreadOnly, wait
         { 'messages.body': { $regex: search, $options: 'i' } }
       ];
     }
-    return await Email.find(query).sort({ updatedAt: -1 });
+    const docs = await Email.find(query).sort({ updatedAt: -1 });
+    return docs.map(d => {
+      const obj = d.toObject ? d.toObject() : { ...d };
+      if (!obj.id) obj.id = obj.threadId || String(obj._id);
+      return obj;
+    });
   }
 
   // In-memory filtering
@@ -167,34 +185,59 @@ const getEmails = async ({ clientId, category, search, urgency, unreadOnly, wait
 const getEmailById = async (id) => {
   const { isConnected } = getStorageMode();
   if (isConnected) {
-    return await Email.findOne({ $or: [{ id }, { _id: id }, { threadId: id }] });
+    try {
+      const filter = buildIdFilter(id);
+      const doc = await Email.findOne(filter);
+      if (doc) {
+        const obj = doc.toObject ? doc.toObject() : { ...doc };
+        if (!obj.id) obj.id = obj.threadId || String(obj._id);
+        return obj;
+      }
+    } catch (err) {
+      console.warn(`MongoDB getEmailById warning for ${id}:`, err.message);
+    }
   }
-  return inMemoryEmails.find(e => e.id === id || e.threadId === id);
+  const strId = String(id);
+  return inMemoryEmails.find(e => e.id === strId || e.threadId === strId || (e._id && String(e._id) === strId));
 };
 
 const updateEmail = async (id, updates) => {
   const { isConnected } = getStorageMode();
   const now = new Date().toISOString();
   updates.updatedAt = now;
+  const strId = String(id);
 
-  if (isConnected) {
-    return await Email.findOneAndUpdate(
-      { $or: [{ id }, { _id: id }, { threadId: id }] },
-      { $set: updates },
-      { new: true }
-    );
-  }
-
-  const idx = inMemoryEmails.findIndex(e => e.id === id || e.threadId === id);
+  // Always update inMemoryEmails immediately for zero-lag consistency
+  const idx = inMemoryEmails.findIndex(e => e.id === strId || e.threadId === strId || (e._id && String(e._id) === strId));
+  let inMemUpdated = null;
   if (idx !== -1) {
     inMemoryEmails[idx] = {
       ...inMemoryEmails[idx],
       ...updates,
       updatedAt: now
     };
-    return inMemoryEmails[idx];
+    inMemUpdated = inMemoryEmails[idx];
   }
-  return null;
+
+  if (isConnected) {
+    try {
+      const filter = buildIdFilter(id);
+      const updatedDoc = await Email.findOneAndUpdate(
+        filter,
+        { $set: updates },
+        { new: true }
+      );
+      if (updatedDoc) {
+        const obj = updatedDoc.toObject ? updatedDoc.toObject() : { ...updatedDoc };
+        if (!obj.id) obj.id = obj.threadId || String(obj._id);
+        return obj;
+      }
+    } catch (err) {
+      console.warn(`MongoDB updateEmail warning for ${id}:`, err.message);
+    }
+  }
+
+  return inMemUpdated;
 };
 
 const addEmail = async (emailData) => {

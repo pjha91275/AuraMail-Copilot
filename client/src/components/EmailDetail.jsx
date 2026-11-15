@@ -43,11 +43,44 @@ export default function EmailDetail({
   const [isSending, setIsSending] = useState(false);
   const [completedActions, setCompletedActions] = useState({});
 
+  // Instant heuristic draft generator for 0ms reactivity on tone click
+  const generateToneDraft = (tone, customNotes = '') => {
+    if (!email) return '';
+    const lastMsg = email.messages && email.messages.length > 0 ? email.messages[email.messages.length - 1] : null;
+    const senderName = (lastMsg?.sender || 'there').split(' ')[0];
+    const cleanSubj = (email.subject || '').replace(/^(re:|fwd:|urgent:)\s*/i, '');
+
+    if (tone === 'Executive Brief') {
+      return `Hi ${senderName},\n\nThank you for sending this over. We have reviewed the proposal and terms regarding "${cleanSubj}". Everything looks aligned on our end, and we are proceeding with execution as discussed.\n\nBest,\n${clientName}`;
+    }
+
+    if (tone === 'Scheduling Confirmation') {
+      const meetingTime = email.meetingDetails?.date ? `${email.meetingDetails.date} at ${email.meetingDetails.time || '10:00 AM'}` : 'Friday at 10:00 AM EST';
+      return `Hi ${senderName},\n\nThank you for following up. I have reviewed ${clientName}'s calendar and confirmed that ${meetingTime} works well for our discussion.\n\nI have dispatched an updated calendar invitation with meeting coordinates.\n\nBest regards,\nExecutive Assistant to ${clientName}`;
+    }
+
+    if (tone === 'Polite Decline') {
+      return `Hi ${senderName},\n\nThank you very much for thinking of ${clientName} regarding "${cleanSubj}". Due to our current high-priority commitments and roadmap deliverables for this quarter, we will have to politely pass at this time.\n\nWe appreciate you reaching out and wish you great success with this initiative.\n\nWarm regards,\nOffice of ${clientName}`;
+    }
+
+    // Default: Professional
+    if (customNotes && customNotes.trim()) {
+      return `Hi ${senderName},\n\nThank you for reaching out regarding "${cleanSubj}". In response to your note: ${customNotes.trim()}.\n\nPlease let us know if you need any additional documentation.\n\nBest regards,\nAssistant to ${clientName}`;
+    }
+
+    return `Hi ${senderName},\n\nThank you for getting in touch regarding "${cleanSubj}". We have received your correspondence and are coordinating the next steps.\n\nWe will follow up shortly once the review is finalized.\n\nBest regards,\nExecutive Assistant to ${clientName}`;
+  };
+
   useEffect(() => {
     if (email) {
-      setDraftContent(email.draftReply?.content || '');
-      setSelectedTone(email.draftReply?.tone || 'Professional');
+      const initialTone = email.draftReply?.tone || 'Professional';
+      setSelectedTone(initialTone);
       setInstructions('');
+      if (email.draftReply?.content && email.draftReply.content.trim()) {
+        setDraftContent(email.draftReply.content);
+      } else {
+        setDraftContent(generateToneDraft(initialTone, ''));
+      }
     }
   }, [email?.id]);
 
@@ -72,6 +105,27 @@ export default function EmailDetail({
   const isClient = classification.type === 'Client to Reply';
   const isNoReply = classification.type === 'No Reply Needed';
 
+  const handleSelectTone = async (tone) => {
+    setSelectedTone(tone);
+    const draft = generateToneDraft(tone, instructions);
+    setDraftContent(draft);
+    if (onGenerateDraft) {
+      try {
+        onGenerateDraft({
+          subject: email.subject,
+          messages: email.messages,
+          tone,
+          instructions,
+          clientName
+        }).then(res => {
+          if (res && res.trim()) {
+            setDraftContent(res.trim());
+          }
+        }).catch(() => {});
+      } catch (e) {}
+    }
+  };
+
   const handleGenerateAiDraft = async () => {
     setIsGenerating(true);
     try {
@@ -82,9 +136,13 @@ export default function EmailDetail({
         instructions,
         clientName
       });
-      if (generated) {
-        setDraftContent(generated);
+      if (generated && generated.trim()) {
+        setDraftContent(generated.trim());
+      } else {
+        setDraftContent(generateToneDraft(selectedTone, instructions));
       }
+    } catch (e) {
+      setDraftContent(generateToneDraft(selectedTone, instructions));
     } finally {
       setIsGenerating(false);
     }
@@ -92,14 +150,16 @@ export default function EmailDetail({
 
   const handleSend = async () => {
     if (!draftContent.trim()) return;
+    const contentToSend = draftContent.trim();
     setIsSending(true);
     try {
-      await onSendReply(email.id, draftContent, selectedTone);
+      await onSendReply(email.id, contentToSend, selectedTone);
       confetti({
         particleCount: 45,
         spread: 65,
         origin: { y: 0.8 }
       });
+      setDraftContent('');
     } finally {
       setIsSending(false);
     }
@@ -432,7 +492,7 @@ export default function EmailDetail({
               {['Professional', 'Executive Brief', 'Scheduling Confirmation', 'Polite Decline'].map((tone) => (
                 <button
                   key={tone}
-                  onClick={() => setSelectedTone(tone)}
+                  onClick={() => handleSelectTone(tone)}
                   className={`px-3 py-1 rounded-xl font-bold transition-all ${
                     selectedTone === tone
                       ? 'bg-brand-600 text-white shadow-sm'

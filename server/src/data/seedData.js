@@ -40,6 +40,20 @@ const clients = [
       urgentThreshold: 'medium',
       customInstructions: 'Assistant schedules grant interviews and press inquiries.'
     }
+  },
+  {
+    id: 'client-prince',
+    name: 'Prince Jha',
+    email: 'pjha91275@gmail.com',
+    role: 'CEO & Founder',
+    company: 'GMAIL Inc.',
+    avatar: '/prince-jha.jpg',
+    connectedAccounts: ['pjha91275@gmail.com'],
+    aiRules: {
+      autoDelegateScheduling: true,
+      urgentThreshold: 'urgent',
+      customInstructions: 'Escalate investor term sheets, contracts, and board votes. Assistant handles all scheduling and vendor logistics.'
+    }
   }
 ];
 

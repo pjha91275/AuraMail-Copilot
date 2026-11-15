@@ -50,6 +50,16 @@ export default function Navbar({
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Helper to ensure Prince Jha always gets his verified photo and Alex gets hers
+  const resolveClientAvatar = (c) => {
+    if (!c) return '/prince-jha.jpg';
+    const name = (c.name || '').toLowerCase();
+    const email = (c.email || '').toLowerCase();
+    if (name.includes('prince') || email.includes('pjha')) return '/prince-jha.jpg';
+    if (name.includes('alex') || email.includes('alex')) return '/alex-vance.jpg';
+    return c.avatar || '/prince-jha.jpg';
+  };
+
   const activeClient = clients.find(c => c.id === activeClientId);
   const unreadNotificationsCount = notifications.filter(n => n.unread).length;
 
@@ -93,7 +103,7 @@ export default function Navbar({
               {activeClient ? (
                 <>
                   <img
-                    src={activeClient.avatar}
+                    src={resolveClientAvatar(activeClient)}
                     alt={activeClient.name}
                     className="w-5 h-5 rounded-full object-cover ring-1 ring-brand-500/40"
                   />
@@ -158,7 +168,7 @@ export default function Navbar({
                     }`}
                   >
                     <img
-                      src={client.avatar}
+                      src={resolveClientAvatar(client)}
                       alt={client.name}
                       className="w-6 h-6 rounded-full object-cover ring-1 ring-brand-500/20"
                     />
@@ -427,7 +437,7 @@ export default function Navbar({
                       activeClientId === client.id ? 'bg-brand-500 text-white border-brand-500 shadow-sm' : 'bg-surface-50 dark:bg-surface-800 border-surface-200 dark:border-white/5'
                     }`}
                   >
-                    <img src={client.avatar} alt={client.name} className="w-7 h-7 rounded-full object-cover" />
+                    <img src={resolveClientAvatar(client)} alt={client.name} className="w-7 h-7 rounded-full object-cover" />
                     <div>
                       <div>{client.name}</div>
                       <div className="text-[10px] opacity-75 font-normal">{client.role} • {client.company}</div>

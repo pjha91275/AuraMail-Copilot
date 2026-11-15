@@ -17,6 +17,7 @@ import {
   fetchClients,
   fetchAccounts,
   fetchEmails,
+  fetchEmailById,
   updateClassification,
   updateEmailStatus,
   handleClientAction,
@@ -292,35 +293,45 @@ export default function App() {
   // Handle Classification Override (Assistant)
   const handleUpdateClassification = async (emailId, newType) => {
     try {
+      const matchEmail = (e) => e.id === emailId || e.threadId === emailId || (e._id && String(e._id) === String(emailId));
+
       // Optimistic update
+      const overrideReason = `Manually classified as ${newType} by Assistant`;
       setEmails(prev => prev.map(e => {
-        if (e.id === emailId) {
+        if (matchEmail(e)) {
           return {
             ...e,
             classification: {
               ...e.classification,
               type: newType,
               manualOverride: true,
-              reason: `Manually classified as ${newType} by Assistant`
+              reason: overrideReason
             }
           };
         }
         return e;
       }));
 
-      if (selectedEmail?.id === emailId) {
+      if (selectedEmail && matchEmail(selectedEmail)) {
         setSelectedEmail(prev => ({
           ...prev,
           classification: {
             ...prev.classification,
             type: newType,
             manualOverride: true,
-            reason: `Manually classified as ${newType} by Assistant`
+            reason: overrideReason
           }
         }));
       }
 
-      await updateClassification(emailId, { type: newType });
+      const res = await updateClassification(emailId, { type: newType });
+      if (res && res.data) {
+        setEmails(prev => prev.map(e => matchEmail(e) ? { ...e, ...res.data } : e));
+        if (selectedEmail && matchEmail(selectedEmail)) {
+          setSelectedEmail(prev => ({ ...prev, ...res.data }));
+        }
+      }
+
       pushToast({
         title: 'Classification Updated',
         message: `Email re-assigned to "${newType}". Synchronized across dashboards.`,
@@ -373,18 +384,81 @@ export default function App() {
     }
   };
 
-  // Send Reply
+  // Send Reply (Immediately appends sent message bubble to conversation history)
   const handleSendReply = async (emailId, content, tone) => {
     try {
-      const res = await updateDraftReply(emailId, { content, tone, status: 'sent' });
-      if (res.success) {
-        pushToast({
-          title: 'Reply Sent Successfully!',
-          message: 'Your reply has been delivered and thread marked resolved.',
-          type: 'success'
-        });
-        loadEmails();
+      const matchEmail = (e) => e.id === emailId || e.threadId === emailId || (e._id && String(e._id) === String(emailId));
+
+      const newOutMessage = {
+        id: `msg-out-${Date.now()}`,
+        sender: `${currentUser?.name || 'Alex Vance'} (Assistant)`,
+        senderEmail: currentUser?.email || 'alex.assistant@techflow.io',
+        avatar: currentUser?.avatar || '/alex-vance.jpg',
+        recipient: selectedEmail?.messages?.[0]?.sender || 'Recipient',
+        recipientEmail: selectedEmail?.messages?.[0]?.senderEmail || '',
+        timestamp: new Date().toISOString(),
+        body: content,
+        isFromClient: false,
+        isFromAssistant: true
+      };
+
+      // 1. Optimistically append message to local state immediately
+      setEmails(prev => prev.map(e => {
+        if (matchEmail(e)) {
+          return {
+            ...e,
+            unread: false,
+            classification: {
+              ...e.classification,
+              type: 'No Reply Needed',
+              reason: 'Reply sent by assistant. Thread concluded.'
+            },
+            messages: [...(e.messages || []), newOutMessage],
+            draftReply: {
+              content,
+              tone: tone || 'Professional',
+              status: 'sent',
+              generatedAt: new Date().toISOString()
+            }
+          };
+        }
+        return e;
+      }));
+
+      if (selectedEmail && matchEmail(selectedEmail)) {
+        setSelectedEmail(prev => ({
+          ...prev,
+          unread: false,
+          classification: {
+            ...prev.classification,
+            type: 'No Reply Needed',
+            reason: 'Reply sent by assistant. Thread concluded.'
+          },
+          messages: [...(prev.messages || []), newOutMessage],
+          draftReply: {
+            content,
+            tone: tone || 'Professional',
+            status: 'sent',
+            generatedAt: new Date().toISOString()
+          }
+        }));
       }
+
+      // 2. Persist to backend
+      const res = await updateDraftReply(emailId, { content, tone, status: 'sent' });
+      if (res && res.data) {
+        setEmails(prev => prev.map(e => matchEmail(e) ? { ...e, ...res.data } : e));
+        if (selectedEmail && matchEmail(selectedEmail)) {
+          setSelectedEmail(prev => ({ ...prev, ...res.data }));
+        }
+      }
+
+      pushToast({
+        title: 'Reply Sent Successfully!',
+        message: 'Your reply has been delivered and appended to the thread timeline.',
+        type: 'success'
+      });
+      loadEmails();
     } catch (err) {
       pushToast({ title: 'Error', message: 'Failed to send reply', type: 'error' });
     }
@@ -530,6 +604,50 @@ export default function App() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [emails, selectedEmail, handleToggleStar, handleArchive]);
+
+  // Select Email from Copilot or external reference (resets restrictive filters & switches view)
+  const handleSelectEmailById = async (emailId) => {
+    if (!emailId) return;
+
+    const matchFn = (e) => e.id === emailId || e.threadId === emailId || (e._id && String(e._id) === String(emailId));
+    let target = emails.find(matchFn);
+
+    if (!target) {
+      try {
+        const fetched = await fetchEmailById(emailId);
+        if (fetched) target = fetched;
+      } catch (err) {
+        console.warn('Could not fetch email by id:', err);
+      }
+    }
+
+    if (target) {
+      if (target.clientId && target.clientId !== activeClientId && activeClientId !== 'all') {
+        setActiveClientId(target.clientId);
+      }
+      setActiveCategory(null);
+      setSearchQuery('');
+      setUrgencyFilter(null);
+      setUnreadOnly(false);
+      setViewMode('assistant');
+      setIsMobileDetailOpen(true);
+      setSelectedEmail(target);
+      setIsCopilotOpen(false);
+
+      pushToast({
+        title: 'Conversation Loaded',
+        message: `Opened "${target.subject.substring(0, 36)}..."`,
+        type: 'info'
+      });
+    } else {
+      setIsCopilotOpen(false);
+      pushToast({
+        title: 'Conversation Focused',
+        message: 'Could not find the requested email thread.',
+        type: 'warning'
+      });
+    }
+  };
 
   const activeClient = clients.find(c => c.id === activeClientId);
 
@@ -687,10 +805,7 @@ export default function App() {
         isOpen={isCopilotOpen}
         onClose={() => setIsCopilotOpen(false)}
         onAskCopilot={handleAskCopilot}
-        onSelectEmailById={(id) => {
-          const match = emails.find(e => e.id === id);
-          if (match) setSelectedEmail(match);
-        }}
+        onSelectEmailById={handleSelectEmailById}
         activeClient={activeClient}
       />
 

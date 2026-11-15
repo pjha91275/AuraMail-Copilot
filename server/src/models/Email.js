@@ -14,6 +14,7 @@ const MessageSchema = new mongoose.Schema({
 });
 
 const EmailSchema = new mongoose.Schema({
+  id: { type: String, index: true },
   threadId: { type: String, required: true, unique: true },
   clientId: { type: String, required: true },
   subject: { type: String, required: true },
