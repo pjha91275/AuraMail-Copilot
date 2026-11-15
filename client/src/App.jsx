@@ -479,7 +479,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-surface-50 dark:bg-[#03060f] text-surface-900 dark:text-surface-100 flex flex-col font-sans transition-colors duration-300 relative overflow-x-hidden">
       
-      {/* Ambient Self-Crafted Dynamic Background with Floating Light Orbs */}
+      {/* Ambient Self-Crafted Dynamic Background with Floating Light Orbs & 4 Radiant Logo Images */}
       <div
         className="ambient-bg"
         style={{
@@ -491,6 +491,43 @@ export default function App() {
         <div className="ambient-orb ambient-orb-2 animate-float-delayed" />
         <div className="ambient-orb ambient-orb-3 animate-float-slow" />
         <div className="ambient-orb ambient-orb-4 animate-float-delayed" />
+
+        {/* 4 Radiant Glowing & Floating Logo Images in the 4 Viewport Quadrants */}
+        {/* 1. Top-Right Logo (Cyan Neon Glow) */}
+        <div className="absolute top-[40px] right-[-20px] md:right-[2.5%] w-[280px] h-[280px] md:w-[380px] md:h-[380px] opacity-30 dark:opacity-45 pointer-events-none select-none animate-float-slow z-0">
+          <img
+            src="/logo-emblem.svg"
+            alt="AuraMail Top-Right Emblem"
+            className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(6,182,212,0.9)]"
+          />
+        </div>
+
+        {/* 2. Top-Left Logo (Royal Indigo Glow) */}
+        <div className="absolute top-[100px] left-[-20px] md:left-[2%] w-[250px] h-[250px] md:w-[340px] md:h-[340px] opacity-25 dark:opacity-40 pointer-events-none select-none animate-float-delayed z-0">
+          <img
+            src="/logo-emblem.svg"
+            alt="AuraMail Top-Left Emblem"
+            className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(99,102,241,0.9)]"
+          />
+        </div>
+
+        {/* 3. Bottom-Left Logo (Violet Purple Glow) */}
+        <div className="absolute bottom-[50px] left-[-20px] md:left-[2.5%] w-[260px] h-[260px] md:w-[360px] md:h-[360px] opacity-25 dark:opacity-40 pointer-events-none select-none animate-float-slow z-0">
+          <img
+            src="/logo-emblem.svg"
+            alt="AuraMail Bottom-Left Emblem"
+            className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(168,85,247,0.9)]"
+          />
+        </div>
+
+        {/* 4. Bottom-Right Logo (Electric Sky Blue Glow) */}
+        <div className="absolute bottom-[40px] right-[-20px] md:right-[2%] w-[270px] h-[270px] md:w-[370px] md:h-[370px] opacity-30 dark:opacity-45 pointer-events-none select-none animate-float-delayed z-0">
+          <img
+            src="/logo-emblem.svg"
+            alt="AuraMail Bottom-Right Emblem"
+            className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(56,189,248,0.9)]"
+          />
+        </div>
       </div>
 
       {/* Toast Notification Container */}

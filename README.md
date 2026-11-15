@@ -2,11 +2,6 @@
 
   <img src="client/public/logo.svg" alt="AuraMail AI Logo" width="420" />
 
-  <h1 align="center">
-    <span style="color: #38bdf8; font-weight: 900;">AuraMail</span>
-    <span style="color: #818cf8; font-weight: 900;"> AI</span>
-  </h1>
-
   <p align="center">
     <strong>An Intelligent Email Management & Autonomous Triage Dashboard for Personal Assistants & Executives</strong>
   </p>
@@ -82,7 +77,7 @@ Personal assistants often manage a heavy inflow of correspondence across multipl
 In traditional email clients, a recurring friction occurs when a client reads an email on mobile but provides no signal on whether they intend to handle it personally or expect their assistant to draft the response. 
 
 **AuraMail AI** eliminates this friction through a dual-experience architecture:
-1. **Split-Screen Authentication Hub**: A dedicated sign-in portal featuring 1-click quick demo access profiles (`Assistant: Alex Vance` and `Client / CEO: Sarah Jenkins`) alongside credential sign-in and workspace sign-out flow.
+1. **Google OAuth 2.0 Authentication Hub**: A dedicated split-screen portal featuring official **Google Workspace** & **Microsoft 365** OAuth sign-in, enterprise passwordless SSO, and 1-click quick demo access profiles (`Assistant: Alex Vance` and `Client / CEO: Sarah Jenkins`) alongside a workspace sign-out flow.
 2. **Assistant Command Center**: A comprehensive workspace featuring multi-client switching, automatic AI classification, confidence scores, reasoning explanations, 1-click classification manual overrides, extracted action items, calendar meeting detection, and an AI Reply Studio.
 3. **Minimalist Client Portal ("Executive Glance")**: A dedicated VIP interface showing **only** emails requiring the client's personal attention, with 1-click "Approve / Handled" (with confetti feedback) and "Delegate to Assistant" with custom note forwarding.
 
@@ -90,17 +85,19 @@ In traditional email clients, a recurring friction occurs when a client reads an
 
 ## ✨ Feature Breakdown
 
-### 1. 🔐 Split-Screen Atmospheric Authentication & 1-Click Demo Profiles
-- **Brand Hero & Value Pitch**: Highlighting autonomous triage, client portal, and AI reply studio.
-- **Floating Glassmorphism Sign-In Card**: Styled with ambient glass borders, focus glow, and a password visibility toggle.
+### 1. 🔐 Google Workspace & Microsoft 365 OAuth 2.0 (Zero Password Architecture)
+Following standard modern production email clients (like Superhuman and Notion), AuraMail AI operates with **zero password handling**:
+- **Continue with Google Workspace**: Instant authentication via Google Identity Services & OAuth 2.0 PKCE.
+- **Continue with Microsoft 365**: Enterprise single-sign-on integration for corporate Office 365 accounts.
+- **Passwordless Enterprise SSO**: No raw email passwords ever handled, transmitted, or stored in MongoDB.
 - **Instant 1-Click Demo Profiles**:
   - ⚡ **Assistant Profile (Alex Vance)**: Launches directly into the full assistant command center with complete triage controls.
   - 👑 **Client / CEO Profile (Sarah Jenkins)**: Launches directly into the minimalist VIP portal.
 - **Workspace Sign-Out Flow**: Integrated in both desktop profile dropdown and mobile navigation drawer, returning the user instantly to the sign-in screen.
 - **Session Persistence**: Stored via `localStorage` so refreshing preserves active workspace credentials.
 
-### 2. 🌌 Self-Crafted Cyber-Atmospheric Background & Visuals
-- **4 Radiant Glowing Vector Logos**: Positioned in all 4 key quadrants of the viewport (Top-Left, Top-Right, Bottom-Left, Bottom-Right) with multi-layered neon glow filters and shining lens flare rays on sparkle stars.
+### 2. 🌌 Self-Crafted Cyber-Atmospheric Background & 4 Glowing Floating Logos
+- **4 Radiant Glowing & Floating Logo Images**: Real floating logo emblems positioned in the DOM across all 4 key quadrants of the viewport (Top-Left, Top-Right, Bottom-Left, Bottom-Right) with multi-layered neon glow drop-shadows (`cyan`, `indigo`, `purple`, `sky blue`) and smooth CSS float animations (`animate-float-slow` & `animate-float-delayed`).
 - **5 Radiant Color Smudges**: Positioned in the hollow areas between logos (Upper-Center Cyan Nebula, Mid-Center Violet Aurora, Left-Center Golden Amber, Right-Center Emerald Teal, Bottom-Center Deep Indigo).
 - **Dual Dynamic Themes**: Seamless Dark Mode (deep obsidian `#020408`) and Bright Mode (crisp pearlescent `#f8fafc`).
 - **Floating Ambient Plasma Orbs**: Smooth floating animation with blurred neon lighting.

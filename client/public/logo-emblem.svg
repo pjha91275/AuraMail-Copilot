@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" fill="none">
+  <defs>
+    <!-- Luminous Cyber Ribbon Gradient -->
+    <linearGradient id="emblemRibbon" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f0ff" />
+      <stop offset="25%" stop-color="#38bdf8" />
+      <stop offset="55%" stop-color="#6366f1" />
+      <stop offset="85%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#ec4899" />
+    </linearGradient>
+
+    <!-- Top Flap Accent Gradient -->
+    <linearGradient id="emblemFlap" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="40%" stop-color="#67e8f9" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+
+    <!-- Shining Star Gradient -->
+    <linearGradient id="emblemStar" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="45%" stop-color="#fef08a" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+
+    <!-- Multi-Stage Radiant Neon Glow Filter -->
+    <filter id="emblemNeonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="7" result="glow" />
+      <feGaussianBlur stdDeviation="2" result="sharp" />
+      <feMerge>
+        <feMergeNode in="glow" />
+        <feMergeNode in="sharp" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="starBurst" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="4" result="starBlur" />
+      <feMerge>
+        <feMergeNode in="starBlur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Pure Transparent Glowing Logo Art (Zero background box, zero grey bubble) -->
+  <g filter="url(#emblemNeonGlow)">
+    <!-- Base Envelope Shield -->
+    <path d="M16 38 C16 30 22 24 30 24 L98 24 C106 24 112 30 112 38 L112 94 C112 102 106 108 98 108 L30 108 C22 108 16 102 16 94 Z" 
+          fill="none" 
+          stroke="url(#emblemRibbon)" 
+          stroke-width="7.5" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+
+    <!-- Dynamic Intersecting Fold (Aura Wings 'A' & 'M') -->
+    <path d="M18 32 L64 74 L110 32" 
+          fill="none" 
+          stroke="url(#emblemFlap)" 
+          stroke-width="7.5" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+
+    <!-- Bottom Wings -->
+    <path d="M18 100 L50 68" fill="none" stroke="url(#emblemRibbon)" stroke-width="6.5" stroke-linecap="round" stroke-opacity="0.95"/>
+    <path d="M110 100 L78 68" fill="none" stroke="url(#emblemRibbon)" stroke-width="6.5" stroke-linecap="round" stroke-opacity="0.95"/>
+
+    <!-- Central Neural AI Node -->
+    <circle cx="64" cy="74" r="7.5" fill="#00f0ff" opacity="0.6"/>
+    <circle cx="64" cy="74" r="5" fill="#38bdf8"/>
+    <circle cx="64" cy="74" r="2.5" fill="#ffffff"/>
+
+    <!-- Star Sparkle with Shining Flare Rays -->
+    <g transform="translate(86, 6)" filter="url(#starBurst)">
+      <line x1="16" y1="-8" x2="16" y2="38" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.95"/>
+      <line x1="-8" y1="15" x2="40" y2="15" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.95"/>
+      <line x1="-2" y1="-3" x2="34" y2="33" stroke="#fef08a" stroke-width="1.5" stroke-linecap="round" opacity="0.75"/>
+      <line x1="34" y1="-3" x2="-2" y2="33" stroke="#fef08a" stroke-width="1.5" stroke-linecap="round" opacity="0.75"/>
+
+      <path d="M16 0 L20 11.5 L31 15 L20 18.5 L16 30 L12 18.5 L1 15 L12 11.5 Z" fill="url(#emblemStar)"/>
+      <circle cx="16" cy="15" r="3.5" fill="#ffffff"/>
+    </g>
+  </g>
+</svg>
