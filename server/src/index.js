@@ -15,17 +15,53 @@ if (fs.existsSync(serverEnvPath)) {
 }
 dotenv.config();
 
-const { connectDB } = require('./config/db');
+const { connectDB, getStorageMode } = require('./config/db');
 const { initStore } = require('./services/store');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+let isInitialized = false;
+let initPromise = null;
+const ensureInit = async () => {
+  if (isInitialized) return;
+  if (!initPromise) {
+    initPromise = (async () => {
+      try {
+        await connectDB();
+        await initStore();
+        isInitialized = true;
+      } catch (err) {
+        console.error('Initialization error:', err);
+      }
+    })();
+  }
+  await initPromise;
+};
+
+// Immediate background initialization
+ensureInit();
+
 // Middleware
 app.use(cors());
 app.use(express.json());
 
+// Serverless DB connection middleware:
+// Ensures DB connection is complete before dispatching API handlers
+// Prevents Lambda from freezing during initial TLS handshake
+app.use(async (req, res, next) => {
+  if (req.path.startsWith('/api') && req.path !== '/api/health') {
+    try {
+      await ensureInit();
+    } catch (e) {
+      console.error('Database connection middleware warning:', e);
+    }
+  }
+  next();
+});
+
 // Routes
+app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/emails', require('./routes/emailRoutes'));
 app.use('/api/ai', require('./routes/aiRoutes'));
 app.use('/api/clients', require('./routes/clientRoutes'));
@@ -33,8 +69,14 @@ app.use('/api/accounts', require('./routes/accountRoutes'));
 
 // Health & Info Endpoint
 app.get('/api/health', (req, res) => {
+  const mode = getStorageMode();
   res.json({
     status: 'healthy',
+    database: {
+      connected: mode.isConnected,
+      storageMode: mode.isConnected ? 'mongodb' : 'memory-store',
+      readyState: mode.readyState
+    },
     product: 'AuraMail Copilot - Personal Assistant Email Management Platform',
     version: '1.0.0',
     timestamp: new Date().toISOString()
@@ -55,22 +97,6 @@ app.get('*', (req, res) => {
   });
 });
 
-let isInitialized = false;
-const ensureInit = async () => {
-  if (!isInitialized) {
-    try {
-      await connectDB();
-      await initStore();
-      isInitialized = true;
-    } catch (err) {
-      console.error('Initialization error:', err);
-    }
-  }
-};
-
-// Immediate init
-ensureInit();
-
 // Start standalone server if executed directly
 if (require.main === module || !process.env.VERCEL) {
   app.listen(PORT, () => {
@@ -79,3 +105,4 @@ if (require.main === module || !process.env.VERCEL) {
 }
 
 module.exports = app;
+module.exports.ensureInit = ensureInit;

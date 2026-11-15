@@ -32,11 +32,11 @@ body.dark .ambient-bg {
   background-color: #020408 !important;
 }
 
-/* Explicit Light Mode Background Rule */
+/* Explicit Light Mode Background Rule (Softer, less stark glare) */
 html:not(.dark) .ambient-bg,
 body:not(.dark) .ambient-bg {
   background-image: url('/bg-atmosphere-light.svg') !important;
-  background-color: #f8fafc !important;
+  background-color: #f1f5f9 !important;
 }
 
 .ambient-orb {
@@ -84,14 +84,14 @@ body:not(.dark) .ambient-bg {
   opacity: 0.45;
 }
 
-/* Light Mode Soft Pastel Glows */
+/* Light Mode Soft Pastel Glows (Comfortable gentle luminescence, reduced glare) */
 .ambient-orb-1 {
   width: 650px;
   height: 650px;
   left: -8%;
   top: -10%;
-  background: radial-gradient(circle, rgba(199, 210, 254, 0.75) 0%, rgba(224, 231, 255, 0.35) 50%, transparent 70%);
-  opacity: 0.9;
+  background: radial-gradient(circle, rgba(199, 210, 254, 0.5) 0%, rgba(224, 231, 255, 0.25) 50%, transparent 70%);
+  opacity: 0.55;
 }
 
 .ambient-orb-2 {
@@ -99,8 +99,8 @@ body:not(.dark) .ambient-bg {
   height: 700px;
   right: -8%;
   top: 15%;
-  background: radial-gradient(circle, rgba(186, 230, 253, 0.7) 0%, rgba(224, 242, 254, 0.35) 50%, transparent 70%);
-  opacity: 0.85;
+  background: radial-gradient(circle, rgba(186, 230, 253, 0.45) 0%, rgba(224, 242, 254, 0.25) 50%, transparent 70%);
+  opacity: 0.5;
 }
 
 .ambient-orb-3 {
@@ -108,8 +108,8 @@ body:not(.dark) .ambient-bg {
   height: 600px;
   left: 30%;
   bottom: -10%;
-  background: radial-gradient(circle, rgba(233, 213, 255, 0.65) 0%, transparent 65%);
-  opacity: 0.8;
+  background: radial-gradient(circle, rgba(233, 213, 255, 0.4) 0%, transparent 65%);
+  opacity: 0.45;
 }
 
 /* High-Tech Dot Matrix Pattern Overlay */

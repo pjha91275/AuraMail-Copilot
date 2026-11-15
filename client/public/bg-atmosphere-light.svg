@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" fill="none">
   <defs>
-    <!-- Crisp Pearlescent Light Canvas Base -->
+    <!-- Crisp Pearlescent Light Canvas Base (Softer comfort tone, reduced stark glare) -->
     <radialGradient id="lightBase" cx="50%" cy="30%" r="85%">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="45%" stop-color="#f8fafc"/>
-      <stop offset="100%" stop-color="#edf2f9"/>
+      <stop offset="0%" stop-color="#f3f6fa"/>
+      <stop offset="45%" stop-color="#edf2f7"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
     </radialGradient>
 
     <!-- Multi-Layered Glow & Shine Filter for Light Mode -->

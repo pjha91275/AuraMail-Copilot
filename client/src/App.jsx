@@ -110,17 +110,63 @@ export default function App() {
   };
 
   // Authentication Handlers
-  const handleLogin = ({ email, role, viewMode: initialViewMode }) => {
+  const handleLogin = useCallback(async ({ email, role, viewMode: initialViewMode, name, avatar, clientId }) => {
     setIsAuthenticated(true);
     localStorage.setItem('auramail_auth', 'true');
     localStorage.setItem('auramail_user_email', email);
+    if (name) localStorage.setItem('auramail_user_name', name);
+    if (avatar) localStorage.setItem('auramail_user_avatar', avatar);
     if (initialViewMode) setViewMode(initialViewMode);
+
+    // Refresh client list & account list immediately to load connected Gmail dashboard
+    try {
+      const clientList = await fetchClients();
+      if (clientList && clientList.length > 0) {
+        setClients(clientList);
+        const matched = clientList.find(c => c.email && c.email.toLowerCase() === email.toLowerCase());
+        const targetId = clientId || matched?.id || clientList[0].id;
+        setActiveClientId(targetId);
+        const accountList = await fetchAccounts(targetId);
+        setAccounts(accountList);
+      }
+    } catch (e) {
+      console.warn('Error refreshing clients after login:', e);
+    }
+
     pushToast({
-      title: 'Welcome to AuraMail Copilot',
-      message: `Signed in as ${role === 'client' ? 'Sarah Jenkins (Client / CEO)' : 'Alex Vance (Executive Assistant)'}`,
+      title: 'Google Workspace Active',
+      message: `Signed in as ${name || email} (${role === 'client' ? 'Client / CEO' : 'Executive Assistant'})`,
       type: 'success'
     });
-  };
+  }, [pushToast]);
+
+  // Handle Google OAuth callback redirect parameters
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('auth') === 'success') {
+      const email = params.get('email');
+      const name = params.get('name');
+      const clientId = params.get('clientId');
+      const role = params.get('role') || 'client';
+      const avatar = params.get('avatar');
+      handleLogin({
+        email,
+        name,
+        clientId,
+        role,
+        avatar,
+        viewMode: role === 'client' ? 'client' : 'assistant'
+      });
+      window.history.replaceState({}, document.title, window.location.pathname);
+    } else if (params.get('auth') === 'error') {
+      pushToast({
+        title: 'Authentication Error',
+        message: params.get('message') || 'Could not complete Google Workspace authentication.',
+        type: 'error'
+      });
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, [handleLogin, pushToast]);
 
   const handleLogout = () => {
     setIsAuthenticated(false);
