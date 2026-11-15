@@ -245,8 +245,8 @@ Open your browser to: **`http://localhost:5000`**
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/pjha91275/AuraMail-AI.git
-   cd AuraMail-AI
+   git clone https://github.com/pjha91275/AuraMail-Copilot.git
+   cd AuraMail-Copilot
    ```
 
 2. **Start Backend (Terminal 1)**:
