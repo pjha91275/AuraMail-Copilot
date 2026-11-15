@@ -32,6 +32,85 @@ const PATTERNS = [
   ]
 ];
 
+// 5 Radiant Color Smudges positioned in the hollow areas between and around logos
+const RADIANT_SMUDGES = [
+  // 1. Upper-Center Cyan Nebula
+  {
+    name: 'Upper-Center Cyan Nebula',
+    style: {
+      top: '-6%',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      width: '680px',
+      height: '380px',
+      maxWidth: '65vw',
+      maxHeight: '35vh',
+      background: 'radial-gradient(ellipse at 50% 30%, rgba(6, 182, 212, 0.40) 0%, rgba(56, 189, 248, 0.22) 45%, rgba(14, 165, 233, 0.08) 68%, transparent 80%)',
+      filter: 'blur(75px)'
+    }
+  },
+  // 2. Mid-Center Violet Aurora
+  {
+    name: 'Mid-Center Violet Aurora',
+    style: {
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: '620px',
+      height: '520px',
+      maxWidth: '60vw',
+      maxHeight: '50vh',
+      background: 'radial-gradient(circle at center, rgba(168, 85, 247, 0.38) 0%, rgba(139, 92, 246, 0.20) 45%, rgba(99, 102, 241, 0.06) 68%, transparent 80%)',
+      filter: 'blur(85px)'
+    }
+  },
+  // 3. Left-Center Golden Amber
+  {
+    name: 'Left-Center Golden Amber',
+    style: {
+      top: '50%',
+      left: '-8%',
+      transform: 'translateY(-50%)',
+      width: '540px',
+      height: '540px',
+      maxWidth: '45vw',
+      maxHeight: '55vh',
+      background: 'radial-gradient(circle at 35% 50%, rgba(245, 158, 11, 0.36) 0%, rgba(251, 146, 60, 0.20) 45%, rgba(217, 119, 6, 0.05) 68%, transparent 80%)',
+      filter: 'blur(80px)'
+    }
+  },
+  // 4. Right-Center Emerald Teal
+  {
+    name: 'Right-Center Emerald Teal',
+    style: {
+      top: '50%',
+      right: '-8%',
+      transform: 'translateY(-50%)',
+      width: '540px',
+      height: '540px',
+      maxWidth: '45vw',
+      maxHeight: '55vh',
+      background: 'radial-gradient(circle at 65% 50%, rgba(16, 185, 129, 0.35) 0%, rgba(20, 184, 166, 0.20) 45%, rgba(6, 182, 212, 0.06) 68%, transparent 80%)',
+      filter: 'blur(80px)'
+    }
+  },
+  // 5. Bottom-Center Deep Indigo
+  {
+    name: 'Bottom-Center Deep Indigo',
+    style: {
+      bottom: '-8%',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      width: '700px',
+      height: '420px',
+      maxWidth: '70vw',
+      maxHeight: '38vh',
+      background: 'radial-gradient(ellipse at 50% 70%, rgba(99, 102, 241, 0.42) 0%, rgba(79, 70, 229, 0.24) 45%, rgba(49, 46, 129, 0.08) 68%, transparent 80%)',
+      filter: 'blur(85px)'
+    }
+  }
+];
+
 export default function DynamicBackgroundLogos() {
   const [patternIndex, setPatternIndex] = useState(0);
 
@@ -47,6 +126,19 @@ export default function DynamicBackgroundLogos() {
 
   return (
     <div className="fixed inset-0 pointer-events-none select-none overflow-hidden z-0">
+      {/* 5 Radiant Color Smudges in the Hollow Areas Between & Around Logos */}
+      <div className="absolute inset-0 pointer-events-none">
+        {RADIANT_SMUDGES.map((smudge, idx) => (
+          <div
+            key={idx}
+            className="absolute rounded-full pointer-events-none will-change-transform opacity-80"
+            style={smudge.style}
+            aria-hidden="true"
+          />
+        ))}
+      </div>
+
+      {/* 4 Dynamic Floating Logos Transitioning smoothly */}
       {currentPattern.map((pos, index) => (
         <div
           key={index}
