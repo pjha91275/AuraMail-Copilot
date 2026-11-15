@@ -17,7 +17,8 @@ import {
   Sliders,
   ShieldCheck,
   Menu,
-  X
+  X,
+  LogOut
 } from 'lucide-react';
 import NotificationCenter from './NotificationCenter';
 import UserProfileMenu from './UserProfileMenu';
@@ -39,7 +40,8 @@ export default function Navbar({
   accountsCount,
   notifications = [],
   onMarkAllNotificationsRead,
-  onSelectNotification
+  onSelectNotification,
+  onLogout
 }) {
   const [showSimulateMenu, setShowSimulateMenu] = useState(false);
   const [showClientMenu, setShowClientMenu] = useState(false);
@@ -334,6 +336,7 @@ export default function Navbar({
                 onOpenShortcuts={onOpenShortcuts}
                 onOpenAccounts={onOpenAccountsModal}
                 onOpenOnboarding={onOpenOnboarding}
+                onLogout={onLogout}
               />
             </div>
 
@@ -537,6 +540,19 @@ export default function Navbar({
                 <Keyboard className="w-4 h-4 text-purple-500" />
                 <span>Keyboard Shortcuts Cheat Sheet</span>
               </button>
+
+              {onLogout && (
+                <button
+                  onClick={() => {
+                    onLogout();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="w-full flex items-center justify-center space-x-2 p-3 rounded-2xl bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 font-bold text-xs"
+                >
+                  <LogOut className="w-4 h-4 text-rose-500" />
+                  <span>Sign Out Workspace</span>
+                </button>
+              )}
             </div>
 
           </div>

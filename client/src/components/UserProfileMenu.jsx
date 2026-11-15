@@ -17,7 +17,8 @@ export default function UserProfileMenu({
   onClose,
   onOpenShortcuts,
   onOpenAccounts,
-  onOpenOnboarding
+  onOpenOnboarding,
+  onLogout
 }) {
   if (!isOpen) return null;
 
@@ -102,6 +103,19 @@ export default function UserProfileMenu({
           <HelpCircle className="w-4 h-4 text-surface-400" />
           <span>Product Tour & AI Setup</span>
         </button>
+
+        {onLogout && (
+          <button
+            onClick={() => {
+              onLogout();
+              onClose();
+            }}
+            className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors text-left font-bold"
+          >
+            <LogOut className="w-4 h-4 text-rose-500" />
+            <span>Sign Out Workspace</span>
+          </button>
+        )}
       </div>
 
       <div className="pt-2 px-3 mt-1 border-t border-surface-100 dark:border-surface-700 flex items-center justify-between text-[11px] text-surface-400">

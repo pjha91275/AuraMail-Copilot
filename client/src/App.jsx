@@ -10,6 +10,7 @@ import OnboardingModal from './components/OnboardingModal';
 import AccountsModal from './components/AccountsModal';
 import ShortcutsModal from './components/ShortcutsModal';
 import Toast from './components/Toast';
+import AuthPage from './components/AuthPage';
 
 import {
   fetchClients,
@@ -31,6 +32,11 @@ export default function App() {
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem('auramail_theme') === 'dark' ||
       window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+
+  // Authentication State (Shows Auth Page first as requested)
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return localStorage.getItem('auramail_auth') === 'true';
   });
 
   // Core Data
@@ -100,6 +106,29 @@ export default function App() {
 
   const dismissToast = (id) => {
     setToasts(prev => prev.filter(t => t.id !== id));
+  };
+
+  // Authentication Handlers
+  const handleLogin = ({ email, role, viewMode: initialViewMode }) => {
+    setIsAuthenticated(true);
+    localStorage.setItem('auramail_auth', 'true');
+    localStorage.setItem('auramail_user_email', email);
+    if (initialViewMode) setViewMode(initialViewMode);
+    pushToast({
+      title: 'Welcome to AuraMail AI',
+      message: `Signed in as ${role === 'client' ? 'Sarah Jenkins (Client / CEO)' : 'Alex Vance (Executive Assistant)'}`,
+      type: 'success'
+    });
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    localStorage.removeItem('auramail_auth');
+    pushToast({
+      title: 'Signed Out',
+      message: 'You have returned to the sign-in screen.',
+      type: 'info'
+    });
   };
 
   // Sync dark mode class on <html> and <body>
@@ -433,6 +462,20 @@ export default function App() {
 
   const activeClient = clients.find(c => c.id === activeClientId);
 
+  // If not authenticated, render the dedicated Split-Screen Authentication Page
+  if (!isAuthenticated) {
+    return (
+      <>
+        <Toast toasts={toasts} onDismiss={dismissToast} />
+        <AuthPage
+          onLogin={handleLogin}
+          darkMode={darkMode}
+          onToggleDarkMode={() => setDarkMode(!darkMode)}
+        />
+      </>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-surface-50 dark:bg-[#03060f] text-surface-900 dark:text-surface-100 flex flex-col font-sans transition-colors duration-300 relative overflow-x-hidden">
       
@@ -470,6 +513,7 @@ export default function App() {
         isSyncing={isSyncing}
         accountsCount={accounts.length}
         notifications={notifications}
+        onLogout={handleLogout}
         onMarkAllNotificationsRead={() => setNotifications(prev => prev.map(n => ({ ...n, unread: false })))}
         onSelectNotification={(emailId) => {
           const match = emails.find(e => e.id === emailId);
