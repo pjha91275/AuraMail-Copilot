@@ -177,7 +177,7 @@ const updateDraftReply = async (req, res) => {
         id: `msg-out-${Date.now()}`,
         sender: 'Alex Vance (Assistant)',
         senderEmail: 'alex.assistant@techflow.io',
-        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80',
+        avatar: '/alex-vance.jpg',
         recipient: email.messages[0]?.sender || 'Recipient',
         recipientEmail: email.messages[0]?.senderEmail || '',
         timestamp: new Date().toISOString(),

@@ -25,8 +25,9 @@ export default function UserProfileMenu({
 
   const displayName = currentUser?.name || localStorage.getItem('auramail_user_name') || 'Prince Jha';
   const displayEmail = currentUser?.email || localStorage.getItem('auramail_user_email') || 'pjha91275@gmail.com';
-  const userRole = currentUser?.role || localStorage.getItem('auramail_user_role') || (displayEmail.includes('pjha') ? 'client' : 'assistant');
-  const avatarUrl = currentUser?.avatar || localStorage.getItem('auramail_user_avatar') || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80';
+  const isPrince = displayEmail.toLowerCase().includes('pjha') || displayName.toLowerCase().includes('prince');
+  const userRole = currentUser?.role || localStorage.getItem('auramail_user_role') || (isPrince ? 'client' : 'assistant');
+  const avatarUrl = currentUser?.avatar || (isPrince ? '/prince-jha.jpg' : (displayEmail.includes('alex') ? '/alex-vance.jpg' : '/prince-jha.jpg'));
 
   return (
     <div

@@ -34,7 +34,7 @@ export default function AuthPage({ onLogin, darkMode, onToggleDarkMode }) {
     {
       name: 'Prince Jha',
       email: 'pjha91275@gmail.com',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=256&q=80',
+      avatar: '/prince-jha.jpg',
       badge: 'Primary Device Account',
       role: 'client'
     },
@@ -48,7 +48,7 @@ export default function AuthPage({ onLogin, darkMode, onToggleDarkMode }) {
     {
       name: 'Alex Vance',
       email: 'alex.vance@techflow.io',
-      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=256&q=80',
+      avatar: '/alex-vance.jpg',
       badge: 'Google Workspace (Assistant Lead)',
       role: 'assistant'
     }

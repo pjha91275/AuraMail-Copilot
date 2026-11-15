@@ -324,7 +324,7 @@ export default function Navbar({
                 title={`${currentUser?.name || 'User'} Profile & Workspace Settings`}
               >
                 <img
-                  src={currentUser?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80'}
+                  src={currentUser?.avatar || (currentUser?.email?.includes('pjha') ? '/prince-jha.jpg' : '/alex-vance.jpg')}
                   alt={currentUser?.name || "User Avatar"}
                   className="w-8 h-8 rounded-full object-cover ring-2 ring-brand-500/40"
                 />

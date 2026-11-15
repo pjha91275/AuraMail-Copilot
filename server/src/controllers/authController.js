@@ -141,7 +141,8 @@ async function provisionGoogleUser(googleUser, preferredRole = 'client') {
   const { isConnected } = getStorageMode();
   const email = googleUser.email.toLowerCase().trim();
   const name = googleUser.name || email.split('@')[0];
-  const avatar = googleUser.picture || googleUser.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=256&q=80';
+  const isPrince = email.includes('pjha') || name.toLowerCase().includes('prince');
+  const avatar = isPrince ? '/prince-jha.jpg' : (googleUser.picture || googleUser.avatar || '/alex-vance.jpg');
   const company = email.split('@')[1] ? email.split('@')[1].split('.')[0].toUpperCase() : 'Workspace';
 
   let clientRecord = null;
