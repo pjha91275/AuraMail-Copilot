@@ -115,8 +115,8 @@ export default function EmailDetail({
   return (
     <div className="flex-1 flex flex-col glass-panel rounded-3xl overflow-hidden h-[calc(100vh-10rem)] shadow-card">
       
-      {/* Thread Header */}
-      <div className="p-6 border-b border-surface-200/80 dark:border-white/[0.06] bg-white/40 dark:bg-surface-900/60 backdrop-blur-md">
+      {/* Thread Header - explicit relative z-30 ensures dropdown stacks over scrollable body */}
+      <div className="p-6 border-b border-surface-200/80 dark:border-white/[0.06] bg-white/40 dark:bg-surface-900/60 backdrop-blur-md relative z-30">
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1 min-w-0">
             <div className="flex items-center space-x-2.5 mb-2.5 flex-wrap gap-y-2">
@@ -133,7 +133,7 @@ export default function EmailDetail({
               )}
 
               {/* Classification Badge with manual override dropdown */}
-              <div className="relative">
+              <div className="relative z-40">
                 <button
                   onClick={() => setOverrideMenuOpen(!overrideMenuOpen)}
                   className={`inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full text-xs font-black tracking-wide transition-all shadow-md ${
@@ -154,10 +154,17 @@ export default function EmailDetail({
 
                 {/* Override Dropdown */}
                 {overrideMenuOpen && (
-                  <div
-                    className="absolute left-0 mt-2 w-64 bg-white dark:bg-surface-800 rounded-2xl shadow-modal border border-surface-200 dark:border-surface-700 py-2 z-50 animate-slide-up"
-                    onMouseLeave={() => setOverrideMenuOpen(false)}
-                  >
+                  <>
+                    {/* Click-away backdrop */}
+                    <div
+                      className="fixed inset-0 z-40"
+                      onClick={() => setOverrideMenuOpen(false)}
+                      aria-hidden="true"
+                    />
+                    <div
+                      className="absolute left-0 mt-2 w-64 bg-white dark:bg-surface-800 rounded-2xl shadow-2xl border border-surface-200 dark:border-surface-700 py-2 z-50 animate-slide-up ring-1 ring-black/5 dark:ring-white/10"
+                      onMouseLeave={() => setOverrideMenuOpen(false)}
+                    >
                     <div className="px-3.5 py-1 text-[10px] font-black text-surface-400 uppercase tracking-widest">
                       Override Classification
                     </div>
@@ -192,7 +199,8 @@ export default function EmailDetail({
                       <span className="font-bold text-emerald-600 dark:text-emerald-400">No Reply Needed</span>
                     </button>
                   </div>
-                )}
+                </>
+              )}
               </div>
 
               {/* Confidence Pill */}
