@@ -60,7 +60,7 @@ export default function DynamicBackgroundLogos() {
             maxHeight: '35vw',
             transform: `translate3d(0, 0, 0) rotate(${pos.rotate}) scale(${pos.scale})`,
             transition: 'top 2200ms cubic-bezier(0.4, 0, 0.2, 1), left 2200ms cubic-bezier(0.4, 0, 0.2, 1), transform 2200ms cubic-bezier(0.4, 0, 0.2, 1), filter 2200ms ease',
-            opacity: index % 2 === 0 ? 0.32 : 0.27
+            opacity: index % 2 === 0 ? 0.38 : 0.32
           }}
         >
           <img
@@ -68,7 +68,7 @@ export default function DynamicBackgroundLogos() {
             alt={`AuraMail Floating Emblem ${index + 1}`}
             className="w-full h-full object-contain"
             style={{
-              filter: `drop-shadow(0 0 26px ${pos.glow}) drop-shadow(0 0 8px ${pos.glow})`
+              filter: `drop-shadow(0 0 24px ${pos.glow}) drop-shadow(0 0 4px rgba(255, 255, 255, 0.75)) drop-shadow(0 0 1px rgba(255, 255, 255, 0.9))`
             }}
           />
         </div>

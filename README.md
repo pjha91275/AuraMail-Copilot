@@ -26,7 +26,6 @@
     <img src="https://img.shields.io/badge/Evaluation-Humanity%20Founders-orange?style=flat-square" alt="Humanity Founders" />
     <img src="https://img.shields.io/badge/Role-AI%20Full--Stack%20Intern-blue?style=flat-square" alt="Role" />
     <img src="https://img.shields.io/badge/Author-Prince%20Jha-purple?style=flat-square" alt="Author" />
-    <img src="https://img.shields.io/badge/Status-10%2F10%20Production%20Ready-emerald?style=flat-square" alt="Status" />
     <img src="https://img.shields.io/badge/IDE-Google%20Antigravity-4285F4?style=flat-square" alt="Google Antigravity" />
     <img src="https://img.shields.io/badge/Auth-Google%20OAuth%202.0-EA4335?style=flat-square&logo=google" alt="Google OAuth" />
     <img src="https://img.shields.io/badge/License-MIT-gray?style=flat-square" alt="License" />
