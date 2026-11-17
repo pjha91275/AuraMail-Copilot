@@ -33,10 +33,11 @@ import {
 } from './services/api';
 
 export default function App() {
-  // Theme state
+  // Theme state: Dark mode is default unless explicitly switched to 'light'
   const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem('auramail_theme') === 'dark' ||
-      window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('auramail_theme');
+    if (savedTheme === 'light') return false;
+    return true; // Default to dark mode
   });
 
   // Authentication State (Shows Auth Page first as requested)
